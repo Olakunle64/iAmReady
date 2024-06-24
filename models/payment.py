@@ -9,7 +9,7 @@ class Payment(ParentModel, Base):
     """Payment class"""
     __tablename__ = 'payments'
     amount = Column("amount", Integer, nullable=False)
-    paid = Column("paid", Boolean, nullable=False)
+    paid = Column("paid", Boolean, default=False)
     job_seeker_id = Column(String(60), ForeignKey('job_seekers.id'), nullable=False)
 
 # added attr:

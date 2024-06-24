@@ -149,3 +149,14 @@ class DBStorage():
         for key in all_cls.keys():
             count += 1
         return count
+
+    def check_attr_val(self, cls, attr, val):
+        """check if the attribute value is in the database"""
+        if cls in classes.values():
+            all_cls = self.all(cls)
+            for key, value in classes.items():
+                if value == cls:
+                    for obj in all_cls.values():
+                        if getattr(obj, attr) == val:
+                            return True
+        return False

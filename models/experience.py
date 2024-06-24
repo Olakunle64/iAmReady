@@ -9,7 +9,7 @@ class Experience(ParentModel, Base):
     """Experience class"""
     __tablename__ = 'experiences'
     company = Column("company", String(128), nullable=False)
-    location = Column("location", String(128), nullable=False)
+    location = Column("location", String(128), nullable=True)
     startDate = Column("startDate", String(128), nullable=False)
     endDate = Column("endDate", String(128), nullable=False)
     description = Column("description", String(1024), nullable=False)
