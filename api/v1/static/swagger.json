@@ -1,0 +1,127 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "iAmReady RESTful API",
+      "version": "1.0"
+    },
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Job Seeker",
+            "description": "Operations related to job seekers"
+        },
+        {
+            "name": "Recruiter",
+            "description": "Operations related to recruiters"
+        },
+        {
+            "name": "Certification",
+            "description": "Operations related to certifications"
+        },
+        {
+            "name": "Portfolio",
+            "description": "Operations related to portfolios"
+        },
+        {
+            "name": "Experience",
+            "description": "Operations related to experiences"
+        },
+        {
+            "name": "Education",
+            "description": "Operations related to educations"
+        },
+        {
+            "name": "Job Seeker Info",
+            "description": "Operations related to job seeker info"
+        },
+        {
+            "name": "Review",
+            "description": "Operations related to reviews"
+        },
+        {
+            "name": "View",
+            "description": "Operations related to views"
+        }
+    ],
+    "paths": {
+      "/job_seeker": {
+       "$ref": "job_seeker.json#/paths/~1job_seeker"
+      },
+      "/recruiter": {
+        "$ref": "recruiter.json#/paths/~1recruiter"
+      },
+      "/certification": {
+        "$ref": "certification.json#/paths/~1certification"
+      },
+      "/job_seeker/certification": {
+        "$ref": "certification.json#/paths/~1job_seeker~1certification"
+      },
+      "/education": {
+        "$ref": "education.json#/paths/~1education"
+      },
+      "/job_seeker/education": {
+        "$ref": "education.json#/paths/~1job_seeker~1education"
+      },
+      "/portfolio": {
+        "$ref": "portfolio.json#/paths/~1portfolio"
+      },
+      "/job_seeker/portfolio": {
+        "$ref": "portfolio.json#/paths/~1job_seeker~1portfolio"
+      },
+      "/job_seeker_info": {
+        "$ref": "job_seeker_info.json#/paths/~1job_seeker_info"
+      },
+      "/job_seeker/job_seeker_info": {
+        "$ref": "job_seeker_info.json#/paths/~1job_seeker~1job_seeker_info"
+      },
+      "/job_seeker/review": {
+        "$ref": "review.json#/paths/~1job_seeker~1review"
+      },
+      "/review": {
+        "$ref": "review.json#/paths/~1review"
+      },
+      "/job_seeker/view": {
+            "$ref": "view.json#/paths/~1job_seeker~1view"
+      },
+      "/view": {
+          "$ref": "view.json#/paths/~1view"
+      },
+      "/job_seeker/experience": {
+        "$ref": "experience.json#/paths/~1job_seeker~1experience"
+      },
+      "/experience": {
+        "$ref": "experience.json#/paths/~1experience"
+      }
+      
+    },
+    "definitions": {
+      "JobSeeker": {
+        "$ref": "job_seeker.json#/definitions/JobSeeker"
+      },
+      "Recruiter": {
+        "$ref": "recruiter.json#/definitions/Recruiter"
+      },
+      "Portfolio": {
+        "$ref": "portfolio.json#/definitions/Portfolio"
+      },
+      "Education": {
+        "$ref": "education.json#/definitions/Education"
+      },
+      "Certification": {
+        "$ref": "certification.json#/definitions/Certification"
+      },
+      "JobSeekerInfo": {
+        "$ref": "jobSeekerInfo.json#/definitions/JobSeekerInfo"
+      },
+      "Review": {
+        "$ref": "review.json#/definitions/Review"
+      },
+      "View": {
+        "$ref": "review.json#/definitions/View"
+      },
+        "Experience": {
+            "$ref": "experience.json#/definitions/Experience"
+        }
+    }
+  }
+  

@@ -2,6 +2,7 @@ from api.v1.views import app_views
 from flask import jsonify, request
 from models import storage
 from models.job_seeker import JobSeeker
+from models.recruiter import Recruiter
 from models.view import View
 
 
@@ -30,6 +31,9 @@ def job_seeker_view():
             for attr in must_attr:
                 if attr not in request.get_json():
                     return jsonify({'error': 'Missing attribute: ' + attr}), 400
+            recruiter = storage.get(Recruiter, request.get_json()['recruiter_id'])
+            if recruiter is None:
+                return jsonify({'error': 'Recruiter not found'}), 404
             request.get_json()['job_seeker_id'] = job_seeker.id
             view = View(**request.get_json())
             view.save()

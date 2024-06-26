@@ -2,14 +2,16 @@ from api.v1.views import app_views
 from flask import jsonify, request
 from models import storage
 from models.job_seeker import JobSeeker
+from flasgger import swag_from
 
 
 
 @app_views.route('/job_seeker', methods=['GET', 'POST', 'DELETE'], strict_slashes=False)
+# @swag_from('job_seeker.yml')
 def job_seekers():
-    """This method returns all the recruiters"""
-    recruiter_id = request.args.get('recruiter_id')
-    if not recruiter_id:
+    """This method returns all the job_seekers"""
+    job_seeker_id = request.args.get('job_seeker_id')
+    if not job_seeker_id:
         if request.method == 'POST':
             must_attr = ['firstName', 'email', 'country', 'lastName', 'password', 'city', 'skills']
             for attr in must_attr:
@@ -27,10 +29,10 @@ def job_seekers():
             return jsonify(job_seeker.to_dict()), 201
 
         if request.method == 'GET':
-            recruiters = storage.all(JobSeeker)
-            return jsonify([job_seeker.to_dict() for job_seeker in recruiters.values()])
+            job_seekers = storage.all(JobSeeker)
+            return jsonify([job_seeker.to_dict() for job_seeker in job_seekers.values()])
 
-    job_seeker = storage.get(JobSeeker, recruiter_id)
+    job_seeker = storage.get(JobSeeker, job_seeker_id)
     if job_seeker is None:
         return jsonify({"error": "Not found"}), 404
 

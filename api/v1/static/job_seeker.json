@@ -1,0 +1,186 @@
+{
+    "paths": {
+      "/job_seeker": {
+        "get": {
+            "tags": ["Job Seeker"],
+          "summary": "Retrieve all job seekers",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/JobSeeker"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+            "tags": ["Job Seeker"],
+          "summary": "Create a new job seeker",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/JobSeeker"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/JobSeeker"
+              }
+            },
+            "400": {
+              "description": "Missing attribute",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "409": {
+              "description": "Email already exists",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "delete": {
+            "tags": ["Job Seeker"],
+          "summary": "Delete a job seeker",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "404": {
+              "description": "Job seeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "put": {
+            "tags": ["Job Seeker"],
+          "summary": "Update a job seeker",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/JobSeeker"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/JobSeeker"
+              }
+            },
+            "404": {
+              "description": "Job seeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "JobSeeker": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "country",
+          "city",
+          "skills"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Empty": {
+        "type": "object"
+      }
+    }
+  }
+  

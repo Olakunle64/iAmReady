@@ -1,0 +1,232 @@
+{
+    "paths": {
+      "/certification": {
+        "get": {
+            "tags": ["Certification"],
+          "summary": "Retrieve all certifications",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "certification_id",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Certification"
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+            "tags": ["Certification"],
+          "summary": "Delete a certification",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "certification_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "404": {
+              "description": "certification not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "put": {
+            "tags": ["Certification"],
+          "summary": "Update a certification",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "certification_id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Certification"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Certification"
+              }
+            },
+            "404": {
+              "description": "certification not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/job_seeker/certification": {
+        "get": {
+          "tags": [
+            "Job Seeker VS Certification"
+          ],
+          "summary": "Retrieve job seeker's certifications",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": true,
+              "type": "string"
+            },
+            {
+                "in": "query",
+                "name": "certification_id",
+                "required": false,
+                "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Certification"
+                }
+              }
+            },
+            "404": {
+              "description": "JobSeeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Job Seeker VS Certification"
+          ],
+          "summary": "Create a new certification for a job seeker",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Certification"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Certification"
+              }
+            },
+            "400": {
+              "description": "Missing attribute",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Job Seeker VS Certification"
+          ],
+          "summary": "Delete all certifications for a job seeker",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "404": {
+              "description": "JobSeeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Certification": {
+        "required": [
+          "title",
+          "job_seeker_id",
+          "issuingOrg",
+          "dateIssued"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "issuingOrg": {
+            "type": "string"
+          },
+          "dateIssued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Empty": {
+        "type": "object"
+      }
+    }
+  }
+  

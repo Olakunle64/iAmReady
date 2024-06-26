@@ -1,0 +1,264 @@
+{
+    "paths": {
+      "/job_seeker/experience": {
+        "get": {
+          "tags": ["Job Seeker VS Experience"],
+          "summary": "Retrieve job seeker's experiences",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Experience"
+                }
+              }
+            },
+            "400": {
+              "description": "Missing job_seeker_id",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "404": {
+              "description": "JobSeeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Job Seeker VS Experience"],
+          "summary": "Create a new experience for a job seeker",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Experience"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Experience"
+              }
+            },
+            "400": {
+              "description": "Missing attribute",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "404": {
+              "description": "JobSeeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Job Seeker VS Experience"],
+          "summary": "Delete all experiences for a job seeker",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "400": {
+              "description": "Missing job_seeker_id",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "404": {
+              "description": "JobSeeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/experience": {
+        "get": {
+          "tags": ["Experience"],
+          "summary": "Retrieve a specific experience",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "experience_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Experience"
+              }
+            },
+            "400": {
+              "description": "Missing experience_id",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "404": {
+              "description": "Experience not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": ["Experience"],
+          "summary": "Update a specific experience",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "experience_id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Experience"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Experience"
+              }
+            },
+            "400": {
+              "description": "Missing attribute",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "404": {
+              "description": "Experience not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Experience"],
+          "summary": "Delete a specific experience",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "experience_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "400": {
+              "description": "Missing experience_id",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "404": {
+              "description": "Experience not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Experience": {
+        "type": "object",
+        "required": ["job_seeker_id", "company", "description", "startDate", "endDate"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "job_seeker_id": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Empty": {
+        "type": "object"
+      }
+    }
+  }
+  

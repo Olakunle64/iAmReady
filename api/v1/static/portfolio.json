@@ -1,0 +1,209 @@
+{
+    "paths": {
+      "/job_seeker/portfolio": {
+        "get": {
+          "tags": ["Job Seeker VS Portfolio"],
+          "summary": "Retrieve job seeker's portfolios",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": true,
+              "type": "string"
+            },
+            {
+                "in": "query",
+                "name": "portfolio_id",
+                "required": false,
+                "type": "string"
+              }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Portfolio"
+                }
+              }
+            },
+            "404": {
+              "description": "JobSeeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Job Seeker VS Portfolio"],
+          "summary": "Create a new portfolio for a job seeker",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Portfolio"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Portfolio"
+              }
+            },
+            "400": {
+              "description": "Missing attribute",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Job Seeker VS Portfolio"],
+          "summary": "Delete all portfolios for a job seeker",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "job_seeker_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "404": {
+              "description": "JobSeeker not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/portfolio": {
+        "get": {
+          "tags": ["Portfolio"],
+          "summary": "Retrieve a specific portfolio",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "portfolio_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Portfolio"
+              }
+            },
+            "404": {
+              "description": "Portfolio not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": ["Portfolio"],
+          "summary": "Update a specific portfolio",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "portfolio_id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Portfolio"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Portfolio"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Portfolio"],
+          "summary": "Delete a specific portfolio",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "portfolio_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "404": {
+              "description": "Portfolio not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Portfolio": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "job_seeker_id": {
+            "type": "string"
+          }
+        },
+        "required": ["title", "description", "job_seeker_id"]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Empty": {
+        "type": "object"
+      }
+    }
+  }
+  

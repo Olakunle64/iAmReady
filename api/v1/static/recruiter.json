@@ -1,0 +1,181 @@
+{
+    "paths": {
+      "/recruiter": {
+        "get": {
+            "tags": ["Recruiter"],
+          "summary": "Retrieve all recruiters",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "recruiter_id",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Recruiter"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+            "tags": ["Recruiter"],
+          "summary": "Create a new recruiter",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Recruiter"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Recruiter"
+              }
+            },
+            "400": {
+              "description": "Missing attribute",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "409": {
+              "description": "Email already exists",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "delete": {
+            "tags": ["Recruiter"],
+          "summary": "Delete a recruiter",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "recruiter_id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "404": {
+              "description": "recruiter not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "put": {
+            "tags": ["Recruiter"],
+          "summary": "Update a recruiter",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "recruiter_id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Recruiter"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Recruiter"
+              }
+            },
+            "404": {
+              "description": "recruiter not found",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Recruiter": {
+        "required": [
+          "companyDesc",
+          "companyName",
+          "email",
+          "password",
+          "country",
+          "city"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "websiteUrl": {
+            "type": "string"
+          },
+          "companyDesc": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Empty": {
+        "type": "object"
+      }
+    }
+}

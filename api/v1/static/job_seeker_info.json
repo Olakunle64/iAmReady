@@ -1,0 +1,247 @@
+{
+    "paths": {
+        "/job_seeker/job_seeker_info": {
+            "get": {
+                "tags": ["Job Seeker VS JobSeeker Info"],
+                "summary": "Retrieve job seeker's job seeker infos",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "job_seeker_id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "job_seeker_info_id",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/JobSeekerInfo"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing job_seeker_id",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "JobSeeker not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Job Seeker VS JobSeeker Info"],
+                "summary": "Create a new job seeker info for a job seeker",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/JobSeekerInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/JobSeekerInfo"
+                        }
+                    },
+                    "400": {
+                        "description": "Missing attribute",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Job Seeker VS JobSeeker Info"],
+                "summary": "Delete all job seeker infos for a job seeker",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "job_seeker_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Empty"
+                        }
+                    },
+                    "400": {
+                        "description": "Missing job_seeker_id",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "JobSeeker not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/job_seeker_info": {
+            "get": {
+                "tags": ["Job Seeker Info"],
+                "summary": "Retrieve a specific job seeker info",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "job_seeker_info_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/JobSeekerInfo"
+                        }
+                    },
+                    "400": {
+                        "description": "Missing job_seeker_info_id",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "JobSeekerInfo not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Job Seeker Info"],
+                "summary": "Update a specific job seeker info",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "job_seeker_info_id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/JobSeekerInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/JobSeekerInfo"
+                        }
+                    },
+                    "400": {
+                        "description": "Missing attribute",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "JobSeekerInfo not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Job Seeker Info"],
+                "summary": "Delete a specific job seeker info",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "job_seeker_info_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Empty"
+                        }
+                    },
+                    "400": {
+                        "description": "Missing job_seeker_info_id",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "JobSeekerInfo not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "JobSeekerInfo": {
+            "type": "object",
+            "properties": {
+                "bio": {
+                    "type": "string"
+                },
+                "jobName": {
+                    "type": "string"
+                },
+                "job_seeker_id": {
+                    "type": "string"
+                },
+                "salaryRange": {
+                    "type": "int"
+                },
+                "resume": {
+                    "type": "string"
+                }
+            },
+            "required": ["bio", "jobName", "job_seeker_id"]
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "Empty": {
+            "type": "object"
+        }
+    }
+}
