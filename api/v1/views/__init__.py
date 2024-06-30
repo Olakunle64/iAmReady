@@ -14,3 +14,4 @@ from api.v1.views.portfolio import *
 from api.v1.views.review import *
 from api.v1.views.payment import *
 from api.v1.views.view import *
+from api.v1.views.user_auth import *

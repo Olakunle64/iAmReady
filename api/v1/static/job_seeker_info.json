@@ -224,7 +224,7 @@
                     "type": "string"
                 },
                 "salaryRange": {
-                    "type": "int"
+                    "type": "integer"
                 },
                 "resume": {
                     "type": "string"

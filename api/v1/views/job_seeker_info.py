@@ -1,65 +1,63 @@
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import jsonify, request, abort
 from models import storage
 from models.job_seeker import JobSeeker
 from models.job_seeker_info import JobSeekerInfo
 
 
-@app_views.route('/job_seeker/job_seeker_info', methods=['GET', 'POST', 'DELETE'], strict_slashes=False)
-def job_seeker_info():
+@app_views.route('/job_seeker/job_seeker_info', methods=['POST'], strict_slashes=False)
+def create_job_seeker_info():
+    """This method creates a job_seeker_info"""
+    job_seeker = request.current_user
+    must_attr = ['bio', 'jobName']
+    for attr in must_attr:
+        if attr not in request.get_json():
+            return jsonify({'error': 'Missing attribute: ' + attr}), 400
+    request.get_json()['job_seeker_id'] = job_seeker.id
+    job_seeker_info = JobSeekerInfo(**request.get_json())
+    job_seeker_info.save()
+    return jsonify(job_seeker_info.to_dict()), 201
+
+
+@app_views.route('/job_seeker/job_seeker_info', methods=['GET'], strict_slashes=False)
+def get_job_seeker_infos():
     """This method returns all the job_seeker_infos"""
-    args = request.args
-    if 'job_seeker_id' in args:
-        job_seeker = storage.get(JobSeeker, args['job_seeker_id'])
-        if job_seeker is None:
-            return jsonify({'error': 'JobSeeker not found'}), 404
+    job_seeker = request.current_user
 
-        if request.method == 'GET':
-            return jsonify([
-                job_seeker_info.to_dict() for job_seeker_info in job_seeker.job_seeker_infos
-            ])
-
-        if request.method == 'DELETE':
-            for job_seeker_info in job_seeker.job_seeker_infos:
-                storage.delete(job_seeker_info)
-            storage.save()
-            return jsonify({}), 200
-
-        if request.method == 'POST':
-            must_attr = ['bio', 'jobName']
-            for attr in must_attr:
-                if attr not in request.get_json():
-                    return jsonify({'error': 'Missing attribute: ' + attr}), 400
-            request.get_json()['job_seeker_id'] = job_seeker.id
-            job_seeker_info = JobSeekerInfo(**request.get_json())
-            job_seeker_info.save()
-            return jsonify(job_seeker_info.to_dict()), 201
-    else:
-        return jsonify({'error': 'Missing job_seeker_id'}), 400
+    return jsonify([
+        job_seeker_info.to_dict() for job_seeker_info in job_seeker.job_seeker_infos
+    ])
 
 
-@app_views.route('/job_seeker_info', methods=['GET', 'PUT', 'DELETE'], strict_slashes=False)
-def job_seeker_infos():
-    """This method returns all the job_seeker_infos"""
+@app_views.route('/job_seeker/job_seeker_info', methods=['PUT'], strict_slashes=False)
+def update_job_seeker_info():
+    """This method updates an job_seeker_info"""
     args = request.args
     if 'job_seeker_info_id' not in args:
         return jsonify({'error': 'Missing job_seeker_info_id'}), 400
     job_seeker_info = storage.get(JobSeekerInfo, args['job_seeker_info_id'])
     if job_seeker_info is None:
-        return jsonify({'error': 'JobSeekerInfo not found'}), 404
+        abort(404)
 
-    if request.method == 'GET':
-        return jsonify(job_seeker_info.to_dict())
+    must_not_attr = ['id', 'created_at', 'updated_at']
+    for key, value in request.get_json().items():
+        if key not in must_not_attr:
+            setattr(job_seeker_info, key, value)
+    job_seeker_info.save()
+    return jsonify(job_seeker_info.to_dict()), 200
 
-    if request.method == 'DELETE':
-        storage.delete(job_seeker_info)
-        storage.save()
-        return jsonify({}), 200
 
-    if request.method == 'PUT':
-        must_not_attr = ['id', 'created_at', 'updated_at']
-        for key, value in request.get_json().items():
-            if key not in must_not_attr:
-                setattr(job_seeker_info, key, value)
-        job_seeker_info.save()
-        return jsonify(job_seeker_info.to_dict()), 200
+@app_views.route('/job_seeker/job_seeker_info', methods=['DELETE'], strict_slashes=False)
+def delete_job_seeker_info():
+    """This method deletes a job_seeker_info"""
+    job_seeker = request.current_user
+
+    args = request.args
+    if 'job_seeker_info_id' not in args:
+        return jsonify({'error': 'Missing job_seeker_info_id'}), 400
+    job_seeker_info = storage.get(JobSeekerInfo, args['job_seeker_info_id'])
+    if job_seeker_info is None:
+        abort(404)
+    storage.delete(job_seeker_info)
+    storage.save()
+    return jsonify({}), 200

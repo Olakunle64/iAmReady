@@ -44,55 +44,12 @@
         }
     ],
     "paths": {
+      "/register/job_seeker": {
+       "$ref": "job_seeker.json#/paths/~1register~1job_seeker"
+      },
       "/job_seeker": {
-       "$ref": "job_seeker.json#/paths/~1job_seeker"
-      },
-      "/recruiter": {
-        "$ref": "recruiter.json#/paths/~1recruiter"
-      },
-      "/certification": {
-        "$ref": "certification.json#/paths/~1certification"
-      },
-      "/job_seeker/certification": {
-        "$ref": "certification.json#/paths/~1job_seeker~1certification"
-      },
-      "/education": {
-        "$ref": "education.json#/paths/~1education"
-      },
-      "/job_seeker/education": {
-        "$ref": "education.json#/paths/~1job_seeker~1education"
-      },
-      "/portfolio": {
-        "$ref": "portfolio.json#/paths/~1portfolio"
-      },
-      "/job_seeker/portfolio": {
-        "$ref": "portfolio.json#/paths/~1job_seeker~1portfolio"
-      },
-      "/job_seeker_info": {
-        "$ref": "job_seeker_info.json#/paths/~1job_seeker_info"
-      },
-      "/job_seeker/job_seeker_info": {
-        "$ref": "job_seeker_info.json#/paths/~1job_seeker~1job_seeker_info"
-      },
-      "/job_seeker/review": {
-        "$ref": "review.json#/paths/~1job_seeker~1review"
-      },
-      "/review": {
-        "$ref": "review.json#/paths/~1review"
-      },
-      "/job_seeker/view": {
-            "$ref": "view.json#/paths/~1job_seeker~1view"
-      },
-      "/view": {
-          "$ref": "view.json#/paths/~1view"
-      },
-      "/job_seeker/experience": {
-        "$ref": "experience.json#/paths/~1job_seeker~1experience"
-      },
-      "/experience": {
-        "$ref": "experience.json#/paths/~1experience"
+        "$ref": "job_seeker.json#/paths/~1job_seeker"
       }
-      
     },
     "definitions": {
       "JobSeeker": {

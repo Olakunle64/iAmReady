@@ -38,16 +38,15 @@ class ParentModel():
 
     def __init__(self, *arg, **kwargs):
         """init constructor of an object"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = self.created_at
         if kwargs:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
                     value = datetime.datetime.fromisoformat(value)
                 if key not in ["__class__"]:
                     setattr(self, key, value)
-        # models.storage.new(self)
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.datetime.now()
+        self.updated_at = self.created_at
 
     def __str__(self):
         """return the string implementation of an instance"""
@@ -66,6 +65,10 @@ class ParentModel():
             del dict_attr["_sa_instance_state"]
         if dict_attr.get("password"):
             del dict_attr["password"]
+        if dict_attr.get("session_id"):
+            del dict_attr["session_id"]
+        if dict_attr.get("reset_token_id"):
+            del dict_attr["reset_token_id"]
         obj_class_name = str(self.__class__.__name__)
         dict_attr.update({"__class__": obj_class_name})
         dict_attr["created_at"] = self.created_at.isoformat()

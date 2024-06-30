@@ -12,4 +12,5 @@ class Recruiter(User, Base):
     companyName = Column(String(128), nullable=False)
     companyDesc = Column(String(1024), nullable=False)
     websiteUrl = Column(String(104), nullable=True)
+    sessions = relationship("RecruiterSession", backref="recruiter", cascade="all, delete")
     # reviews = relationship("Review", backref="recruiter", cascade="all, delete")

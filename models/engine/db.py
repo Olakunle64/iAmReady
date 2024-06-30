@@ -15,7 +15,11 @@ from models.portfolio import Portfolio
 from models.certification import Certification
 from models.review import Review
 from models.job_seeker_info import JobSeekerInfo
+from models.job_seeker_session import JobSeekerSession
+from models.recruiter_session import RecruiterSession
 from models.view import View
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 
 
 ValidClasses = [Recruiter, JobSeeker, Experience,
@@ -33,7 +37,9 @@ classes = {
     "Certification": Certification,
     "Review": Review,
     "JobSeekerInfo": JobSeekerInfo,
-    "View": View
+    "View": View,
+    "JobSeekerSession": JobSeekerSession,
+    "RecruiterSession": RecruiterSession
 }
 
 
@@ -160,3 +166,29 @@ class DBStorage():
                         if getattr(obj, attr) == val:
                             return True
         return False
+
+    def find_user_by(self, cls, **kwargs):
+        """find a user based on the keywords args and return
+            the first row
+        """
+        # if cls in classes.values():
+        #     all_cls = self.all(cls)
+        #     for obj in all_cls.values():
+        #         for key, value in kwargs.items():
+        #             print(key, value)
+        #             print(getattr(obj, key))
+        #             if getattr(obj, key) == value:
+        #                 print("found")
+        #                 return obj
+        #     return None
+        try:
+            user = self.__session.query(cls).filter_by(**kwargs).first()
+            if not user:
+                # raise 
+                return None
+            return user
+        except NoResultFound as e:
+            return None
+        except InvalidRequestError as e:
+            # raise e
+            return None

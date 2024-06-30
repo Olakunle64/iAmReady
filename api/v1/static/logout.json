@@ -1,0 +1,38 @@
+{
+    "paths": {
+      "/logout": {
+        "post": {
+          "tags": ["Authentication"],
+          "summary": "Logout a user",
+          "responses": {
+            "200": {
+              "description": "Successful logout",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Empty": {
+        "type": "object"
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+  

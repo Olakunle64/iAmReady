@@ -22,3 +22,5 @@ class JobSeeker(User, Base):
     reviews = relationship("Review", backref="job_seeker", cascade="all, delete")
     jsInfo = relationship("JobSeekerInfo", backref="job_seeker", uselist=False)
     views = relationship("View", backref="job_seeker", cascade="all, delete")
+    sessions = relationship("JobSeekerSession", backref="job_seeker", cascade="all, delete")
+
