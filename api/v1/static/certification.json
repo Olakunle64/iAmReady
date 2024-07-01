@@ -1,232 +1,184 @@
 {
-    "paths": {
-      "/certification": {
-        "get": {
-            "tags": ["Certification"],
-          "summary": "Retrieve all certifications",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "certification_id",
-              "required": false,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/Certification"
-                }
-              }
-            }
-          }
-        },
-        "delete": {
-            "tags": ["Certification"],
-          "summary": "Delete a certification",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "certification_id",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Empty"
-              }
-            },
-            "404": {
-              "description": "certification not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        },
-        "put": {
-            "tags": ["Certification"],
-          "summary": "Update a certification",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "certification_id",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Certification"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Certification"
-              }
-            },
-            "404": {
-              "description": "certification not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        }
-      },
+  "paths": {
       "/job_seeker/certification": {
-        "get": {
-          "tags": [
-            "Job Seeker VS Certification"
-          ],
-          "summary": "Retrieve job seeker's certifications",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "job_seeker_id",
-              "required": true,
-              "type": "string"
-            },
-            {
-                "in": "query",
-                "name": "certification_id",
-                "required": false,
-                "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/Certification"
-                }
+          "get": {
+              "tags": ["Job Seeker VS Certification"],
+              "summary": "Retrieve job seeker's certifications",
+              "description": "This method retrieves all certifications for the current job seeker",
+              "parameters": [],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "$ref": "#/definitions/Certification"
+                          }
+                      }
+                  },
+                  "401": {
+                      "description": "Unauthorized",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
               }
-            },
-            "404": {
-              "description": "JobSeeker not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
+          },
+          "post": {
+              "tags": ["Job Seeker VS Certification"],
+              "summary": "Create a new certification for a job seeker",
+              "description": "This method creates a new certification for the current job seeker",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "Certification object that needs to be added",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Certification"
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "Successful response",
+                      "schema": {
+                          "$ref": "#/definitions/Certification"
+                      }
+                  },
+                  "400": {
+                      "description": "Missing attribute",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
               }
-            }
+          },
+          "put": {
+              "tags": ["Job Seeker VS Certification"],
+              "summary": "Update a certification",
+              "description": "This method updates an existing certification for the current job seeker",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "certification_id",
+                      "description": "ID of the certification to be updated",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "Certification object with updated values",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Certification"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                          "$ref": "#/definitions/Certification"
+                      }
+                  },
+                  "400": {
+                      "description": "Missing certification_id",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  },
+                  "404": {
+                      "description": "Certification not found",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "delete": {
+              "tags": ["Job Seeker VS Certification"],
+              "summary": "Delete a certification",
+              "description": "This method deletes a certification for the current job seeker",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "certification_id",
+                      "description": "ID of the certification to be deleted",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                          "$ref": "#/definitions/Empty"
+                      }
+                  },
+                  "400": {
+                      "description": "Missing certification_id",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  },
+                  "404": {
+                      "description": "Certification not found",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
           }
-        },
-        "post": {
-          "tags": [
-            "Job Seeker VS Certification"
-          ],
-          "summary": "Create a new certification for a job seeker",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Certification"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Certification"
-              }
-            },
-            "400": {
-              "description": "Missing attribute",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "Job Seeker VS Certification"
-          ],
-          "summary": "Delete all certifications for a job seeker",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "job_seeker_id",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Empty"
-              }
-            },
-            "404": {
-              "description": "JobSeeker not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        }
       }
-    },
-    "definitions": {
+  },
+  "definitions": {
       "Certification": {
-        "required": [
-          "title",
-          "job_seeker_id",
-          "issuingOrg",
-          "dateIssued"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "issuingOrg": {
-            "type": "string"
-          },
-          "dateIssued": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
+          "required": [
+              "title",
+              "job_seeker_id",
+              "issuingOrg",
+              "dateIssued"
+          ],
+          "type": "object",
+          "properties": {
+              "id": {
+                  "type": "string"
+              },
+              "title": {
+                  "type": "string"
+              },
+              "issuingOrg": {
+                  "type": "string"
+              },
+              "dateIssued": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "job_seeker_id": {
+                  "type": "string"
+              },
+              "created_at": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "updated_at": {
+                  "type": "string",
+                  "format": "date-time"
+              }
           }
-        }
       },
       "Error": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
+          "type": "object",
+          "properties": {
+              "error": {
+                  "type": "string"
+              }
           }
-        }
       },
       "Empty": {
-        "type": "object"
+          "type": "object"
       }
-    }
   }
-  
+}

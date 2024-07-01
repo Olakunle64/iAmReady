@@ -4,20 +4,8 @@
             "get": {
                 "tags": ["Job Seeker VS JobSeeker Info"],
                 "summary": "Retrieve job seeker's job seeker infos",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "job_seeker_id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "job_seeker_info_id",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
+                "description": "This method retrieves all job seeker infos for the current job seeker",
+                "parameters": [],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -28,14 +16,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Missing job_seeker_id",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    },
-                    "404": {
-                        "description": "JobSeeker not found",
+                    "401": {
+                        "description": "Unauthorized",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -45,10 +27,12 @@
             "post": {
                 "tags": ["Job Seeker VS JobSeeker Info"],
                 "summary": "Create a new job seeker info for a job seeker",
+                "description": "This method creates a new job seeker info for the current job seeker",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
+                        "description": "JobSeekerInfo object that needs to be added",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/JobSeekerInfo"
@@ -70,49 +54,26 @@
                     }
                 }
             },
-            "delete": {
+            "put": {
                 "tags": ["Job Seeker VS JobSeeker Info"],
-                "summary": "Delete all job seeker infos for a job seeker",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "job_seeker_id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "$ref": "#/definitions/Empty"
-                        }
-                    },
-                    "400": {
-                        "description": "Missing job_seeker_id",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    },
-                    "404": {
-                        "description": "JobSeeker not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/job_seeker_info": {
-            "get": {
-                "tags": ["Job Seeker Info"],
-                "summary": "Retrieve a specific job seeker info",
+                "summary": "Update a job seeker info",
+                "description": "This method updates an existing job seeker info for the current job seeker",
                 "parameters": [
                     {
                         "in": "query",
                         "name": "job_seeker_info_id",
+                        "description": "ID of the job seeker info to be updated",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "JobSeekerInfo object with updated values",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/JobSeekerInfo"
+                        }
                     }
                 ],
                 "responses": {
@@ -136,53 +97,15 @@
                     }
                 }
             },
-            "put": {
-                "tags": ["Job Seeker Info"],
-                "summary": "Update a specific job seeker info",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "job_seeker_info_id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/JobSeekerInfo"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "$ref": "#/definitions/JobSeekerInfo"
-                        }
-                    },
-                    "400": {
-                        "description": "Missing attribute",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    },
-                    "404": {
-                        "description": "JobSeekerInfo not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            },
             "delete": {
-                "tags": ["Job Seeker Info"],
-                "summary": "Delete a specific job seeker info",
+                "tags": ["Job Seeker VS JobSeeker Info"],
+                "summary": "Delete a job seeker info",
+                "description": "This method deletes a job seeker info for the current job seeker",
                 "parameters": [
                     {
                         "in": "query",
                         "name": "job_seeker_info_id",
+                        "description": "ID of the job seeker info to be deleted",
                         "required": true,
                         "type": "string"
                     }
@@ -230,7 +153,7 @@
                     "type": "string"
                 }
             },
-            "required": ["bio", "jobName", "job_seeker_id"]
+            "required": ["bio", "jobName"]
         },
         "Error": {
             "type": "object",

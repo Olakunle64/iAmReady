@@ -1,0 +1,22 @@
+{
+    "/status": {
+      "get": {
+        "tags": ["Status"],
+        "summary": "Retrieve API status",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

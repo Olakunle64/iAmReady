@@ -1,217 +1,175 @@
 {
-    "paths": {
+  "paths": {
       "/job_seeker/education": {
-        "get": {
-          "tags": ["Job Seeker VS Education"],
-          "summary": "Retrieve job seeker's educations",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "job_seeker_id",
-              "required": true,
-              "type": "string"
-            },
-            {
-                "in": "query",
-                "name": "education_id",
-                "required": false,
-                "type": "string"
+          "get": {
+              "tags": ["Job Seeker VS Education"],
+              "summary": "Retrieve job seeker's educations",
+              "description": "This method retrieves all educations for the current job seeker",
+              "parameters": [],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "$ref": "#/definitions/Education"
+                          }
+                      }
+                  },
+                  "401": {
+                      "description": "Unauthorized",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
               }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/Education"
-                }
+          },
+          "post": {
+              "tags": ["Job Seeker VS Education"],
+              "summary": "Create a new education for a job seeker",
+              "description": "This method creates a new education for the current job seeker",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "Education object that needs to be added",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Education"
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "Successful response",
+                      "schema": {
+                          "$ref": "#/definitions/Education"
+                      }
+                  },
+                  "400": {
+                      "description": "Missing attribute",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
               }
-            },
-            "404": {
-              "description": "JobSeeker not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
+          },
+          "put": {
+              "tags": ["Job Seeker VS Education"],
+              "summary": "Update an education",
+              "description": "This method updates an existing education for the current job seeker",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "education_id",
+                      "description": "ID of the education to be updated",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "Education object with updated values",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Education"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                          "$ref": "#/definitions/Education"
+                      }
+                  },
+                  "400": {
+                      "description": "Missing education_id",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  },
+                  "404": {
+                      "description": "Education not found",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
               }
-            }
+          },
+          "delete": {
+              "tags": ["Job Seeker VS Education"],
+              "summary": "Delete an education",
+              "description": "This method deletes an education for the current job seeker",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "education_id",
+                      "description": "ID of the education to be deleted",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "schema": {
+                          "$ref": "#/definitions/Empty"
+                      }
+                  },
+                  "400": {
+                      "description": "Missing education_id",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  },
+                  "404": {
+                      "description": "Education not found",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
           }
-        },
-        "post": {
-          "tags": ["Job Seeker VS Education"],
-          "summary": "Create a new education for a job seeker",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Education"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Education"
-              }
-            },
-            "400": {
-              "description": "Missing attribute",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        },
-        "delete": {
-          "tags": ["Job Seeker VS Education"],
-          "summary": "Delete all educations for a job seeker",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "job_seeker_id",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Empty"
-              }
-            },
-            "404": {
-              "description": "JobSeeker not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        }
-      },
-      "/education": {
-        "get": {
-          "tags": ["Education"],
-          "summary": "Retrieve a specific education",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "education_id",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Education"
-              }
-            },
-            "404": {
-              "description": "Education not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        },
-        "put": {
-          "tags": ["Education"],
-          "summary": "Update a specific education",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "education_id",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Education"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Education"
-              }
-            }
-          }
-        },
-        "delete": {
-          "tags": ["Education"],
-          "summary": "Delete a specific education",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "education_id",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Empty"
-              }
-            },
-            "404": {
-              "description": "Education not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        }
       }
-    },
-    "definitions": {
+  },
+  "definitions": {
       "Education": {
-        "type": "object",
-        "properties": {
-          "school": {
-            "type": "string"
+          "type": "object",
+          "properties": {
+              "school": {
+                  "type": "string"
+              },
+              "degree": {
+                  "type": "string"
+              },
+              "fieldOfStudy": {
+                  "type": "string"
+              },
+              "startDate": {
+                  "type": "string",
+                  "format": "date"
+              },
+              "endDate": {
+                  "type": "string",
+                  "format": "date"
+              },
+              "job_seeker_id": {
+                  "type": "string"
+              }
           },
-          "degree": {
-            "type": "string"
-          },
-          "fieldOfStudy": {
-            "type": "string"
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "job_seeker_id": {
-            "type": "string"
-          }
-        },
-        "required": ["school", "degree", "fieldOfStudy", "startDate", "endDate", "job_seeker_id"]
+          "required": ["school", "degree", "fieldOfStudy", "startDate", "endDate", "job_seeker_id"]
       },
       "Error": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
+          "type": "object",
+          "properties": {
+              "error": {
+                  "type": "string"
+              }
           }
-        }
       },
       "Empty": {
-        "type": "object"
+          "type": "object"
       }
-    }
   }
-  
+}

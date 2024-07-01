@@ -1,154 +1,161 @@
 {
-    "paths": {
-      "/login": {
-        "post": {
-          "tags": ["Authentication"],
-          "summary": "Login a user",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/LoginRequest"
-              }
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login a user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful login",
-              "schema": {
-                "oneOf": [
-                  { "$ref": "#/definitions/JobSeeker" },
-                  { "$ref": "#/definitions/Recruiter" }
-                ]
-              },
-              "headers": {
-                "Set-Cookie": {
-                  "description": "Session ID cookie",
-                  "type": "string"
-                }
-              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "schema": {
+              "oneOf": [
+                { "$ref": "#/definitions/JobSeeker" },
+                { "$ref": "#/definitions/Recruiter" }
+              ]
             },
-            "400": {
-              "description": "Missing attribute: email or password",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            },
-            "401": {
-              "description": "Unauthorized",
-              "schema": {
-                "$ref": "#/definitions/Error"
+            "headers": {
+              "Set-Cookie": {
+                "description": "Session ID cookie",
+                "type": "string"
               }
             }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "LoginRequest": {
-        "required": ["email", "password"],
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string"
           },
-          "password": {
-            "type": "string"
-          },
-          "user_type": {
-            "type": "string",
-            "enum": ["j", "r"],
-            "description": "User type: 'j' for job seeker, 'r' for recruiter"
-          }
-        }
-      },
-      "JobSeeker": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "country": {
-            "type": "string"
-          },
-          "city": {
-            "type": "string"
-          },
-          "skills": {
-            "type": "array",
-            "items": {
-              "type": "string"
+          "400": {
+            "description": "Missing attribute: email or password",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "Recruiter": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "companyName": {
-            "type": "string"
-          },
-          "websiteUrl": {
-            "type": "string"
-          },
-          "companyDesc": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "country": {
-            "type": "string"
-          },
-          "city": {
-            "type": "string"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "Error": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
     }
+  },
+  "definitions": {
+    "LoginRequest": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "user_type": {
+          "type": "string",
+          "enum": [
+            "j",
+            "r"
+          ],
+          "description": "User type: 'j' for job seeker, 'r' for recruiter"
+        }
+      }
+    },
+    "JobSeeker": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Recruiter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "websiteUrl": {
+          "type": "string"
+        },
+        "companyDesc": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      }
+    }
   }
-  
+}

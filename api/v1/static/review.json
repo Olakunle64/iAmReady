@@ -1,253 +1,252 @@
 {
-    "paths": {
-      "/job_seeker/review": {
-        "get": {
-          "tags": ["Job Seeker VS Review"],
-          "summary": "Retrieve job seeker's reviews",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "job_seeker_id",
-              "required": true,
-              "type": "string"
-            },
-            {
-                "in": "query",
-                "name": "review_id",
-                "required": false,
-                "type": "string"
-              }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/Review"
-                }
-              }
-            },
-            "400": {
-              "description": "Missing job_seeker_id",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            },
-            "404": {
-              "description": "JobSeeker not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
+  "paths": {
+    "/job_seeker/review": {
+      "get": {
+        "tags": ["Job Seeker VS Review"],
+        "summary": "Retrieve job seeker's reviews",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "job_seeker_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "review_id",
+            "required": false,
+            "type": "string"
           }
-        },
-        "post": {
-          "tags": ["Job Seeker VS Review"],
-          "summary": "Create a new review for a job seeker",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
-              "schema": {
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "array",
+              "items": {
                 "$ref": "#/definitions/Review"
               }
             }
-          ],
-          "responses": {
-            "201": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Review"
-              }
-            },
-            "400": {
-              "description": "Missing attribute",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
+          },
+          "400": {
+            "description": "Missing job_seeker_id or review_id",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "delete": {
-          "tags": ["Job Seeker VS Review"],
-          "summary": "Delete all reviews for a job seeker",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "job_seeker_id",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Empty"
-              }
-            },
-            "400": {
-              "description": "Missing job_seeker_id",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            },
-            "404": {
-              "description": "JobSeeker not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
+          },
+          "404": {
+            "description": "JobSeeker or Review not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
       },
-      "/review": {
-        "get": {
-          "tags": ["Review"],
-          "summary": "Retrieve a specific review",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "review_id",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Review"
-              }
-            },
-            "400": {
-              "description": "Missing review_id",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            },
-            "404": {
-              "description": "Review not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
+      "post": {
+        "tags": ["Job Seeker VS Review"],
+        "summary": "Create a new review for a job seeker",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Review"
             }
           }
-        },
-        "put": {
-          "tags": ["Review"],
-          "summary": "Update a specific review",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "review_id",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Review"
-              }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Review"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Review"
-              }
-            },
-            "400": {
-              "description": "Missing attribute",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            },
-            "404": {
-              "description": "Review not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
+          },
+          "400": {
+            "description": "Missing attribute",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
-        },
-        "delete": {
-          "tags": ["Review"],
-          "summary": "Delete a specific review",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "review_id",
-              "required": true,
-              "type": "string"
+        }
+      },
+      "delete": {
+        "tags": ["Job Seeker VS Review"],
+        "summary": "Delete all reviews for a job seeker",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "job_seeker_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "$ref": "#/definitions/Empty"
-              }
-            },
-            "400": {
-              "description": "Missing review_id",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            },
-            "404": {
-              "description": "Review not found",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
+          },
+          "400": {
+            "description": "Missing job_seeker_id",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "JobSeeker not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
       }
     },
-    "definitions": {
-      "Review": {
-        "required": ["job_seeker_id", "rating", "description"],
-        "type": "object",
-        "properties": {
-          "id": {
+    "/review": {
+      "get": {
+        "tags": ["Review"],
+        "summary": "Retrieve a specific review",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "review_id",
+            "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
           },
-          "job_seeker_id": {
-            "type": "string"
+          "400": {
+            "description": "Missing review_id",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           },
-          "rating": {
-            "type": "integer"
-          },
-          "description": {
-            "type": "string"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
+          "404": {
+            "description": "Review not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
-      "Error": {
-        "type": "object",
-        "properties": {
-          "message": {
+      "put": {
+        "tags": ["Review"],
+        "summary": "Update a specific review",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "review_id",
+            "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          },
+          "400": {
+            "description": "Missing attribute",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Review not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
-      "Empty": {
-        "type": "object"
+      "delete": {
+        "tags": ["Review"],
+        "summary": "Delete a specific review",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "review_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "400": {
+            "description": "Missing review_id",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Review not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     }
+  },
+  "definitions": {
+    "Review": {
+      "required": ["job_seeker_id", "rating", "description"],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "job_seeker_id": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Empty": {
+      "type": "object"
+    }
   }
-  
+}

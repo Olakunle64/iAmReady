@@ -46,7 +46,7 @@ def before_request():
             '/api/v1/status/', '/api/v1/stats/',
             '/api/v1/login/', '/api/v1/register/job_seeker',
             '/api/v1/reset_password/', '/api/v1/register/recruiter',
-            '/swagger'
+            '/swagger/*', '/static/*'
         ]
     ):
         if (

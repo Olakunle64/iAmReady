@@ -64,8 +64,6 @@ class Auth:
         user_exist = self._db.find_user_by(cls, email=email)
         if not user_exist:
             return False
-        print(f"incoming password is {password}")
-        print(f"inner password is {user_exist.password}")
         valid_paswd = bcrypt.checkpw(
             password.encode("utf-8"), user_exist.password)
         if valid_paswd:

@@ -1,0 +1,49 @@
+{
+    "/stats": {
+      "get": {
+        "tags": ["Stats"],
+        "summary": "Retrieve counts of all classes",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recruiters": {
+                  "type": "integer"
+                },
+                "job_seekers": {
+                  "type": "integer"
+                },
+                "educations": {
+                  "type": "integer"
+                },
+                "views": {
+                  "type": "integer"
+                },
+                "certifications": {
+                  "type": "integer"
+                },
+                "experiences": {
+                  "type": "integer"
+                },
+                "job_seeker_infos": {
+                  "type": "integer"
+                },
+                "portfolios": {
+                  "type": "integer"
+                },
+                "reviews": {
+                  "type": "integer"
+                },
+                "payments": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
