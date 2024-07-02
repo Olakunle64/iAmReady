@@ -1,0 +1,16 @@
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(29, 78, 216);
+    color: white;
+    padding: 2%;
+    margin-top: -2%;
+    /* border: 1px solid #000000;
+    border-radius: 15px; */
+}
+.register h2 {
+    font-size: 3em;
+    /* margin-bottom: 0%; */
+}

@@ -1,0 +1,24 @@
+.subHeader {
+    display: flex;
+    background-color: #eff6ff;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subHeader h2 {
+    color: #000000;
+    font-size: 2em;
+    margin: 0.5em;
+}
+
+/* choose the first h2 in subHeader class */
+.subHeader h2:first-child {
+    font-size: 4em;
+    padding-top: 1%;
+    padding-bottom: 0%;
+    margin-bottom: 0.5%;
+}
+/* choose the last h2 in subHeader class */
+.subHeader h2:last-child {
+    padding-top: 0%;
+}

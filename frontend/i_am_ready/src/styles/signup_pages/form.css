@@ -1,0 +1,130 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 10%;
+    background-color: #f3f4f6;
+    margin-top: 4%;
+}
+.form-container h2:first-child {
+    font-size: 2.5em;
+    padding-top: 2%;
+}
+
+.form-container .notify {
+    /* font-size: 1.5em; */
+    margin-top: -3%;
+    display: flex;
+    flex-direction: row;
+}
+.form-container .notify h2 {
+    font-size: 1.5em;
+    margin-left: 2%;
+    margin-top: -1%;
+}
+
+.signupform {
+    background-color: white;
+    width: 40%;
+    margin: 3%;
+    margin-top: 1%;
+    /* display: flex;
+    flex-direction: row; */
+}
+
+.two-forms {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+    align-items: flex-start;
+    
+}
+
+.labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* width: 100%; */
+    padding: 5%;
+}
+
+.labels label {
+    margin-bottom: 2%;
+    font-size: 2em;
+}
+
+.labels input {
+    margin-bottom: 2%;
+    box-sizing: border-box;
+    height: 50px;
+    font-size: 2em;
+    padding: 3%;
+}
+/* .labels input::-webkit-input-placeholder {
+    font-size: 1.7em;
+} */
+
+.form-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: start;
+    width: 100%;
+    padding: 2%;
+}
+.form-header h2 {
+    margin-left: 2%;
+}
+
+.btn_3b82f6 {
+    align-items: center;
+    background-color: #3b82f6;
+    color: white;
+    font-size: 2em;
+    padding: 2.5%;
+    border-radius: 20px;
+    border-color: #3b82f6;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.btn_22c55e {
+    align-items: center;
+    background-color: #22c55e;
+    color: white;
+    font-size: 2em;
+    padding: 2.5%;
+    border-radius: 20px;
+    border-color: #3b82f6;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.foot {
+    background-color: #1f2937;
+    color: white;
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1%;
+
+}
+.foot ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-between;
+    /* margin-right: 5%; */
+}
+.foot ul li {
+    margin-left: 1%;
+    padding: 1%;
+    width: max-content;
+}
