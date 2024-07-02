@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(29, 78, 216);
+    border-color: black 1px solid;
+    /* padding: 1em; */
+}
+.header h1 {
+    color: white;
+    font-size: 3em;
+    margin-left: 1em;
+}
+.header .links {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    margin-right: 5%;
+    flex-grow: 0.2;
+    margin-top: 1%;
+}
