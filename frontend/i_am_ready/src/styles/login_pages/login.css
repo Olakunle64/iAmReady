@@ -23,6 +23,7 @@
     padding: 2%;
     width: 80%;
     font-size: 2em;
+    outline: none;
 }
 
 .login .sub_login h1 {
@@ -57,7 +58,7 @@
     /* align-items: center; */
     align-items: start;
     margin-top: 5%;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 input[type="radio"] {
@@ -65,3 +66,9 @@ input[type="radio"] {
     height: 30px;
     margin-right: 5px;
   }
+
+.login .sub_login input[type="text"] {
+    border: none;
+    outline: none;
+    font-size: 500em;
+}

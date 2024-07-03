@@ -1,8 +1,8 @@
 import React from "react";
 // import LandingPage from "./components/pages/LandingPages";
 // import SignUp from "./components/pages/SignUp";
-import LoginPage from "./components/pages/LoginPage";
-
+// import LoginPage from "./components/pages/LoginPage";
+import JobSeekerProfile from "./components/pages/JobSeekerProfile";
 
 
 function App() {
@@ -15,8 +15,9 @@ function App() {
   return (
     <>
       {/* <LandingPage reviews={reviews}/>
-      <SignUp/> */}
-      <LoginPage />
+      <SignUp/>
+      <LoginPage /> */}
+      <JobSeekerProfile />
 
     </>
   );

@@ -10,7 +10,12 @@ import './styles/landing_pages/testimonial.css';
 import './styles/landing_pages/register.css';
 import './styles/landing_pages/footer.css';
 import './styles/signup_pages/form.css';
-import './styles/signup_pages/login.css'
+import './styles/login_pages/login.css'
+import './styles/job_seeker_profile/bio.css'
+import './styles/job_seeker_profile/summary.css'
+import './styles/job_seeker_profile/profile_box.css'
+import './styles/job_seeker_profile/portfolio.css'
+import './styles/job_seeker_profile/skills.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
