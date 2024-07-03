@@ -4,20 +4,7 @@
       "get": {
         "tags": ["Job Seeker VS View"],
         "summary": "Retrieve job seeker's views",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "job_seeker_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "view_id",
-            "required": false,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -72,11 +59,11 @@
       },
       "delete": {
         "tags": ["Job Seeker VS View"],
-        "summary": "Delete all views for a job seeker",
+        "summary": "Delete a view of a job seeker",
         "parameters": [
           {
             "in": "query",
-            "name": "job_seeker_id",
+            "name": "view_id",
             "required": true,
             "type": "string"
           }
@@ -103,40 +90,7 @@
         }
       }
     },
-    "/view": {
-      "get": {
-        "tags": ["View"],
-        "summary": "Retrieve a specific view",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "view_id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/View"
-            }
-          },
-          "400": {
-            "description": "Missing view_id",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "404": {
-            "description": "View not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "put": {
+    "put": {
         "tags": ["View"],
         "summary": "Update a specific view",
         "parameters": [
@@ -175,40 +129,7 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": ["View"],
-        "summary": "Delete a specific view",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "view_id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Empty"
-            }
-          },
-          "400": {
-            "description": "Missing view_id",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "404": {
-            "description": "View not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
       }
-    }
   },
   "definitions": {
     "View": {
@@ -225,7 +146,7 @@
           "format": "date-time"
         }
       },
-      "required": ["recruiter_id", "job_seeker_id"]
+      "required": ["job_seeker_id"]
     },
     "Error": {
       "type": "object",

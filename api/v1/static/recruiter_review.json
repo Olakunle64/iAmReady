@@ -1,0 +1,124 @@
+{
+    "paths": {
+      "/recruiter/review": {
+        "post": {
+          "tags": ["Recruiter VS RecruiterReviews"],
+          "summary": "Create a new review",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/RecruiterReview"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Review created successfully",
+              "schema": {
+                "$ref": "#/definitions/RecruiterReview"
+              }
+            },
+            "400": {
+              "description": "Missing attribute"
+            }
+          }
+        },
+        "get": {
+          "tags": ["Recruiter VS RecruiterReviews"],
+          "summary": "Get all reviews for the current recruiter",
+          "responses": {
+            "200": {
+              "description": "List of reviews",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/RecruiterReview"
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": ["Recruiter VS RecruiterReviews"],
+          "summary": "Update an existing review",
+          "parameters": [
+            {
+              "name": "review_id",
+              "in": "query",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/RecruiterReview"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Review updated successfully",
+              "schema": {
+                "$ref": "#/definitions/RecruiterReview"
+              }
+            },
+            "400": {
+              "description": "Missing review_id"
+            },
+            "404": {
+              "description": "Review not found"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Recruiter Vs RecruiterReviews"],
+          "summary": "Delete a review",
+          "parameters": [
+            {
+              "name": "review_id",
+              "in": "query",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Review deleted successfully"
+            },
+            "400": {
+              "description": "Missing review_id"
+            },
+            "404": {
+              "description": "Review not found"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "RecruiterReview": {
+        "type": "object",
+        "required": ["rating", "description"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "recruiter_id": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+  

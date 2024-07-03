@@ -1,0 +1,505 @@
+{
+    "paths": {
+      "/job_seeker_infos": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all job seeker infos",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/JobSeekerInfo"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/job_seekers": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all job seekers",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/JobSeeker"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/educations": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all educations",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Education"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/recruiters": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all recruiters",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Recruiter"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/recruiter_reviews": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all recruiter reviews",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/RecruiterReview"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/views": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all views",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/View"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/payments": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all payments",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Payment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/portfolios": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all portfolios",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Portfolio"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/certifications": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all certifications",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Certification"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/experiences": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all experiences",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Experience"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reviews": {
+        "get": {
+          "tags": [
+            "Data Retrieval"
+          ],
+          "summary": "Retrieve all reviews",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Review"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+    "Recruiter": {
+        "required": [
+            "companyDesc",
+            "companyName",
+            "email",
+            "password",
+            "country",
+            "city",
+            "user_type"
+        ],
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "companyName": {
+                "type": "string"
+            },
+            "websiteUrl": {
+                "type": "string"
+            },
+            "companyDesc": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "country": {
+                "type": "string"
+            },
+            "city": {
+                "type": "string"
+            },
+            "user_type": {
+                "type": "string",
+                "enum": ["j", "r"]
+            }
+        }
+    },
+    "RecruiterReview": {
+        "type": "object",
+        "required": ["rating", "description"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "recruiter_id": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+    "View": {
+      "type": "object",
+      "properties": {
+        "recruiter_id": {
+          "type": "string"
+        },
+        "job_seeker_id": {
+          "type": "string"
+        },
+        "dateViewed": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["job_seeker_id"]
+    },
+    "Review": {
+      "required": ["rating", "description"],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "job_seeker_id": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Experience": {
+        "type": "object",
+        "required": ["company", "description", "startDate", "endDate"],
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "job_seeker_id": {
+                "type": "string"
+            },
+            "company": {
+                "type": "string"
+            },
+            "location": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            },
+            "startDate": {
+                "type": "string",
+                "format": "date"
+            },
+            "endDate": {
+                "type": "string",
+                "format": "date"
+            },
+            "created_at": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "updated_at": {
+                "type": "string",
+                "format": "date-time"
+            }
+        }
+    },
+    "Portfolio": {
+        "required": [
+          "title",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "job_seeker_id": {
+            "type": "string"
+          }
+        }
+      },
+      "JobSeekerInfo": {
+        "type": "object",
+        "properties": {
+            "bio": {
+                "type": "string"
+            },
+            "jobName": {
+                "type": "string"
+            },
+            "job_seeker_id": {
+                "type": "string"
+            },
+            "salaryRange": {
+                "type": "integer"
+            },
+            "resume": {
+                "type": "string"
+            }
+        },
+        "required": ["bio", "jobName"]
+        },
+      "Education": {
+        "required": [
+          "school",
+          "degree",
+          "field",
+          "startYear",
+          "endYear"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "school": {
+            "type": "string"
+          },
+          "degree": {
+            "type": "string"
+          },
+          "field": {
+            "type": "string"
+          },
+          "startYear": {
+            "type": "string"
+          },
+          "endYear": {
+            "type": "string"
+          },
+          "job_seeker_id": {
+            "type": "string"
+          }
+        }
+      },
+      "Certification": {
+        "required": [
+          "title",
+          "job_seeker_id",
+          "issuingOrg",
+          "dateIssued"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "issuingOrg": {
+            "type": "string"
+          },
+          "dateIssued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "job_seeker_id": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "JobSeeker": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "country",
+          "city",
+          "skills",
+          "user_type"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "user_type": {
+            "type": "string",
+            "enum": [
+              "j",
+              "r"
+            ]
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }  

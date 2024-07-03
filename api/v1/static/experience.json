@@ -136,7 +136,7 @@
   "definitions": {
       "Experience": {
           "type": "object",
-          "required": ["job_seeker_id", "company", "description", "startDate", "endDate"],
+          "required": ["company", "description", "startDate", "endDate"],
           "properties": {
               "id": {
                   "type": "string"
@@ -160,14 +160,6 @@
               "endDate": {
                   "type": "string",
                   "format": "date"
-              },
-              "created_at": {
-                  "type": "string",
-                  "format": "date-time"
-              },
-              "updated_at": {
-                  "type": "string",
-                  "format": "date-time"
               }
           }
       },

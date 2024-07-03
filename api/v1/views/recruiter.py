@@ -7,13 +7,13 @@ from models.recruiter import Recruiter
 @app_views.route('/register/recruiter', methods=['POST'], strict_slashes=False)
 def register_recruiter():
     """This method registers a recruiter"""
-    must_attr = ['user_type', 'companyName', 'email', 'country', 'companyDesc', 'password', 'city']
+    must_attr = ['companyName', 'email', 'country', 'companyDesc', 'password', 'city']
     for attr in must_attr:
         if attr not in request.get_json():
             return jsonify({"error": "Missing attribute: " + attr}), 400
 
-    if request.get_json().get("user_type") not in ["j", "r"]:
-        return jsonify({"error": "user_type must either be j or r"}), 400
+    if request.get_json().get("user_type") not in ["r"]:
+        return jsonify({"error": "user_type must either be r"}), 400
 
     user = storage.find_user_by(Recruiter, email=request.get_json().get('email'))
     if user:

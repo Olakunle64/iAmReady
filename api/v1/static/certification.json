@@ -3,7 +3,7 @@
       "/job_seeker/certification": {
           "get": {
               "tags": ["Job Seeker VS Certification"],
-              "summary": "Retrieve job seeker's certifications",
+              "summary": "Retrieve a job seeker's certification",
               "description": "This method retrieves all certifications for the current job seeker",
               "parameters": [],
               "responses": {
@@ -137,7 +137,6 @@
       "Certification": {
           "required": [
               "title",
-              "job_seeker_id",
               "issuingOrg",
               "dateIssued"
           ],
@@ -158,14 +157,6 @@
               },
               "job_seeker_id": {
                   "type": "string"
-              },
-              "created_at": {
-                  "type": "string",
-                  "format": "date-time"
-              },
-              "updated_at": {
-                  "type": "string",
-                  "format": "date-time"
               }
           }
       },

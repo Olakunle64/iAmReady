@@ -41,7 +41,11 @@ class ParentModel():
         if kwargs:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
-                    value = datetime.datetime.fromisoformat(value)
+                    try:
+                        value = datetime.datetime.fromisoformat(value)
+                    except Exception:
+                        self.created_at = datetime.datetime.now()
+                        self.updated_at = self.created_at
                 if key not in ["__class__"]:
                     setattr(self, key, value)
         self.id = str(uuid.uuid4())

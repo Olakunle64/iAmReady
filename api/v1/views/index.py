@@ -12,6 +12,7 @@ from models.job_seeker_info import JobSeekerInfo
 from models.portfolio import Portfolio
 from models.review import Review
 from models.payment import Payment
+from models.recruiter_review import RecruiterReview
 
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
@@ -27,7 +28,8 @@ def stats():
         "job_seeker_infos": JobSeekerInfo,
         "portfolios": Portfolio,
         "reviews": Review,
-        "payments": Payment
+        "payments": Payment,
+        "recruiter_reviews": RecruiterReview
     }
     count = {}
     for key, value in classes.items():

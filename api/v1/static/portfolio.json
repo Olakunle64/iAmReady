@@ -4,20 +4,7 @@
           "get": {
               "tags": ["Job Seeker VS Portfolio"],
               "summary": "Retrieve job seeker's portfolios",
-              "parameters": [
-                  {
-                      "in": "query",
-                      "name": "job_seeker_id",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "in": "query",
-                      "name": "portfolio_id",
-                      "required": false,
-                      "type": "string"
-                  }
-              ],
+              "parameters": [],
               "responses": {
                   "200": {
                       "description": "Successful response",
@@ -66,14 +53,14 @@
           },
           "delete": {
               "tags": ["Job Seeker VS Portfolio"],
-              "summary": "Delete all portfolios for a job seeker",
+              "summary": "Delete a portfolio for a job seeker",
               "parameters": [
-                  {
-                      "in": "query",
-                      "name": "job_seeker_id",
-                      "required": true,
-                      "type": "string"
-                  }
+                {
+                    "in": "query",
+                    "name": "portfolio_id",
+                    "required": false,
+                    "type": "string"
+                }
               ],
               "responses": {
                   "200": {
@@ -89,37 +76,9 @@
                       }
                   }
               }
-          }
-      },
-      "/portfolio": {
-          "get": {
-              "tags": ["Portfolio"],
-              "summary": "Retrieve a specific portfolio",
-              "parameters": [
-                  {
-                      "in": "query",
-                      "name": "portfolio_id",
-                      "required": true,
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Successful response",
-                      "schema": {
-                          "$ref": "#/definitions/Portfolio"
-                      }
-                  },
-                  "404": {
-                      "description": "Portfolio not found",
-                      "schema": {
-                          "$ref": "#/definitions/Error"
-                      }
-                  }
-              }
           },
           "put": {
-              "tags": ["Portfolio"],
+              "tags": ["Job Seeker VS Portfolio"],
               "summary": "Update a specific portfolio",
               "parameters": [
                   {
@@ -145,32 +104,6 @@
                       }
                   }
               }
-          },
-          "delete": {
-              "tags": ["Portfolio"],
-              "summary": "Delete a specific portfolio",
-              "parameters": [
-                  {
-                      "in": "query",
-                      "name": "portfolio_id",
-                      "required": true,
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Successful response",
-                      "schema": {
-                          "$ref": "#/definitions/Empty"
-                      }
-                  },
-                  "404": {
-                      "description": "Portfolio not found",
-                      "schema": {
-                          "$ref": "#/definitions/Error"
-                      }
-                  }
-              }
           }
       }
   },
@@ -191,7 +124,7 @@
                   "type": "string"
               }
           },
-          "required": ["title", "description", "job_seeker_id"]
+          "required": ["title", "description"]
       },
       "Error": {
           "type": "object",

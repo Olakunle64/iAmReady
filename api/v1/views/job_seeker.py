@@ -7,16 +7,16 @@ from models.job_seeker import JobSeeker
 @app_views.route('/register/job_seeker', methods=['POST'], strict_slashes=False)
 def register_job_seeker():
     """This method registers a job seeker"""
-    must_attr = ['user_type', 'firstName', 'email', 'country', 'lastName', 'password', 'city', 'skills']
+    must_attr = ['firstName', 'email', 'country', 'lastName', 'password', 'city', 'skills']
     for attr in must_attr:
         if attr not in request.get_json():
             return jsonify({"error": "Missing attribute: " + attr}), 400
 
+    if request.get_json().get("user_type") not in ["j"]:
+        return jsonify({"error": "user_type must either be j"}), 400
     # check if skills is an array
     if not isinstance(request.get_json().get('skills'), list):
         return jsonify({"error": "skills must be an array"}), 400
-    if request.get_json().get("user_type") not in ["j", "r"]:
-        return jsonify({"error": "user_type must either be j or r"}), 400
 
     user = storage.find_user_by(JobSeeker, email=request.get_json().get('email'))
     if user:

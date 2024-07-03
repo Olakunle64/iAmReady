@@ -158,7 +158,7 @@
                   "type": "string"
               }
           },
-          "required": ["school", "degree", "fieldOfStudy", "startDate", "endDate", "job_seeker_id"]
+          "required": ["school", "degree", "fieldOfStudy", "startDate", "endDate"]
       },
       "Error": {
           "type": "object",
