@@ -38,4 +38,5 @@ class Auth:
         if not request:
             return None
         cookie_name = os.getenv("SESSION_NAME", "session_id")
+        # print("cookies: ", request.cookies)
         return request.cookies.get(cookie_name)

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response, Blueprint, request, abort
+from flask import Flask, jsonify, make_response, Blueprint, request, abort, Response
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -15,7 +15,8 @@ from api.v1.auth.session_auth import SessionDBAuth
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
+# CORS(app, origins="*")
 
 
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
@@ -32,13 +33,28 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
 auth = SessionDBAuth()
+# @app.after_request
+# def after_request(response):
+#     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+#     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+#     response.headers.add('Access-Control-Allow-Credentials', 'true')
+#     return response
 
+# from flask import Response
+
+# @current_app.before_request
+# def basic_authentication():
+#     if request.method.lower() == 'options':
+#         return Response()
 
 @app.before_request
 def before_request():
     """Method that runs before each request to
         handle authentication.
     """
+    if request.method.lower() == 'options':
+        return Response()
     # Check if the request path requires authentication
     if auth.require_auth(
         request.path,
@@ -53,6 +69,7 @@ def before_request():
             # not auth.authorization_header(request) and
             not auth.session_cookie(request)
         ):
+            print("KOFFI")
             abort(401)  # Unauthorized
         if not auth.current_user(request):
             # print("here")

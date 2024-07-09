@@ -64,7 +64,7 @@ def get_all_job_seeker_infos():
     return jsonify([job_seeker_info.to_dict() for job_seeker_info in job_seeker_infos])
 
 
-@app_views.route('/recruiters', methods=['GET'], strict_slashes=False)
+@app_views.route('/recruiters', methods=['GET', 'OPTIONS'], strict_slashes=False)
 def get_all_recruiters():
     """This method returns all the recruiters"""
     recruiters = storage.all(Recruiter).values()

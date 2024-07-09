@@ -6,6 +6,7 @@ from models.job_seeker import JobSeeker
 from models.recruiter import Recruiter
 from models.job_seeker_session import JobSeekerSession
 from models.recruiter_session import RecruiterSession
+from flask_cors import cross_origin
 
 
 @app_views.route('/login', methods=['POST'], strict_slashes=False)
@@ -41,13 +42,16 @@ def login():
     response.set_cookie('user_type', user_type)
     return response
 
-@app_views.route('/logout', methods=['POST'], strict_slashes=False)
+@app_views.route('/logout', methods=['POST', 'OPTIONS'], strict_slashes=False)
+@cross_origin(supports_credentials=True)
 def logout():
     from api.v1.app import auth
     """This method logs out a user"""
+    # if request.method == 'OPTIONS':
+    #     return make_response('', 200)  # Handle preflight OPTIONS request
     session_id = request.cookies.get('session_id')
     user_type = request.cookies.get('user_type')
-    
+    print(session_id, user_type)
     if not session_id or not user_type:
         abort(401)
     
@@ -113,7 +117,7 @@ def update_password():
         cls = Recruiter
     else:
         return jsonify({"error": "Invalid user type"}), 400
-    
+
     try:
         auth.update_password(cls, reset_token, new_password)
         return jsonify({"email": email, "message": "Password updated"}), 200

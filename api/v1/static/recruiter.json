@@ -145,14 +145,6 @@
               "user_type": {
                   "type": "string",
                   "enum": ["j", "r"]
-              },
-              "created_at": {
-                  "type": "string",
-                  "format": "date-time"
-              },
-              "updated_at": {
-                  "type": "string",
-                  "format": "date-time"
               }
           }
       },

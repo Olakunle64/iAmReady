@@ -1,6 +1,0 @@
-"/stats": {
-      "$ref": "./stats.json#/paths/~1stats"
-    },
-    "/status": {
-      "$ref": "./status.json#/paths/~1status"
-    }

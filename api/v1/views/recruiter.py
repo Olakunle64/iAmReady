@@ -23,7 +23,7 @@ def register_recruiter():
     return jsonify(recruiter.to_dict()), 201
 
 
-@app_views.route('/recruiter', methods=['PUT'], strict_slashes=False)
+@app_views.route('/recruiter', methods=['PUT', 'OPTIONS'], strict_slashes=False)
 def update_recruiter():
     """This method updates a recruiter"""
     recruiter_id = request.current_user.id
@@ -39,7 +39,7 @@ def update_recruiter():
     return jsonify(recruiter.to_dict()), 200
 
 
-@app_views.route('/recruiter', methods=['GET'], strict_slashes=False)
+@app_views.route('/recruiter', methods=['GET', 'OPTIONS'], strict_slashes=False)
 def get_recruiter():
     """This method gets a recruiter"""
     recruiter_id = request.current_user.id
@@ -49,7 +49,7 @@ def get_recruiter():
     return jsonify(recruiter.to_dict())
 
 
-@app_views.route('/recruiter', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/recruiter', methods=['DELETE', 'OPTIONS'], strict_slashes=False)
 def delete_recruiter():
     """This method deletes a recruiter"""
     recruiter_id = request.current_user.id
