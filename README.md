@@ -48,13 +48,10 @@ Once the development servers are running, you can access the website at `http://
 - Recruiters can contact job seekers directly through the platform
 
 ## API Documentation
-The API documentation for the backend is available at `/api/docs` (e.g., `http://localhost:5000/api/docs`). This documentation is generated using Swagger UI and provides detailed information about the available endpoints, request/response schemas, and authentication requirements.
+The API documentation for the backend is available at `/swagger` (e.g., `http://localhost:5000/swagger`). This documentation is generated using Swagger UI and provides detailed information about the available endpoints, request/response schemas, and authentication requirements.
 
 ## Data Modeling
 The data model for the iAmReady project is designed using Draw.io. You can find the data model diagram in the `docs/data-model.png` file.
-
-## Deployment
-The iAmReady website is currently deployed on [Heroku](https://www.heroku.com/) and can be accessed at [https://iamready.herokuapp.com](https://iamready.herokuapp.com).
 
 ## Contributing
 Contributions to the iAmReady project are welcome! If you'd like to contribute, please follow these guidelines:
@@ -70,5 +67,5 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contact
 If you have any questions or feedback, please feel free to contact the project maintainers:
 
-- Salau Isiaka Olakunle (Project Lead) - salauisiaka1998@gmail.com
-- Salau Isiaka Olakunle (Developer) - salauisiaka1998@gmail.com
+- Salau Isiaka Olakunle (Project Lead) - olakunleisiaq50@gmail.com
+- Salau Isiaka Olakunle (Developer) - olakunleisiaq50@gmail.com
