@@ -16,15 +16,18 @@ import './styles/job_seeker_profile/summary.css'
 import './styles/job_seeker_profile/profile_box.css'
 import './styles/job_seeker_profile/portfolio.css'
 import './styles/job_seeker_profile/skills.css'
+import './styles/searchPage/search.css'
+import './styles/searchPage/user_card.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from "react-router-dom";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <App />
-  </React.StrictMode>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -7,6 +7,7 @@ import { BiSolidCertification } from "react-icons/bi";
 import { IoBagAdd } from "react-icons/io5";
 import Portfolio from "./Porfolio";
 import Skill from "./Skill";
+import Logout from "./Logout";
 
 export default function ProfileSection() {
     return (
@@ -24,15 +25,18 @@ export default function ProfileSection() {
                         <div className="message">
                             <div className="phone">
                                 <FaPhone size="1.5em"/>
-                                <h3>+2347062869135</h3>
+                                <span>+2347062869135</span>
                             </div>
                             <div className="email">
                                 <MdEmail size="1.5em"/>
-                                <h3>salauisiaka1998@gmail.com</h3>
+                                <a href="mailto:salauisiaka1998@gmail.com">salauisiaka1998@gmail.com</a>
                             </div>
                             <div className="linkedin">
                                 <FaLinkedin size="1.5em"/>
-                                <h3>Linkedin</h3>
+                                <a href="google.com">Linkedin</a>
+                            </div>
+                            <div>
+                                <Logout/>
                             </div>
                         </div>
                     </div>

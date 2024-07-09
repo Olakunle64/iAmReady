@@ -5,6 +5,9 @@
     border-color: black 1px solid;
     /* padding: 1em; */
 }
+.navBar:hover {
+    color: white;
+}
 .header h1 {
     color: white;
     font-size: 3em;
@@ -17,4 +20,13 @@
     margin-right: 5%;
     flex-grow: 0.2;
     margin-top: 1%;
+    font-size: 1.5em;
+}
+.header .links h3:hover {
+    cursor: pointer;
+    /* color: lightblue; */
+    /* text-decoration: underline; */
+}
+.header .links h3 {
+    text-decoration: underline;
 }
