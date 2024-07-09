@@ -1,6 +1,6 @@
 .login {
-    margin-left: 35%;
-    margin-right: 35%;
+    margin-left: 20%;
+    margin-right: 20%;
     background-color: #bdd9fb;
     border: 1px solid #bdd9fb;
     /* height: 100%; */
@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .login .sub_login input {
@@ -23,6 +24,7 @@
     padding: 2%;
     width: 80%;
     font-size: 2em;
+    outline: none;
 }
 
 .login .sub_login h1 {
@@ -57,7 +59,7 @@
     /* align-items: center; */
     align-items: start;
     margin-top: 5%;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 input[type="radio"] {
@@ -65,3 +67,9 @@ input[type="radio"] {
     height: 30px;
     margin-right: 5px;
   }
+
+.login .sub_login input[type="text"] {
+    border: none;
+    outline: none;
+    font-size: 500em;
+}
