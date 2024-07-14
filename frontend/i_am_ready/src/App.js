@@ -6,6 +6,7 @@ import LandingPage from "./components/pages/LandingPages";
 import SignUp from "./components/pages/SignUp";
 import LoginPage from "./components/pages/LoginPage";
 import JobSeekerProfile from "./components/pages/JobSeekerProfile";
+// import { useState } from "react";
 
 
 function App() {
@@ -15,6 +16,35 @@ function App() {
   {"name": "James Doe", "description": "I found"},
   {"name": "Jill Doe", "description": "I found"}
   ]
+  // const [cookies] = useState({
+  //   session_id: document.cookie.split(";")[0].split("=")[1],
+  //   user_type: document.cookie.split(";")[1].split("=")[1]
+  // });
+  // const [jobSeeker, setJobSeeker] = useState({})
+  //   async function handleJobseeker() {
+  //       try {
+  //           const response = await fetch("http://127.0.0.1:5000/api/v1/jobSeeker", {
+  //               method: "GET",
+  //               credentials: "include",
+  //               headers: {
+  //                   "Content-Type": "application/json",
+  //                   "Authorization": JSON.stringify(cookies)
+  //               },
+  //           });
+
+  //           if (!response.ok) {
+  //               throw new Error("Failed to fetch JobSeeker details!");
+  //           }
+
+  //           return await response.json();
+  //       } catch (err) {
+  //           console.error("Error logging out:", err);
+  //       }
+  //   }
+  //   handleJobseeker().then((data) => {
+  //       console.log(data)
+  //       setJobSeeker(data)
+  //   })
   return (
     <Routes>
         <Route path="/" element={<LandingPage reviews={reviews} />} />

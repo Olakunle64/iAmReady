@@ -4,9 +4,8 @@ from flask import jsonify, request, make_response, abort
 from models import storage
 from models.job_seeker import JobSeeker
 from models.recruiter import Recruiter
-from models.job_seeker_session import JobSeekerSession
-from models.recruiter_session import RecruiterSession
 from flask_cors import cross_origin
+from flask_login import login_user, logout_user, current_user
 
 
 @app_views.route('/login', methods=['POST'], strict_slashes=False)
@@ -32,46 +31,29 @@ def login():
     else:
         return jsonify({"error": "Invalid user type"}), 400
     
-    session_id = auth.create_session(user_type, user.id)
-    if not session_id:
-        abort(401)
-    
-    # add the session_id to cookie
-    response = make_response(jsonify({"message": "Logged in"}))
-    response.set_cookie('session_id', session_id)
-    response.set_cookie('user_type', user_type)
+    login_user(user)
+    response = make_response(jsonify(user.to_dict()))
+    print("response", response.headers)
+    print("Cookies in the response:", response.headers.get('Set-Cookie'))
     return response
+    # session_id = auth.create_session(user_type, user.id)
+    # if not session_id:
+    #     abort(401)
+    
+    # # add the session_id to cookie
+    # # response = make_response(jsonify({"message": "Logged in"}))
+    # response = make_response(jsonify(user.to_dict()))
+    # response.set_cookie('session_id', session_id)
+    # response.set_cookie('user_type', user_type)
+    # return response
 
 @app_views.route('/logout', methods=['POST', 'OPTIONS'], strict_slashes=False)
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def logout():
     from api.v1.app import auth
     """This method logs out a user"""
-    # if request.method == 'OPTIONS':
-    #     return make_response('', 200)  # Handle preflight OPTIONS request
-    session_id = request.cookies.get('session_id')
-    user_type = request.cookies.get('user_type')
-    print(session_id, user_type)
-    if not session_id or not user_type:
-        abort(401)
-    
-    if user_type == "j":
-        cls = JobSeekerSession
-    elif user_type == "r":
-        cls = RecruiterSession
-    else:
-        abort(401)
-    
-    user = auth.get_user_from_session_id(cls, session_id)
-    if not user:
-        abort(401)
-    
-    auth.destroy_session(user_type, request)
-    response = jsonify({"message": "Logged out"})
-    response.delete_cookie('session_id')
-    response.delete_cookie('user_type')
-    return response
-
+    logout_user()
+    return jsonify({"message": "Logged out"})
 
 
 @app_views.route('/reset_password', methods=['POST'], strict_slashes=False)

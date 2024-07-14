@@ -6,9 +6,10 @@ from models.user import User
 from models.parent_model import ParentModel, Base
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.dialects.postgresql import ARRAY
+from flask_login import UserMixin
 
 
-class JobSeeker(User, Base):
+class JobSeeker(User, Base, UserMixin):
     """JobSeeker class"""
     __tablename__ = 'job_seekers'
     firstName = Column("firstName", String(128), nullable=False)
@@ -22,5 +23,4 @@ class JobSeeker(User, Base):
     reviews = relationship("Review", backref="job_seeker", cascade="all, delete")
     jsInfo = relationship("JobSeekerInfo", backref="job_seeker", uselist=False)
     views = relationship("View", backref="job_seeker", cascade="all, delete")
-    sessions = relationship("JobSeekerSession", backref="job_seeker", cascade="all, delete")
 

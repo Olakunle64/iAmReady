@@ -8,6 +8,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [user_type, setUserType] = useState("");
     const [isUserTypeSelected, setIsUserTypeSelected] = useState(false);
+    // const [JobSeeker, setJobSeeker] = useState()
 
     const handleRadioChange = (e) => {
         setUserType(e.target.value);
@@ -36,19 +37,14 @@ export default function LoginPage() {
                 },
                 body: JSON.stringify(dataToSend),
             });
-            // console.log(typeof password)
             if (!response.ok) {
                 alert("Invalid email or password.");
                 return
             }
-            // console.log(response)
-
-            // const cookies = response.headers.get("Set-Cookie");
             alert("Login successful!");
-
-            // localStorage.setItem("cookies", cookies);
-
-            user_type === "j" ? navigate("/job-seeker-profile") : navigate("/recruiter-profile");
+            console.log(await response.json())
+            console.log(response.headers)
+            // user_type === "j" ? navigate("/job-seeker-profile") : navigate("/recruiter-profile");
 
         } catch (error) {
             console.error("Error logging in:", error);

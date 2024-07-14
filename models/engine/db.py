@@ -15,8 +15,6 @@ from models.portfolio import Portfolio
 from models.certification import Certification
 from models.review import Review
 from models.job_seeker_info import JobSeekerInfo
-from models.job_seeker_session import JobSeekerSession
-from models.recruiter_session import RecruiterSession
 from models.recruiter_review import RecruiterReview
 from models.view import View
 from sqlalchemy.exc import InvalidRequestError
@@ -26,7 +24,6 @@ from sqlalchemy.orm.exc import NoResultFound
 ValidClasses = [Recruiter, JobSeeker, Experience,
                 Education, Payment, Portfolio,
                 Certification, Review, JobSeekerInfo, View,
-                JobSeekerSession, RecruiterSession
             ]
 
 classes = {
@@ -40,8 +37,6 @@ classes = {
     "Review": Review,
     "JobSeekerInfo": JobSeekerInfo,
     "View": View,
-    "JobSeekerSession": JobSeekerSession,
-    "RecruiterSession": RecruiterSession,
     "RecruiterReview": RecruiterReview
 }
 

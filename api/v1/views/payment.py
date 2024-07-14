@@ -3,13 +3,15 @@ from flask import jsonify, request, abort
 from models import storage
 from models.job_seeker import JobSeeker
 from models.payment import Payment
+from flask_login import login_required, current_user
 
 
 
 @app_views.route('/job_seeker/payment', methods=['POST'], strict_slashes=False)
+@login_required
 def create_payment():
     """This method creates a payment"""
-    job_seeker = request.current_user
+    job_seeker = current_user
     must_attr = ['amount', 'paid']
     for attr in must_attr:
         if attr not in request.get_json():
@@ -21,16 +23,21 @@ def create_payment():
 
 
 @app_views.route('/job_seeker/payment', methods=['GET'], strict_slashes=False)
+@login_required
 def get_payments():
     """This method returns all the payments"""
-    job_seeker = request.current_user
+    job_seeker = current_user
+    payment = job_seeker.payment
 
-    return jsonify([
-        payment.to_dict() for payment in job_seeker.payments
-    ])
+    if payment:
+        return jsonify([
+            [payment.to_dict()]
+        ])
+    return jsonify([])
 
 
 @app_views.route('/job_seeker/payment', methods=['PUT'], strict_slashes=False)
+@login_required
 def update_payment():
     """This method updates an payment"""
     args = request.args
@@ -49,10 +56,9 @@ def update_payment():
 
 
 @app_views.route('/job_seeker/payment', methods=['DELETE'], strict_slashes=False)
+@login_required
 def delete_payment():
     """This method deletes a payment"""
-    job_seeker = request.current_user
-
     args = request.args
     if 'payment_id' not in args:
         return jsonify({'error': 'Missing payment_id'}), 400

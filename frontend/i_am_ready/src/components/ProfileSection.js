@@ -8,20 +8,48 @@ import { IoBagAdd } from "react-icons/io5";
 import Portfolio from "./Porfolio";
 import Skill from "./Skill";
 import Logout from "./Logout";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export default function ProfileSection() {
+    const [JobSeeker, setJobSeeker] = useState()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchJobSeeker = async () => {
+            try {
+                const response = await axios.get("http://127.0.0.1:5000/api/v1/jobSeeker", {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                setJobSeeker(response.data);
+            } catch (error) {
+                alert("Unable to login!");
+                // navigate('/login');
+            }
+        };
+
+        fetchJobSeeker();
+
+    }, [navigate]);
+
+    
+    console.log("dict: ", JobSeeker);
     return (
         <>
             <div className="profile">
                 {/* bio */}
                 <div className="bio">
-                    <div class="profile-picture">
+                    <div className="profile-picture">
                         <h1>JD</h1>
                     </div>
                     <div className="info">
-                        <h1>John Doe</h1>
-                        <p>Software Developer</p>
-                        <p>Location: Lagos, Nigeria</p>
+                        <h1>Salau Isiaka</h1>
+                        <p>Software Engineer</p>
+                        <p>Location: Ogun, Nigeria</p>
                         <div className="message">
                             <div className="phone">
                                 <FaPhone size="1.5em"/>
@@ -45,11 +73,11 @@ export default function ProfileSection() {
                 <div className="summary">
                     <div>
                         <h3>Professional Summary</h3>
-                        <p>I have 4 years of experience in software developer.
-                            I have 4 years of experience in software developer.
-                            I have 4 years of experience in software developer.
-                            I have 4 years of experience in software developer.
-                            I have 4 years of experience in software developer
+                        <p>
+                            A Software Engineer with experience in python
+                            A Software Engineer with experience in python
+                            A Software Engineer with experience in python
+                            A Software Engineer with experience in python
                         </p>
                     </div>
                 </div>

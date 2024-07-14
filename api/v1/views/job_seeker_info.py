@@ -3,9 +3,11 @@ from flask import jsonify, request, abort
 from models import storage
 from models.job_seeker import JobSeeker
 from models.job_seeker_info import JobSeekerInfo
+from flask_login import login_required
 
 
 @app_views.route('/job_seeker/job_seeker_info', methods=['POST'], strict_slashes=False)
+@login_required
 def create_job_seeker_info():
     """This method creates a job_seeker_info"""
     job_seeker = request.current_user
@@ -20,16 +22,25 @@ def create_job_seeker_info():
 
 
 @app_views.route('/job_seeker/job_seeker_info', methods=['GET'], strict_slashes=False)
+@login_required
 def get_job_seeker_infos():
     """This method returns all the job_seeker_infos"""
     job_seeker = request.current_user
+    job_seeker_info = job_seeker.jsInfo
 
-    return jsonify([
-        job_seeker_info.to_dict() for job_seeker_info in job_seeker.job_seeker_infos
-    ])
+    if job_seeker_info:
+        return jsonify([
+            [job_seeker_info.to_dict()]
+        ])
+    return jsonify([])
+
+    # return jsonify([
+    #     job_seeker_info.to_dict() for job_seeker_info in job_seeker.job_seeker_infos
+    # ])
 
 
 @app_views.route('/job_seeker/job_seeker_info', methods=['PUT'], strict_slashes=False)
+@login_required
 def update_job_seeker_info():
     """This method updates an job_seeker_info"""
     args = request.args
@@ -48,6 +59,7 @@ def update_job_seeker_info():
 
 
 @app_views.route('/job_seeker/job_seeker_info', methods=['DELETE'], strict_slashes=False)
+@login_required
 def delete_job_seeker_info():
     """This method deletes a job_seeker_info"""
     job_seeker = request.current_user

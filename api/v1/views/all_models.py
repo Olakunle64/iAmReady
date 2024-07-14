@@ -13,10 +13,12 @@ from models.payment import Payment
 from models.review import Review
 from models.recruiter_review import RecruiterReview
 from models.portfolio import Portfolio
+from flask_login import login_required
 
 
 
 @app_views.route('/certifications', methods=['GET'], strict_slashes=False)
+@login_required
 def get_all_certifications():
     """This method returns all the certifications"""
     certifications = storage.all(Certification).values()
@@ -24,6 +26,7 @@ def get_all_certifications():
 
 
 @app_views.route('/views', methods=['GET'], strict_slashes=False)
+@login_required
 def get_all_views():
     """This method returns all the views"""
     views = storage.all(View).values()
@@ -31,12 +34,14 @@ def get_all_views():
 
 
 @app_views.route('/reviews', methods=['GET'], strict_slashes=False)
+@login_required
 def get_all_reviews():
     """This method returns all the reviews"""
     reviews = storage.all(Review).values()
     return jsonify([review.to_dict() for review in reviews])
 
 @app_views.route('/job_seekers', methods=['GET'], strict_slashes=False)
+@login_required
 def get__all_job_seekers():
     """This method returns all the job_seekers"""
     job_seekers = storage.all(JobSeeker).values()
@@ -44,6 +49,7 @@ def get__all_job_seekers():
 
 
 @app_views.route('/educations', methods=['GET'], strict_slashes=False)
+@login_required
 def get_all_educations():
     """This method returns all the educations"""
     educations = storage.all(Education).values()
@@ -51,6 +57,7 @@ def get_all_educations():
 
 
 @app_views.route('/experiences', methods=['GET'], strict_slashes=False)
+@login_required
 def get_all_experiences():
     """This method returns all the experiences"""
     experiences = storage.all(Experience).values()
@@ -58,6 +65,7 @@ def get_all_experiences():
 
 
 @app_views.route('/job_seeker_infos', methods=['GET'], strict_slashes=False)
+@login_required
 def get_all_job_seeker_infos():
     """This method returns all the job_seeker_infos"""
     job_seeker_infos = storage.all(JobSeekerInfo).values()
@@ -65,6 +73,7 @@ def get_all_job_seeker_infos():
 
 
 @app_views.route('/recruiters', methods=['GET', 'OPTIONS'], strict_slashes=False)
+@login_required
 def get_all_recruiters():
     """This method returns all the recruiters"""
     recruiters = storage.all(Recruiter).values()

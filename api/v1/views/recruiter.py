@@ -2,6 +2,7 @@ from api.v1.views import app_views
 from flask import jsonify, request, make_response, abort
 from models import storage
 from models.recruiter import Recruiter
+from flask_login import current_user, login_required
 
 
 @app_views.route('/register/recruiter', methods=['POST'], strict_slashes=False)
@@ -24,14 +25,15 @@ def register_recruiter():
 
 
 @app_views.route('/recruiter', methods=['PUT', 'OPTIONS'], strict_slashes=False)
+@login_required
 def update_recruiter():
     """This method updates a recruiter"""
-    recruiter_id = request.current_user.id
+    recruiter_id = current_user.id
     recruiter = storage.get(Recruiter, recruiter_id)
     if recruiter is None:
         abort(404)
 
-    must_not_attr = ['id', 'created_at', 'updated_at']
+    must_not_attr = ['id', 'created_at', 'updated_at', "password", 'user_type']
     for key, value in request.get_json().items():
         if key not in must_not_attr:
             setattr(recruiter, key, value)
@@ -40,9 +42,10 @@ def update_recruiter():
 
 
 @app_views.route('/recruiter', methods=['GET', 'OPTIONS'], strict_slashes=False)
+@login_required
 def get_recruiter():
     """This method gets a recruiter"""
-    recruiter_id = request.current_user.id
+    recruiter_id = current_user.id
     recruiter = storage.get(Recruiter, recruiter_id)
     if recruiter is None:
         abort(401)
@@ -50,9 +53,10 @@ def get_recruiter():
 
 
 @app_views.route('/recruiter', methods=['DELETE', 'OPTIONS'], strict_slashes=False)
+@login_required
 def delete_recruiter():
     """This method deletes a recruiter"""
-    recruiter_id = request.current_user.id
+    recruiter_id = current_user.id
     recruiter = storage.get(Recruiter, recruiter_id)
     storage.delete(recruiter)
     storage.save()

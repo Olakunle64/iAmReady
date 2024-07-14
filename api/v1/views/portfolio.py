@@ -3,12 +3,14 @@ from flask import jsonify, request, abort
 from models import storage
 from models.job_seeker import JobSeeker
 from models.portfolio import Portfolio
+from flask_login import login_required, current_user
 
 
 @app_views.route('/job_seeker/portfolio', methods=['POST'], strict_slashes=False)
+@login_required
 def create_portfolio():
     """This method creates a portfolio"""
-    job_seeker = request.current_user
+    job_seeker = current_user
     must_attr = ['title', 'description']
     for attr in must_attr:
         if attr not in request.get_json():
@@ -20,9 +22,10 @@ def create_portfolio():
 
 
 @app_views.route('/job_seeker/portfolio', methods=['GET'], strict_slashes=False)
+@login_required
 def get_portfolios():
     """This method returns all the portfolios"""
-    job_seeker = request.current_user
+    job_seeker = current_user
 
     return jsonify([
         portfolio.to_dict() for portfolio in job_seeker.portfolios
@@ -30,6 +33,7 @@ def get_portfolios():
 
 
 @app_views.route('/job_seeker/portfolio', methods=['PUT'], strict_slashes=False)
+@login_required
 def update_portfolio():
     """This method updates an portfolio"""
     args = request.args
@@ -48,10 +52,9 @@ def update_portfolio():
 
 
 @app_views.route('/job_seeker/portfolio', methods=['DELETE'], strict_slashes=False)
+@login_required
 def delete_portfolio():
     """This method deletes a portfolio"""
-    job_seeker = request.current_user
-
     args = request.args
     if 'portfolio_id' not in args:
         return jsonify({'error': 'Missing portfolio_id'}), 400

@@ -3,13 +3,15 @@ from flask import jsonify, request, abort
 from models import storage
 from models.job_seeker import JobSeeker
 from models.experience import Experience
+from flask_login import login_required, current_user
 
 
 
 @app_views.route('/job_seeker/experience', methods=['POST'], strict_slashes=False)
+@login_required
 def create_experience():
     """This method creates a experience"""
-    job_seeker = request.current_user
+    job_seeker = current_user
     must_attr = ['company', 'description', 'startDate', 'endDate']
     for attr in must_attr:
         if attr not in request.get_json():
@@ -21,9 +23,10 @@ def create_experience():
 
 
 @app_views.route('/job_seeker/experience', methods=['GET'], strict_slashes=False)
+@login_required
 def get_experiences():
     """This method returns all the experiences"""
-    job_seeker = request.current_user
+    job_seeker = current_user
 
     return jsonify([
         experience.to_dict() for experience in job_seeker.experiences
@@ -31,6 +34,7 @@ def get_experiences():
 
 
 @app_views.route('/job_seeker/experience', methods=['PUT'], strict_slashes=False)
+@login_required
 def update_experience():
     """This method updates an experience"""
     args = request.args
@@ -49,9 +53,10 @@ def update_experience():
 
 
 @app_views.route('/job_seeker/experience', methods=['DELETE'], strict_slashes=False)
+@login_required
 def delete_experience():
     """This method deletes a experience"""
-    job_seeker = request.current_user
+    job_seeker = current_user
 
     args = request.args
     if 'experience_id' not in args:

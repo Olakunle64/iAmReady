@@ -3,13 +3,15 @@ from flask import jsonify, request, abort
 from models import storage
 from models.job_seeker import JobSeeker
 from models.review import Review
+from flask_login import login_required, current_user
 
 
 
 @app_views.route('/job_seeker/review', methods=['POST'], strict_slashes=False)
+@login_required
 def create_review():
     """This method creates a review"""
-    job_seeker = request.current_user
+    job_seeker = current_user
     must_attr = ['school', 'degree', 'fieldOfStudy', 'startDate', 'endDate']
     for attr in must_attr:
         if attr not in request.get_json():
@@ -21,9 +23,10 @@ def create_review():
 
 
 @app_views.route('/job_seeker/review', methods=['GET'], strict_slashes=False)
+@login_required
 def get_reviews():
     """This method returns all the reviews"""
-    job_seeker = request.current_user
+    job_seeker = current_user
 
     return jsonify([
         review.to_dict() for review in job_seeker.reviews
@@ -31,6 +34,7 @@ def get_reviews():
 
 
 @app_views.route('/job_seeker/review', methods=['PUT'], strict_slashes=False)
+@login_required
 def update_review():
     """This method updates an review"""
     args = request.args
@@ -49,9 +53,10 @@ def update_review():
 
 
 @app_views.route('/job_seeker/review', methods=['DELETE'], strict_slashes=False)
+@login_required
 def delete_review():
     """This method deletes a review"""
-    job_seeker = request.current_user
+    job_seeker = current_user
 
     args = request.args
     if 'review_id' not in args:

@@ -9,3 +9,6 @@ def get_cookie(self, request=None):
                 "user_type": user_type
             }
         return None
+
+## Deployment
+The iAmReady website is currently deployed on [Heroku](https://www.heroku.com/) and can be accessed at [https://iamready.herokuapp.com](https://iamready.herokuapp.com).

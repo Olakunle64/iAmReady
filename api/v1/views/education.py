@@ -3,13 +3,15 @@ from flask import jsonify, request, abort
 from models import storage
 from models.job_seeker import JobSeeker
 from models.education import Education
+from flask_login import login_required, current_user
 
 
 
 @app_views.route('/job_seeker/education', methods=['POST'], strict_slashes=False)
+@login_required
 def create_education():
     """This method creates a education"""
-    job_seeker = request.current_user
+    job_seeker = current_user
     must_attr = ['school', 'degree', 'fieldOfStudy', 'startDate', 'endDate']
     for attr in must_attr:
         if attr not in request.get_json():
@@ -21,9 +23,10 @@ def create_education():
 
 
 @app_views.route('/job_seeker/education', methods=['GET'], strict_slashes=False)
+@login_required
 def get_educations():
     """This method returns all the educations"""
-    job_seeker = request.current_user
+    job_seeker = current_user
 
     return jsonify([
         education.to_dict() for education in job_seeker.educations
@@ -31,6 +34,7 @@ def get_educations():
 
 
 @app_views.route('/job_seeker/education', methods=['PUT'], strict_slashes=False)
+@login_required
 def update_education():
     """This method updates an education"""
     args = request.args
@@ -49,9 +53,10 @@ def update_education():
 
 
 @app_views.route('/job_seeker/education', methods=['DELETE'], strict_slashes=False)
+@login_required
 def delete_education():
     """This method deletes a education"""
-    job_seeker = request.current_user
+    job_seeker = current_user
 
     args = request.args
     if 'education_id' not in args:

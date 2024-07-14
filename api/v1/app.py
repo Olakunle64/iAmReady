@@ -4,21 +4,60 @@ from api.v1.views import app_views
 from os import getenv
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
-
-# import the authentication class
-# from api.v1.auth.auth import Auth
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from models.job_seeker import JobSeeker
+from models.recruiter import Recruiter
 from api.v1.auth.session_auth import SessionDBAuth
 
 
-# AUTH = Auth()
-
-
+auth = SessionDBAuth()
 app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
 app.register_blueprint(app_views)
-CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
-# CORS(app, origins="*")
+# CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
+CORS(app, supports_credentials=True)
 
 
+app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql+psycopg2://iamready_dev:iamready_dev_pwd@localhost:5432/iamready_dev'
+app.config["SECRET_KEY"] = "i_am_ready_secret_key"
+
+
+@app.before_request
+def before_request():
+    print("request: ", request)
+    print("headers: ", request.headers)
+    print("cookies: ", request.cookies)
+    # Add your custom logic here
+    print("Before request")
+    # You can also check the current user and perform any necessary actions
+    if current_user.is_authenticated:
+        print(f"Authenticated user: {current_user.id}")
+    else:
+        print("Unauthenticated user")
+
+
+# load the user
+@login_manager.user_loader
+def load_user(user_id):
+    print(user_id)
+    user_type = user_id.split('_')[0]
+    
+    if user_type == 'jobseeker':
+        user = storage.get(JobSeeker, user_id)
+        print("user: ", user)
+    elif user_type == 'recruiter':
+        user = storage.get(Recruiter, user_id)
+    else:
+        return None
+
+    if user:
+        return user
+    else:
+        return None
+
+
+# add swagger documentation of the API
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 SWAGGER_URL = "/swagger"
 API_URL = "/static/swagger.json"
@@ -31,50 +70,6 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
     }
 )
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
-
-auth = SessionDBAuth()
-# @app.after_request
-# def after_request(response):
-#     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-#     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-#     response.headers.add('Access-Control-Allow-Credentials', 'true')
-#     return response
-
-# from flask import Response
-
-# @current_app.before_request
-# def basic_authentication():
-#     if request.method.lower() == 'options':
-#         return Response()
-
-@app.before_request
-def before_request():
-    """Method that runs before each request to
-        handle authentication.
-    """
-    if request.method.lower() == 'options':
-        return Response()
-    # Check if the request path requires authentication
-    if auth.require_auth(
-        request.path,
-        [
-            '/api/v1/status/', '/api/v1/stats/',
-            '/api/v1/login/', '/api/v1/register/job_seeker',
-            '/api/v1/reset_password/', '/api/v1/register/recruiter',
-            '/swagger/*', '/static/*'
-        ]
-    ):
-        if (
-            # not auth.authorization_header(request) and
-            not auth.session_cookie(request)
-        ):
-            print("KOFFI")
-            abort(401)  # Unauthorized
-        if not auth.current_user(request):
-            # print("here")
-            abort(403)  # Forbidden
-    request.current_user = auth.current_user(request)
 
 
 @app.errorhandler(404)
