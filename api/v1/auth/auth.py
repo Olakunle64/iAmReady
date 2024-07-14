@@ -39,4 +39,18 @@ class Auth:
             return None
         cookie_name = os.getenv("SESSION_NAME", "session_id")
         # print("cookies: ", request.cookies)
-        return request.cookies.get(cookie_name)
+        # return request.cookies.get(cookie_name)
+        if self.get_cookie(request):
+            return self.get_cookie(request).get(cookie_name)
+    
+    def get_cookie(self, request=None):
+        # {"session_id":"ccfa88ad-bc97-42b4-bbf7-d48b62d18ce2","user_type":"j"}
+        if request.headers.get("Authorization"):   
+            cookie = request.headers.get("Authorization")
+            session_id = cookie.split(",")[0].split(":")[1].strip('"')
+            user_type = cookie.split(",")[1].split(":")[1].split("}")[0].strip('"')
+            return {
+                "session_id": session_id,
+                "user_type": user_type
+            }
+        return None

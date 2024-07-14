@@ -8,14 +8,60 @@ import { IoBagAdd } from "react-icons/io5";
 import Portfolio from "./Porfolio";
 import Skill from "./Skill";
 import Logout from "./Logout";
+import { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 
 export default function ProfileSection() {
+    // const navigate = useNavigate();
+    const [jobSeeker, setjobSeeker] = useState([])
+    const [cookies] = useState({
+        session_id: document.cookie.split(";")[0].split("=")[1],
+        user_type: document.cookie.split(";")[1].split("=")[1]
+        // session_id: storedCookies.
+    });
+    useEffect(() => {
+        async function getJobSeekerDetails() {
+            try {
+                // const cookies = localStorage.getItem("cookies");
+                const response = await fetch("http://127.0.0.1:5000/api/v1/job_seeker", {
+                    // mode: 'no-cors',
+                    method: "GET",
+                    credentials: "include",
+                    cookies: JSON.stringify(cookies),
+                    headers: {
+                        "Content-Type": "application/json",
+                        // "Access-Control-Allow-Origin": "*",
+                        "Cookie": JSON.stringify(cookies),
+                        "Authorization": JSON.stringify(cookies)
+                    },
+                    // body: JSON.stringify({name: "olakunle"})
+                });
+    
+                if (!response.ok) {
+                    throw new Error("Failed to log out");
+                }
+    
+                localStorage.removeItem("cookies");
+                return await response.json();
+            } catch (err) {
+                console.error("Error logging out:", err);
+                // navigate("/");
+            }
+        }
+        getJobSeekerDetails().then((data) => {
+            setjobSeeker(data)
+            console.log("my Class: ", jobSeeker)
+        });
+    }, [jobSeeker, cookies])
+    
+    // console.log(jobSeeker)
+
     return (
         <>
             <div className="profile">
                 {/* bio */}
                 <div className="bio">
-                    <div class="profile-picture">
+                    <div className="profile-picture">
                         <h1>JD</h1>
                     </div>
                     <div className="info">

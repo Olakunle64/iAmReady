@@ -108,7 +108,7 @@ class SessionDBAuth(Auth):
         """get the current user"""
         cookie_value = self.session_cookie(request)
         try:
-            if request.cookies.get("user_type") == 'j' or request.get_json().get("user_type") == 'j':
+            if self.get_cookie(request).get("user_type") == 'j' or request.get_json().get("user_type") == 'j':
                 user_id = self.user_id_for_session_id("j", cookie_value)
                 return self._db.get(JobSeeker, user_id)
         except Exception:

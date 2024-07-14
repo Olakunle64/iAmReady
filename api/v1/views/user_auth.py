@@ -49,8 +49,8 @@ def logout():
     """This method logs out a user"""
     # if request.method == 'OPTIONS':
     #     return make_response('', 200)  # Handle preflight OPTIONS request
-    session_id = request.cookies.get('session_id')
-    user_type = request.cookies.get('user_type')
+    session_id = auth.session_cookie(request)
+    user_type = auth.get_cookie(request).get('user_type')
     print(session_id, user_type)
     if not session_id or not user_type:
         abort(401)

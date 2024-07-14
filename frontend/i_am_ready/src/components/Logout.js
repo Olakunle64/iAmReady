@@ -29,7 +29,7 @@ export default function Logout() {
         // console.log("cookies: ", cookies);
         try {
             // const cookies = localStorage.getItem("cookies");
-            // console.log(cookies);
+            console.log(cookies);
             const response = await fetch("http://127.0.0.1:5000/api/v1/logout", {
                 // mode: 'no-cors',
                 method: "POST",
