@@ -24,10 +24,13 @@ def create_payment():
 def get_payments():
     """This method returns all the payments"""
     job_seeker = request.current_user
+    payment = job_seeker.payment
 
-    return jsonify([
-        payment.to_dict() for payment in job_seeker.payments
-    ])
+    if payment:
+        return jsonify([
+            [payment.to_dict()]
+        ])
+    return jsonify([])
 
 
 @app_views.route('/job_seeker/payment', methods=['PUT'], strict_slashes=False)

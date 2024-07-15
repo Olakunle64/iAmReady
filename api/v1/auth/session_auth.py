@@ -107,8 +107,14 @@ class SessionDBAuth(Auth):
     def current_user(self, request=None):
         """get the current user"""
         cookie_value = self.session_cookie(request)
+        if request.cookies.get("user_type"):
+            user_type = request.cookies.get("user_type")
+        elif self.get_cookie(request) and self.get_cookie(request).get("user_type"):
+            user_type = self.get_cookie(request).get("user_type")
+        else:
+            return None
         try:
-            if self.get_cookie(request).get("user_type") == 'j' or request.get_json().get("user_type") == 'j':
+            if user_type == 'j' or request.get_json().get("user_type") == 'j':
                 user_id = self.user_id_for_session_id("j", cookie_value)
                 return self._db.get(JobSeeker, user_id)
         except Exception:

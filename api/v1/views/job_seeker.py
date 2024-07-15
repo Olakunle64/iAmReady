@@ -63,3 +63,32 @@ def delete_job_seeker():
     response.delete_cookie('session_id')
     response.delete_cookie('user_type')
     return response, 200
+
+
+@app_views.route('/jobSeeker', methods=['GET'], strict_slashes=False)
+def full_job_seeker():
+    """This method gets a job seeker"""
+    if not request.current_user:
+        abort(401)
+    job_seeker_id = request.current_user.id
+    job_seeker = storage.get(JobSeeker, job_seeker_id)
+    if job_seeker is None:
+        abort(401)
+
+    response = {
+            "job_seeker": job_seeker.to_dict(),
+            "education": [education.to_dict() for education in job_seeker.educations],
+            "certification": [certification.to_dict() for certification in job_seeker.certifications],
+            "experience": [experience.to_dict() for experience in job_seeker.experiences],
+            "payment": {},
+            "portfolio": [portfolio.to_dict() for portfolio in job_seeker.portfolios],
+            "review": [review.to_dict() for review in job_seeker.reviews],
+            "view": [view.to_dict() for view in job_seeker.views],
+            "jobSeekerInfo": {}
+        }
+    if job_seeker.jsInfo:
+        response["jobSeekerInfo"] = job_seeker.jsInfo.to_dict()
+    if job_seeker.payment:
+        response["payment"] = job_seeker.payment.to_dict()
+    
+    return jsonify(response)

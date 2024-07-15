@@ -50,7 +50,10 @@ def logout():
     # if request.method == 'OPTIONS':
     #     return make_response('', 200)  # Handle preflight OPTIONS request
     session_id = auth.session_cookie(request)
-    user_type = auth.get_cookie(request).get('user_type')
+    if request.cookies.get("user_type"):
+        user_type = request.cookies.get("user_type")
+    elif auth.get_cookie(request) and auth.get_cookie(request).get("user_type"):
+        user_type = auth.get_cookie(request).get("user_type")
     print(session_id, user_type)
     if not session_id or not user_type:
         abort(401)

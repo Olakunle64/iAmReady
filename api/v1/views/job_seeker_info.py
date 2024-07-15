@@ -23,10 +23,13 @@ def create_job_seeker_info():
 def get_job_seeker_infos():
     """This method returns all the job_seeker_infos"""
     job_seeker = request.current_user
+    job_seeker_info = job_seeker.jsInfo
 
-    return jsonify([
-        job_seeker_info.to_dict() for job_seeker_info in job_seeker.job_seeker_infos
-    ])
+    if job_seeker_info:
+        return jsonify([
+            [job_seeker_info.to_dict()]
+        ])
+    return jsonify([])
 
 
 @app_views.route('/job_seeker/job_seeker_info', methods=['PUT'], strict_slashes=False)

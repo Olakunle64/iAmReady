@@ -40,6 +40,9 @@ class Auth:
         cookie_name = os.getenv("SESSION_NAME", "session_id")
         # print("cookies: ", request.cookies)
         # return request.cookies.get(cookie_name)
+        print(request.cookies.get(cookie_name))
+        if request.cookies.get(cookie_name):
+            return request.cookies.get(cookie_name)
         if self.get_cookie(request):
             return self.get_cookie(request).get(cookie_name)
     
