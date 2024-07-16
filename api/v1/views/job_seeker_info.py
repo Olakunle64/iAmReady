@@ -36,9 +36,10 @@ def get_job_seeker_infos():
 def update_job_seeker_info():
     """This method updates an job_seeker_info"""
     args = request.args
-    if 'job_seeker_info_id' not in args:
-        return jsonify({'error': 'Missing job_seeker_info_id'}), 400
-    job_seeker_info = storage.get(JobSeekerInfo, args['job_seeker_info_id'])
+    print(args)
+    # if 'job_seeker_info_id' not in args:
+    #     return jsonify({'error': 'Missing job_seeker_info_id'}), 400
+    job_seeker_info = request.current_user.jsInfo
     if job_seeker_info is None:
         abort(404)
 

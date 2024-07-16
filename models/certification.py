@@ -11,4 +11,4 @@ class Certification(ParentModel, Base):
     title = Column("title", String(128), nullable=False)
     job_seeker_id = Column(String(60), ForeignKey('job_seekers.id'), nullable=False)
     issuingOrg = Column("issuingOrg", String(128), nullable=False)
-    dateIssued = Column("dateIssued", String(128), nullable=False)
+    dateIssued = Column("dateIssued", String(128), nullable=False) # change to the date type later

@@ -1,0 +1,62 @@
+.formEdu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 70%;
+    background-color: lightskyblue;
+}
+.formEdu textarea {
+    width: 87%;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.5em;
+
+}
+.formEdu input {
+    width: 87%;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.5em;
+}
+.formEdu button {
+    font-size: 1.5em;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: red;
+    border: 1px solid red;
+    color: white;
+}
+
+.formEdu h3 {
+    font-size: 2em;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.btn_add {
+    font-size: 25px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: green;
+    border: 1px solid green;
+    color: white;
+    padding: 10px;
+    width: 100px;
+}
+.formEdu label {
+    color: black;
+    font-size: 1.5em;
+    /* justify-self: flex-start; */
+}
+
+.portfolio_container {
+    margin-left: 3%;
+}

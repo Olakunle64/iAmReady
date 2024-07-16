@@ -8,8 +8,15 @@ import { IoBagAdd } from "react-icons/io5";
 import Portfolio from "./Porfolio";
 import Skill from "./Skill";
 import Logout from "./Logout";
+// import AddButton from "./AddButton";
+import AddEducation from "./AddEducation";
+import AddCertification from "./AddCertification";
+import AddExperience from "./AddExperience";
+import AddPortfolio from "./AddPortfolio";
+import EditProfile from "./EditProfile";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
 
 export default function ProfileSection() {
     const navigate = useNavigate();
@@ -26,6 +33,23 @@ export default function ProfileSection() {
           return acc;
         }, {});
       });
+      function camelCase(dict) {
+        let newDict = {};
+        for (let key in dict) {
+            let value = dict[key];
+            if (key !== 'title' && key !== 'company') {
+                let newValue = value[0].toUpperCase() + value.slice(1).toLowerCase();
+                newDict[key] = newValue;
+                continue;
+            } 
+            newDict[key] = value;
+        }
+        return newDict;
+    }
+    function camelCaseStr(str) {
+        let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
+        return newStr;
+    }
     useEffect(() => {
         async function getJobSeekerDetails() {
             try {
@@ -98,12 +122,12 @@ export default function ProfileSection() {
                     {jobSeeker.job_seeker && (
                         <>
                             <div className="profile-picture">
-                                <h1>{`${jobSeeker.job_seeker.firstName[0].toUpperCase()}${jobSeeker.job_seeker.lastName[0].toUpperCase()}`}</h1>
+                                <h1>{`${jobSeeker.job_seeker.firstName && jobSeeker.job_seeker.firstName[0].toUpperCase()}${jobSeeker.job_seeker.lastName && jobSeeker.job_seeker.lastName[0].toUpperCase()}`}</h1>
                             </div>
                             <div className="info">
-                                <h1>{`${jobSeeker.job_seeker.firstName} ${jobSeeker.job_seeker.lastName}`}</h1>
+                                <h1>{`${camelCaseStr(jobSeeker.job_seeker.firstName)} ${camelCaseStr(jobSeeker.job_seeker.lastName)}`}</h1>
                                 <p>{jobSeeker.jobSeekerInfo.jobName}</p>
-                                <p>Location: {`${jobSeeker.job_seeker.city}, ${jobSeeker.job_seeker.country}`}</p>
+                                <p>Location: {`${camelCaseStr(jobSeeker.job_seeker.city)}, ${camelCaseStr(jobSeeker.job_seeker.country)}`}</p>
                                 <div className="message">
                                     <div className="phone">
                                         <FaPhone size="1.5em"/>
@@ -121,6 +145,10 @@ export default function ProfileSection() {
                                         <Logout/>
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div>
+                                <EditProfile jobSeeker={jobSeeker} icon={<FaEdit size="2em"/>} camelCase={camelCase}/>
                             </div>
                         </>
                     )}
@@ -147,12 +175,15 @@ export default function ProfileSection() {
                     subheader={"Education"}
                     children={all_education}
                     icon={<GiGraduateCap size="2em" />} cls={"container-box"}
+                    addButton={<AddEducation camelCase={camelCase}/>}
                 />
                 {/* certification */}
                 <ProfileBox 
                     subheader={"Certification"}
                     children={all_certification}
+                    // addButton={<AddButton text={"Add Certification"} onClick={() => navigate("/addCertification")} />}
                     icon={<BiSolidCertification size="2em"/>} cls={"container-box"}
+                    addButton={<AddCertification camelCase={camelCase}/>}
                 />
                 
                 
@@ -169,41 +200,28 @@ export default function ProfileSection() {
                             ))
                         )
                     }
-                    {/* <ProfileBox 
-                    subheader={"Senior Full Stack Developer"}
-                    children={["Bachelor degree in Computer Science at University of Ibadan", "Bachelor degree in Computer Science at University of Ibadan"]}
-                    icon={<IoBagAdd size="2em"/>} cls={"container-box-ex"}
-                    />
-                    <ProfileBox 
-                    subheader={"Senior Full Stack Developer"}
-                    children={["Bachelor degree in Computer Science at University of Ibadan", "Bachelor degree in Computer Science at University of Ibadan", "Bachelor degree in Computer Science at University of Ibadan", "Bachelor degree in Computer Science at University of Ibadan"]}
-                    icon={<IoBagAdd size="2em"/>} cls={"container-box-ex"}
-                    />
-                    <ProfileBox 
-                    subheader={"Senior Full Stack Developer"}
-                    children={["Bachelor degree in Computer Science at University of Ibadan", "Bachelor degree in Computer Science at University of Ibadan"]}
-                    icon={<IoBagAdd size="2em"/>} cls={"container-box-ex"}
-                    /> */}
+                    <AddExperience camelCase={camelCase}/>
                 </div>
                 <div className="portfolios">
                     <h2>Portfolios</h2>
                     <div className="many_portfolios">
-                        <Portfolio 
-                        description={"The website is for matching recruiters with job seekers"}
-                        link={"https://www.google.com"}
-                        title={"Job Seeker Website"}
-                        />
-                        <Portfolio 
-                        description={"The website is for matching recruiters with job seekers"}
-                        link={"https://www.google.com"}
-                        title={"Job Seeker Website"}
-                        />
-                        <Portfolio 
-                        description={"The website is for matching recruiters with job seekers"}
-                        link={"https://www.google.com"}
-                        title={"Job Seeker Website"}
-                        />
+                        {
+                            jobSeeker.portfolio && (
+                                jobSeeker.portfolio.map((element) => (
+                                    <Portfolio 
+                                    description={element.description}
+                                    link={element.link}
+                                    title={element.title}
+                                    />
+                                ))
+                            )
+                        }
                     </div>
+                    <div className="portfolio_container">
+                        <AddPortfolio camelCase={camelCase}/>
+                    </div>
+                    
+                    
                     
                 </div>
                 <div className="skills">
@@ -218,13 +236,6 @@ export default function ProfileSection() {
                                 </>
                             )
                         }
-                        {/* <Skill name={'Python'}/>
-                        <Skill name={'Python'}/>
-                        <Skill name={'Python'}/>
-                        <Skill name={'Python'}/>
-                        <Skill name={'Python'}/>
-                        <Skill name={'Python'}/>
-                        <Skill name={'Python'}/> */}
                     </div>
                 </div>
                 <div className="profile-footer">

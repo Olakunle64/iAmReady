@@ -1,5 +1,5 @@
 import React from "react"
-export default function ProfileBox({header, subheader, children, icon, cls, optional}) {
+export default function ProfileBox({header, subheader, children, icon, cls, optional, addButton}) {
     return (
         <div className={cls}>
             <div className="profile-box">
@@ -18,6 +18,9 @@ export default function ProfileBox({header, subheader, children, icon, cls, opti
                         ))
                     }
                 </ul>
+                {/* render addButton if it is not empty */}
+                {addButton && addButton}
+                {/* {addButton } */}
             </div>
         </div>
         

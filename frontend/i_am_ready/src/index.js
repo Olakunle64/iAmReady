@@ -18,6 +18,7 @@ import './styles/job_seeker_profile/portfolio.css'
 import './styles/job_seeker_profile/skills.css'
 import './styles/searchPage/search.css'
 import './styles/searchPage/user_card.css'
+import './styles/job_seeker_profile/add_education.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
