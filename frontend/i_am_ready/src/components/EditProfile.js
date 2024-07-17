@@ -4,12 +4,11 @@ import React, { useState } from 'react';
 export default function EditProfile({icon, jobSeeker}) {
     const [showForm, setShowForm] = useState(false);
     const [updateJobSeeker, setupdateJobSeeker] = useState({
-        firstName: '', LastName: '', email: '', phoneNumber: '', linkedin: '', country: '', city: ''
+        firstName: jobSeeker.job_seeker.firstName, LastName: jobSeeker.job_seeker.lastName,
+        phoneNumber: jobSeeker.job_seeker.phoneNumber, linkedIn: jobSeeker.job_seeker.linkedIn,
+        country: jobSeeker.job_seeker.country, city: jobSeeker.job_seeker.city, skills: jobSeeker.job_seeker.skills.join(','),
+        bio: jobSeeker.job_seeker.bio, jobName: jobSeeker.job_seeker.jobName
     });
-    const [updateJobSeekerInfo, setupdateJobSeekerInfo] = useState({
-        bio: '', skills: '', jobName: ''
-    });
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
         const [key, value] = cookie.trim().split("=");
@@ -21,56 +20,31 @@ export default function EditProfile({icon, jobSeeker}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // Check if the updateJobSeeker object has been modified
-        const modifiedJobSeekerKeys = Object.keys(updateJobSeeker).filter(
-            (key) => updateJobSeeker[key] !== jobSeeker.job_seeker[key]
-        );
-        
-        // Check if the updateJobSeekerInfo object has been modified
-        const modifiedJobSeekerInfoKeys = Object.keys(updateJobSeekerInfo).filter(
-            (key) => updateJobSeekerInfo[key] !== jobSeeker.jobSeekerInfo[key]
-        );
-        
         try {
-            const [response1, response2] = await Promise.all([
-            fetch("http://localhost:5000/api/v1/job_seeker", {
+            const response = fetch("http://localhost:5000/api/v1/job_seeker", {
                 method: 'PUT',
                 headers: {
                 'Content-Type': 'application/json',
                 "Cookie": JSON.stringify(cookies),
                 "Authorization": JSON.stringify(cookies)
                 },
-                body: JSON.stringify(
-                    modifiedJobSeekerKeys.reduce((acc, key) => {
-                    acc[key] = updateJobSeeker[key];
-                    return acc;
-                    }, {})
+                // in the updateJobSeeker try to convert skills to an array
+                body: JSON.stringify({...updateJobSeeker, skills: updateJobSeeker.skills.split(',')}
                 ),
-            }),
-            fetch("http://localhost:5000/api/v1/job_seeker/job_seeker_info", {
-                method: 'PUT',
-                headers: {
-                'Content-Type': 'application/json',
-                "Cookie": JSON.stringify(cookies),
-                "Authorization": JSON.stringify(cookies)
-                },
-                body: JSON.stringify(
-                modifiedJobSeekerInfoKeys.reduce((acc, key) => {
-                    acc[key] = updateJobSeekerInfo[key];
-                    return acc;
-                }, {})
-                ),
-            }),
-            ]);
+            });
         
-            if (!response1.ok || !response2.ok) {
-            alert('Network response was not ok');
+            if ((await response).status !== 200) {
+                alert('Network response was not ok');
             } else {
-            alert("Profile updated successfully");
+                alert("Profile updated successfully");
             }
         
-            setupdateJobSeeker({ firstName: '', LastName: '', email: '', phoneNumber: '', linkedin: '', country: '', city: '', skills: '' });
-            setupdateJobSeekerInfo({ bio: '', jobName: '' });
+            setupdateJobSeeker({
+                firstName: jobSeeker.job_seeker.firstName, LastName: jobSeeker.job_seeker.lastName,
+                phoneNumber: jobSeeker.job_seeker.phoneNumber, linkedIn: jobSeeker.job_seeker.linkedIn,
+                country: jobSeeker.job_seeker.country, city: jobSeeker.job_seeker.city, skills: jobSeeker.job_seeker.skills.join(','),
+                bio: jobSeeker.job_seeker.bio, jobName: jobSeeker.job_seeker.jobName
+            });
             setShowForm(false);
         } catch (error) {
             console.error(error);
@@ -86,12 +60,6 @@ export default function EditProfile({icon, jobSeeker}) {
     const handleJobSeekerInputChange = (e) => {
         setupdateJobSeeker({
             ...updateJobSeeker,
-            [e.target.name]: e.target.value,
-        });
-    };
-    const handleJobSeekerInfoInputChange = (e) => {
-        setupdateJobSeekerInfo({
-            ...updateJobSeekerInfo,
             [e.target.name]: e.target.value,
         });
     };
@@ -122,7 +90,7 @@ export default function EditProfile({icon, jobSeeker}) {
                 <input
                     type='text'
                     name='firstName'
-                    value={updateJobSeeker.firstName || jobSeeker.job_seeker.firstName}
+                    value={updateJobSeeker.firstName}
                     onChange={handleJobSeekerInputChange}
                     // placeholder='First Name'
                     required
@@ -131,34 +99,25 @@ export default function EditProfile({icon, jobSeeker}) {
                 <input
                     type='text'
                     name='LastName'
-                    value={updateJobSeeker.LastName || jobSeeker.job_seeker.lastName}
+                    value={updateJobSeeker.LastName}
                     onChange={handleJobSeekerInputChange}
                     // placeholder='Last Name'
-                    required
-                />
-                <label>Email</label>
-                <input
-                    type='email'
-                    name='email'
-                    value={updateJobSeeker.email || jobSeeker.job_seeker.email}
-                    onChange={handleJobSeekerInputChange}
-                    // placeholder='Email'
                     required
                 />
                 <label>Phone Number</label>
                 <input
                     type='text'
                     name='phoneNumber'
-                    value={updateJobSeeker.phoneNumber || jobSeeker.job_seeker.phoneNumber}
+                    value={updateJobSeeker.phoneNumber}
                     onChange={handleJobSeekerInputChange}
                     // placeholder='Phone Number'
                     // required
                 />
-                <label>Linkedin</label>
+                <label>LinkedIn</label>
                 <input
                     type='text'
-                    name='linkedin'
-                    value={updateJobSeeker.linkedin || jobSeeker.job_seeker.linkedin}
+                    name='linkedIn'
+                    value={updateJobSeeker.linkedIn}
                     onChange={handleJobSeekerInputChange}
                     // placeholder='Linkedin'
                     // required
@@ -167,7 +126,7 @@ export default function EditProfile({icon, jobSeeker}) {
                 <input
                     type='text'
                     name='country'
-                    value={updateJobSeeker.country || jobSeeker.job_seeker.country}
+                    value={updateJobSeeker.country}
                     onChange={handleJobSeekerInputChange}
                     // placeholder='Country'
                     required
@@ -176,7 +135,7 @@ export default function EditProfile({icon, jobSeeker}) {
                 <input
                     type='text'
                     name='city'
-                    value={updateJobSeeker.city || jobSeeker.job_seeker.city}
+                    value={updateJobSeeker.city}
                     onChange={handleJobSeekerInputChange}
                     // placeholder='City'
                     required
@@ -184,16 +143,16 @@ export default function EditProfile({icon, jobSeeker}) {
                 <label>Professional Summary</label>
                 <textarea
                     name='bio'
-                    value={updateJobSeekerInfo.bio || jobSeeker.jobSeekerInfo.bio}
-                    onChange={handleJobSeekerInfoInputChange}
+                    value={updateJobSeeker.bio}
+                    onChange={handleJobSeekerInputChange}
                     // placeholder='Professional Summary'
-                    required
+                    // required
                 />
                 <label>Skills</label>
                 <input
                     type='text'
                     name='skills'
-                    value={updateJobSeeker.skills || jobSeeker.job_seeker.skills.join(", ")}
+                    value={updateJobSeeker.skills}
                     onChange={handleJobSeekerInputChange}
                     // placeholder='Skills'
                     required
@@ -202,10 +161,10 @@ export default function EditProfile({icon, jobSeeker}) {
                 <input
                     type='text'
                     name='jobName'
-                    value={updateJobSeekerInfo.jobName || jobSeeker.jobSeekerInfo.jobName}
-                    onChange={handleJobSeekerInfoInputChange}
+                    value={updateJobSeeker.jobName}
+                    onChange={handleJobSeekerInputChange}
                     // placeholder='Job Name'
-                    required
+                    // required
                 />
                 <button type="submit">Save</button>
                 <button onClick={() => setShowForm(false)}>Cancel</button>

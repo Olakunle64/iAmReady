@@ -80,15 +80,13 @@ def full_job_seeker():
             "education": [education.to_dict() for education in job_seeker.educations],
             "certification": [certification.to_dict() for certification in job_seeker.certifications],
             "experience": [experience.to_dict() for experience in job_seeker.experiences],
-            "payment": {},
             "portfolio": [portfolio.to_dict() for portfolio in job_seeker.portfolios],
             "review": [review.to_dict() for review in job_seeker.reviews],
             "view": [view.to_dict() for view in job_seeker.views],
-            "jobSeekerInfo": {}
         }
-    if job_seeker.jsInfo:
-        response["jobSeekerInfo"] = job_seeker.jsInfo.to_dict()
-    if job_seeker.payment:
-        response["payment"] = job_seeker.payment.to_dict()
+    # if job_seeker.jsInfo:
+    #     response["jobSeekerInfo"] = job_seeker.jsInfo.to_dict()
+    # if job_seeker.payment:
+    #     response["payment"] = job_seeker.payment.to_dict()
     
     return jsonify(response)

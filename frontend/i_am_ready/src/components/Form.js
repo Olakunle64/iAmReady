@@ -70,6 +70,7 @@ export default function Form(props) {
                     skills: "",
                     country: "",
                     city: "",
+                    jobName: "",
                     // resume: null,
                 });
                 alert("You have successfully signed up");
@@ -201,7 +202,16 @@ return (
                     onChange={handleJobSeekerInputChange}
                     required
                 />
-
+                <label htmlFor="interest">Interest</label>
+                <input
+                    type="text"
+                    id="interest"
+                    name="jobName"
+                    value={jobSeekerData.jobName}
+                    placeholder="Software Developer, Data Analyst"
+                    onChange={handleJobSeekerInputChange}
+                    required
+                />
                 <label htmlFor="skills">Skills</label>
                 <input
                     type="text"

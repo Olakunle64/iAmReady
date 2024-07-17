@@ -14,6 +14,7 @@ import AddCertification from "./AddCertification";
 import AddExperience from "./AddExperience";
 import AddPortfolio from "./AddPortfolio";
 import EditProfile from "./EditProfile";
+// import EditEducation from "./EditEducation";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
@@ -53,7 +54,6 @@ export default function ProfileSection() {
     useEffect(() => {
         async function getJobSeekerDetails() {
             try {
-                console.log(cookies)
                 // const cookies = localStorage.getItem("cookies");
                 const response = await fetch("http://127.0.0.1:5000/api/v1/jobSeeker", {
                     // mode: 'no-cors',
@@ -87,31 +87,19 @@ export default function ProfileSection() {
         });
     })
     
-    // console.log(jobSeeker)
-    // return jsonify({
-    //     "job_seeker": job_seeker.to_dict(),
-    //     "education": [education.to_dict() for education in job_seeker.educations],
-    //     "certification": [certification.to_dict() for certification in job_seeker.certifications],
-    //     "experience": [experience.to_dict() for experience in job_seeker.experiences],
-    //     "payment": payments,
-    //     "portfolio": [portfolio.to_dict() for portfolio in job_seeker.portfolios],
-    //     "review": [review.to_dict() for review in job_seeker.reviews],
-    //     "view": [view.to_dict() for view in job_seeker.views],
-    //     "jobSeekerInfo": job_seeker_infos
-    // })
-    let all_education = []
+    let all_education = {};
     if (jobSeeker.education) {
         jobSeeker.education.forEach(element => {
             const education = `${element.degree} in ${element.fieldOfStudy} at ${element.school}`;
-            all_education.push(education)
+            all_education[element.id] = education;
         });
     }
 
-    let all_certification = []
+    let all_certification = {};
     if (jobSeeker.certification) {
         jobSeeker.certification.forEach(element => {
             const certification = `${element.title} at ${element.issuingOrg} ON ${element.dateIssued}`;
-            all_certification.push(certification)
+            all_certification[element.id] = certification;
         });
     }
     return (
@@ -126,12 +114,12 @@ export default function ProfileSection() {
                             </div>
                             <div className="info">
                                 <h1>{`${camelCaseStr(jobSeeker.job_seeker.firstName)} ${camelCaseStr(jobSeeker.job_seeker.lastName)}`}</h1>
-                                <p>{jobSeeker.jobSeekerInfo.jobName}</p>
+                                <p>{jobSeeker.job_seeker.jobName.split(",").join(' || ')}</p>
                                 <p>Location: {`${camelCaseStr(jobSeeker.job_seeker.city)}, ${camelCaseStr(jobSeeker.job_seeker.country)}`}</p>
                                 <div className="message">
                                     <div className="phone">
                                         <FaPhone size="1.5em"/>
-                                        <span>+2347062869135</span>
+                                        <span>{jobSeeker.job_seeker.phoneNumber}</span>
                                     </div>
                                     <div className="email">
                                         <MdEmail size="1.5em"/>
@@ -139,7 +127,7 @@ export default function ProfileSection() {
                                     </div>
                                     <div className="linkedin">
                                         <FaLinkedin size="1.5em"/>
-                                        <a href="google.com">Linkedin</a>
+                                        <a href={jobSeeker.job_seeker.linkedIn}>Linkedin</a>
                                     </div>
                                     <div>
                                         <Logout/>
@@ -159,10 +147,10 @@ export default function ProfileSection() {
                     <div>
                         <h3>Professional Summary</h3>
                         {
-                            jobSeeker.jobSeekerInfo && (
+                            jobSeeker.job_seeker && (
                                 <>
                                     <p>
-                                        {jobSeeker.jobSeekerInfo.bio}
+                                        {jobSeeker.job_seeker.bio}
                                     </p>
                                     
                                 </>
@@ -176,6 +164,9 @@ export default function ProfileSection() {
                     children={all_education}
                     icon={<GiGraduateCap size="2em" />} cls={"container-box"}
                     addButton={<AddEducation camelCase={camelCase}/>}
+                    camelCase={camelCase}
+                    jobSeeker={jobSeeker}
+                    
                 />
                 {/* certification */}
                 <ProfileBox 
@@ -194,7 +185,8 @@ export default function ProfileSection() {
                             jobSeeker.experience.map((element) => (
                                 <ProfileBox 
                                 subheader={element.company}
-                                children={[`${element.description} from ${element.startDate} to ${element.startDate} at ${element.location}`]}
+                                children={{ [element.id]: `${element.description} from ${element.startDate} to ${element.startDate} at ${element.location}` }}
+                                // children={{ [element.id]: `${element.description} from ${element.startDate} to ${element.endDate} at ${element.location}` }}
                                 icon={<IoBagAdd size="2em"/>} cls={"container-box-ex"}
                                 />
                             ))

@@ -10,11 +10,11 @@ from models.recruiter import Recruiter
 from models.job_seeker import JobSeeker
 from models.experience import Experience
 from models.education import Education
-from models.payment import Payment
+# from models.payment import Payment
 from models.portfolio import Portfolio
 from models.certification import Certification
 from models.review import Review
-from models.job_seeker_info import JobSeekerInfo
+# from models.job_seeker_info import JobSeekerInfo
 from models.job_seeker_session import JobSeekerSession
 from models.recruiter_session import RecruiterSession
 from models.recruiter_review import RecruiterReview
@@ -24,8 +24,8 @@ from sqlalchemy.orm.exc import NoResultFound
 
 
 ValidClasses = [Recruiter, JobSeeker, Experience,
-                Education, Payment, Portfolio,
-                Certification, Review, JobSeekerInfo, View,
+                Education, Portfolio,
+                Certification, Review, View,
                 JobSeekerSession, RecruiterSession
             ]
 
@@ -34,11 +34,9 @@ classes = {
     "JobSeeker": JobSeeker,
     "Experience": Experience,
     "Education": Education,
-    "Payment": Payment,
     "Portfolio": Portfolio,
     "Certification": Certification,
     "Review": Review,
-    "JobSeekerInfo": JobSeekerInfo,
     "View": View,
     "JobSeekerSession": JobSeekerSession,
     "RecruiterSession": RecruiterSession,

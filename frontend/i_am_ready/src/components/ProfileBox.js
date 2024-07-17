@@ -1,5 +1,16 @@
 import React from "react"
-export default function ProfileBox({header, subheader, children, icon, cls, optional, addButton}) {
+import { useState } from "react"
+import EditEducation from "./EditEducation"
+
+export default function ProfileBox({header, subheader, children, icon, cls, optional, addButton, jobSeeker, camelCase}) {
+    const [showForm, setShowForm] = useState(false);
+    const [educationId, setEducationId] = useState(null);
+
+    function handleButtonDoubleClick(e) {
+        setEducationId(e.target.id);
+        setShowForm(true);
+    }
+
     return (
         <div className={cls}>
             <div className="profile-box">
@@ -8,21 +19,26 @@ export default function ProfileBox({header, subheader, children, icon, cls, opti
                     {icon}
                     <h4>{subheader}</h4>
                 </div>
-                
+
                 {optional && <p className="parag">{optional}</p>}
                 <ul>
                     {
-                        
-                        React.Children.toArray(children).map((child, index) => (
-                            <li key={index}>{child}</li>
+                        Object.keys(children).map((key, index) => (
+                            <li onDoubleClick={handleButtonDoubleClick} key={index} id={key}>{children[key]}</li>
                         ))
                     }
                 </ul>
-                {/* render addButton if it is not empty */}
                 {addButton && addButton}
-                {/* {addButton } */}
             </div>
+            {showForm && subheader === "Education" && (
+                <EditEducation
+                    showForm={showForm}
+                    setShowForm={setShowForm}
+                    jobSeeker={jobSeeker}
+                    camelCase={camelCase}
+                    educationId={educationId}
+                />
+            )}
         </div>
-        
     )
 }

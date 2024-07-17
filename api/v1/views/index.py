@@ -8,10 +8,10 @@ from datetime import datetime as Datetime
 from models.view import View
 from models.certification import Certification
 from models.experience import Experience
-from models.job_seeker_info import JobSeekerInfo
+# from models.job_seeker_info import JobSeekerInfo
 from models.portfolio import Portfolio
 from models.review import Review
-from models.payment import Payment
+# from models.payment import Payment
 from models.recruiter_review import RecruiterReview
 
 
@@ -25,10 +25,10 @@ def stats():
         "views": View,
         "certifications": Certification,
         "experiences": Experience,
-        "job_seeker_infos": JobSeekerInfo,
+        # "job_seeker_infos": JobSeekerInfo,
         "portfolios": Portfolio,
         "reviews": Review,
-        "payments": Payment,
+        # "payments": Payment,
         "recruiter_reviews": RecruiterReview
     }
     count = {}

@@ -7,9 +7,9 @@ from models.education import Education
 from models.experience import Experience
 from models.job_seeker import JobSeeker
 from models.recruiter import Recruiter
-from models.job_seeker_info import JobSeekerInfo
+# from models.job_seeker_info import JobSeekerInfo
 from models.view import View
-from models.payment import Payment
+# from models.payment import Payment
 from models.review import Review
 from models.recruiter_review import RecruiterReview
 from models.portfolio import Portfolio
@@ -57,11 +57,11 @@ def get_all_experiences():
     return jsonify([experience.to_dict() for experience in experiences])
 
 
-@app_views.route('/job_seeker_infos', methods=['GET'], strict_slashes=False)
-def get_all_job_seeker_infos():
-    """This method returns all the job_seeker_infos"""
-    job_seeker_infos = storage.all(JobSeekerInfo).values()
-    return jsonify([job_seeker_info.to_dict() for job_seeker_info in job_seeker_infos])
+# @app_views.route('/job_seeker_infos', methods=['GET'], strict_slashes=False)
+# def get_all_job_seeker_infos():
+#     """This method returns all the job_seeker_infos"""
+#     job_seeker_infos = storage.all(JobSeekerInfo).values()
+#     return jsonify([job_seeker_info.to_dict() for job_seeker_info in job_seeker_infos])
 
 
 @app_views.route('/recruiters', methods=['GET', 'OPTIONS'], strict_slashes=False)
@@ -78,11 +78,11 @@ def get_all_recruiter_reviews():
     return jsonify([recruiter_review.to_dict() for recruiter_review in recruiter_reviews])
 
 
-@app_views.route('/payments', methods=['GET'], strict_slashes=False)
-def get_all_payments():
-    """This method returns all the payments"""
-    payments = storage.all(Payment).values()
-    return jsonify([payment.to_dict() for payment in payments])
+# @app_views.route('/payments', methods=['GET'], strict_slashes=False)
+# def get_all_payments():
+#     """This method returns all the payments"""
+#     payments = storage.all(Payment).values()
+#     return jsonify([payment.to_dict() for payment in payments])
 
 
 @app_views.route('/portfolios', methods=['GET'], strict_slashes=False)
