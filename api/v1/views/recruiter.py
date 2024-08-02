@@ -42,8 +42,7 @@ def update_recruiter():
 @app_views.route('/recruiter', methods=['GET', 'OPTIONS'], strict_slashes=False)
 def get_recruiter():
     """This method gets a recruiter"""
-    recruiter_id = request.current_user.id
-    recruiter = storage.get(Recruiter, recruiter_id)
+    recruiter = request.current_user
     if recruiter is None:
         abort(401)
     return jsonify(recruiter.to_dict())
@@ -60,5 +59,3 @@ def delete_recruiter():
     response.delete_cookie('session_id')
     response.delete_cookie('user_type')
     return response, 200
-    
-

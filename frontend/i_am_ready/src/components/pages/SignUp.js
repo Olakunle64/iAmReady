@@ -1,8 +1,14 @@
 // import React, { useState } from "react";
 import Form from "../Form";
 import { BsBellFill } from "react-icons/bs";
+import { useState } from "react";
 
 export default function SignUp() {
+    const [userType, setUserType] = useState(0); // 0 for Job Seeker, 1 for Recruiter
+
+    const toggleUserType = (type) => {
+        setUserType(type);
+    };
     return (
         <div className="signup">
             <div className="top">
@@ -11,9 +17,13 @@ export default function SignUp() {
             </div>
             <div className="form-container">
                 <h2>Join iAmReady Today</h2>
+                <div className="toggle-buttons">
+                    <button onClick={() => toggleUserType(0)}>Job Seeker</button>
+                    <button onClick={() => toggleUserType(1)}>Recruiter</button>
+                </div>
                 <div className="two-forms">
-                    <Form user_type={0} />
-                    <Form user_type={1} />
+                    {/* {userType === 0 ? <Form user_type={0} /> : <Form user_type={1} />} */}
+                    <Form user_type={userType} />
                 </div>
                 <div className="notify">
                     <BsBellFill size="2em"/>

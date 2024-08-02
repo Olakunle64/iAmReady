@@ -5,7 +5,6 @@ from models.job_seeker import JobSeeker
 from models.certification import Certification
 
 
-
 @app_views.route('/job_seeker/certification', methods=['POST'], strict_slashes=False)
 def create_certification():
     """This method creates a certification"""

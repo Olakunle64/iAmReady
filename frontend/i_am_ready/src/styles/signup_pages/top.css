@@ -1,13 +1,36 @@
 .signup {
     margin: 20%;
     margin-top: 5%;
+    /* text-align: center;  */
 }
+
+.top {
+    background-color: #f0f4ff; /* Light background color */
+    padding: 20px; /* Add padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    text-align: center; /* Center text */
+}
+
 .top h2 {
     color: #2563eb;
-    font-size: 3em;
+    font-size: 2em; /* Increase font size */
+    font-weight: bold; /* Make it bold */
+    margin-bottom: 0.5em; /* Add space below */
 }
+
 .top h3 {
     margin-top: -1%;
     color: #78808a;
-    font-size: 1.5em;
+    font-size: 1em; /* Increase font size */
+    font-weight: 300; /* Lighter weight for contrast */
+}
+
+@media (max-width: 600px) {
+    .top h2 {
+        font-size: 1.5em; /* Adjust font size for smaller screens */
+    }
+    .top h3 {
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+    }
 }

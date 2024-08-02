@@ -53,9 +53,10 @@ export default function Logout() {
 
             const data = await response.json();
             // localStorage.removeItem("cookies");
+            
             clearCookies();
             console.log(data);
-            navigate("/login");
+            navigate("/");
         } catch (err) {
             console.error("Error logging out:", err);
             navigate("/");

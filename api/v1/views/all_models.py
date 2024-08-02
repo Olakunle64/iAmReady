@@ -7,12 +7,11 @@ from models.education import Education
 from models.experience import Experience
 from models.job_seeker import JobSeeker
 from models.recruiter import Recruiter
-# from models.job_seeker_info import JobSeekerInfo
 from models.view import View
-# from models.payment import Payment
 from models.review import Review
 from models.recruiter_review import RecruiterReview
 from models.portfolio import Portfolio
+import random
 
 
 
@@ -33,12 +32,15 @@ def get_all_views():
 @app_views.route('/reviews', methods=['GET'], strict_slashes=False)
 def get_all_reviews():
     """This method returns all the reviews"""
-    reviews = storage.all(Review).values()
+    reviews = list(storage.all(Review).values())  # Convert to a list
+    reviews.extend(list(storage.all(RecruiterReview).values()))
+    random.shuffle(reviews)  # Shuffle the list
     return jsonify([review.to_dict() for review in reviews])
 
 @app_views.route('/job_seekers', methods=['GET'], strict_slashes=False)
 def get__all_job_seekers():
-    """This method returns all the job_seekers"""
+    """This method returns all the job_seekers
+    """
     job_seekers = storage.all(JobSeeker).values()
     return jsonify([job_seeker.to_dict() for job_seeker in job_seekers])
 
@@ -57,13 +59,6 @@ def get_all_experiences():
     return jsonify([experience.to_dict() for experience in experiences])
 
 
-# @app_views.route('/job_seeker_infos', methods=['GET'], strict_slashes=False)
-# def get_all_job_seeker_infos():
-#     """This method returns all the job_seeker_infos"""
-#     job_seeker_infos = storage.all(JobSeekerInfo).values()
-#     return jsonify([job_seeker_info.to_dict() for job_seeker_info in job_seeker_infos])
-
-
 @app_views.route('/recruiters', methods=['GET', 'OPTIONS'], strict_slashes=False)
 def get_all_recruiters():
     """This method returns all the recruiters"""
@@ -76,13 +71,6 @@ def get_all_recruiter_reviews():
     """This method returns all the recruiter_reviews"""
     recruiter_reviews = storage.all(RecruiterReview).values()
     return jsonify([recruiter_review.to_dict() for recruiter_review in recruiter_reviews])
-
-
-# @app_views.route('/payments', methods=['GET'], strict_slashes=False)
-# def get_all_payments():
-#     """This method returns all the payments"""
-#     payments = storage.all(Payment).values()
-#     return jsonify([payment.to_dict() for payment in payments])
 
 
 @app_views.route('/portfolios', methods=['GET'], strict_slashes=False)

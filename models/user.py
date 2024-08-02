@@ -13,6 +13,7 @@ class User(ParentModel):
     country = Column("country", String(128), nullable=False)
     city = Column("city", String(128), nullable=False)
     phoneNumber = Column("phoneNumber", String(128), nullable=True)
+    linkedIn = Column("linkedIn", String(128), nullable=True)
     address = Column("address", String(128), nullable=True)
     reset_token_id = Column("reset_token_id", String(128), nullable=True)
 

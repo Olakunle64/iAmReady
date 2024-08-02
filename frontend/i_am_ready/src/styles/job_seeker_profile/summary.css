@@ -1,16 +1,49 @@
 .summary {
-    margin-top: 2%;
-    margin-left: 3%;
-    margin-right: 3%;
-    /* border: 1px solid #2563eb; */
+    margin: 2% 3%; /* Combined margin for simplicity */
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
-    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow for depth */
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 12px; /* More rounded corners */
+    padding: 20px; /* Increased padding */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
 }
+
+.summary:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
 .summary div {
-    margin-left: 2%;
-    font-size: 1.5em;
-    width: 80%;
+    /* margin-left: 2%; */
+    font-size: 1em;
+    width: 98%;
+    line-height: 1.6; /* Improved readability */
+    color: #444; /* Darker text for better contrast */
+    padding: 10px; /* Padding for inner spacing */
+    border-left: 4px solid #2563eb; /* Left border for emphasis */
+    background-color: #f0f8ff; /* Light background for text */
+    border-radius: 8px; /* Rounded corners for text blocks */
+    margin-bottom: 15px; /* Space between paragraphs */
+    margin: 0;
+}
+
+.summary h2 {
+    margin-bottom: 15px; /* Space below the heading */
+    font-size: 1.8em; /* Larger font size for the heading */
+    color: #2563eb; /* Highlight heading in blue */
+    text-align: left; /* Align heading to the left */
+    font-weight: bold; /* Bold heading */
+    text-transform: uppercase; /* Uppercase for emphasis */
+    letter-spacing: 1px; /* Spacing between letters */
+}
+
+@media screen and (max-width: 768px) {
+    .summary {
+        margin: 2% 1%; /* Adjust margins for smaller screens */
+    }
+    
+    .summary div {
+        width: 92%; /* Full width on mobile */
+    }
 }

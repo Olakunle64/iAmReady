@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const AddEducation = ({camelCase}) => {
+const AddEducation = () => {
     // const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [newEducation, setnewEducation] = useState({ degree: '', school: '', fieldOfStudy: '', startDate: '', endDate: ''});
@@ -25,7 +25,7 @@ const AddEducation = ({camelCase}) => {
             "Cookie": JSON.stringify(cookies),
             "Authorization": JSON.stringify(cookies)
         },
-        body: JSON.stringify(camelCase(newEducation)),
+        body: JSON.stringify(newEducation),
         });
         if (!response.ok) {
             alert('Network response was not ok');

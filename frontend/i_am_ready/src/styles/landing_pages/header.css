@@ -1,32 +1,99 @@
 .header {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(29, 78, 216);
-    border-color: black 1px solid;
-    /* padding: 1em; */
+    align-items: center; /* Center items vertically */
+    background-color: rgb(29, 78, 216); /* Deep blue background */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2); /* Subtle bottom border */
+    padding: 1em 2em; /* Increased padding for better spacing */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    /* width: 100%; */
 }
-.navBar:hover {
-    color: white;
-}
+
 .header h1 {
     color: white;
-    font-size: 3em;
+    font-size: 1.8em; /* Increased font size for prominence */
     margin-left: 1em;
+    margin-right: 10%;
+    margin-bottom: 20px; /* Add space below the title */
 }
+
+
 .header .links {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Align links to the start */
+    align-items: flex-start;
     color: white;
-    margin-right: 5%;
+    margin-right: 3%;
     flex-grow: 0.2;
-    margin-top: 1%;
-    font-size: 1.5em;
+    font-size: 1em; /* Increased font size for better readability */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    /* border: 1px solid red; */
 }
-.header .links h3:hover {
-    cursor: pointer;
-    /* color: lightblue; */
-    /* text-decoration: underline; */
-}
+
 .header .links h3 {
     text-decoration: underline;
+    margin: 0 15px; /* Reduced margin to bring links closer */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.header .links h3:last-child {
+    margin-right: 0; /* Remove right margin for the last link */
+}
+
+.header .links h3:hover {
+    color: #ffeb3b; /* Highlight color on hover */
+}
+
+.hamburger {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+.links.open {
+    display: flex; /* Show links when hamburger is open */
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .header .links {
+        display: none; /* Hide links by default on small screens */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        background-color: rgb(29, 78, 216);
+        top: 95px; /* Adjust based on header height */
+        left: 0; /* Align to left */
+        z-index: 10; /* Ensure links are above other content */
+        padding: 20px 0; /* Added padding for better spacing */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for dropdown */
+    }
+
+    .hamburger {
+        display: flex; /* Show hamburger on small screens */
+    }
+
+    .links.open {
+        display: flex; /* Show links when hamburger is open */
+    }
+}
+
+/* logo */
+.header h1 {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 60px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between logo and text */
 }

@@ -1,75 +1,102 @@
+
+
 .login {
-    margin-left: 20%;
-    margin-right: 20%;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    height: 100vh; /* Full viewport height */
     background-color: #bdd9fb;
-    border: 1px solid #bdd9fb;
-    /* height: 100%; */
-    /* background-color: blue; */
 }
 
-.login .sub_login {
+.sub_login {
     background-color: white;
     border-radius: 10px;
-    margin: 4%;
-    /* margin-top: 500px; */
-    /* border: 1px solid #000000; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
+    padding: 20px; /* Add padding around the container */
+    width: 90%; /* Adjust width for portrait */
+    max-width: 400px; /* Set a maximum width */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    text-align: center;
 }
 
-.login .sub_login input {
-    margin: 3%;
-    padding: 2%;
-    width: 80%;
-    font-size: 2em;
+.sub_login input {
+    margin: 10px 0; /* Adjust margins */
+    padding: 10px; /* Increase padding */
+    width: calc(100% - 20px); /* Full width minus padding */
+    font-size: 1em;
     outline: none;
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Rounded corners */
+    transition: border-color 0.3s; /* Transition for border */
 }
 
-.login .sub_login h1 {
-    color: #2563eb;
-    font-size: 3em;
-    margin-bottom: 1%;
-    /* border: 1px solid white; */
+.sub_login input:focus {
+    border-color: #2563eb; /* Change border color on focus */
 }
-.login .sub_login h2 {
+
+.sub_login h1 {
+    color: #2563eb;
+    font-size: 2em; /* Increase font size */
+    margin-bottom: 10px; /* Adjust margin */
+}
+
+.sub_login h2 {
     color: #4b5563;
-    font-size: 2em;
-    margin-top: 1%;
-    margin-bottom: 10%;
+    font-size: 1.2em; /* Slightly increase font size */
+    margin-top: 10px;
+    margin-bottom: 20px; /* Adjust margin */
+    text-align: center; /* Center align */
 }
 
 .btn_2563eb {
     background-color: #2563eb;
     color: white;
-    font-size: 2em;
-    padding: 2.5%;
-    border-radius: 20px;
-    margin-top: 5%;
-    width: 70%;
-    margin-bottom: 5%;
-    border: 1px solid #2563eb;
+    font-size: 1em;
+    padding: 10px; /* Increase padding */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px;
+    width: calc(100% - 20px); /* Full width minus padding */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor */
+    transition: background-color 0.3s; /* Transition for hover */
 }
 
-.login .sub_login .radio {
+.btn_2563eb:hover {
+    background-color: #1d4ed8; /* Darker shade on hover */
+}
+
+.radio {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* align-items: center; */
-    align-items: start;
-    margin-top: 5%;
-    font-size: 1.5em;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+.radio label {
+    margin-right: 20px; /* Add space between radio buttons */
 }
 
 input[type="radio"] {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin-right: 5px;
-  }
+}
 
-.login .sub_login input[type="text"] {
-    border: none;
-    outline: none;
-    font-size: 500em;
+.links {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 20px); /* Full width minus padding */
+    margin-top: 20px; /* Add margin */
+}
+
+.links a {
+    color: #2563eb; /* Link color */
+    text-decoration: none; /* Remove underline */
+    font-size: 0.9em; /* Font size */
+    transition: color 0.3s; /* Transition for hover */
+}
+
+.links a:hover {
+    color: #1d4ed8; /* Darker shade on hover */
 }

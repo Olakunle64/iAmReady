@@ -5,16 +5,17 @@ from models.job_seeker import JobSeeker
 from models.review import Review
 
 
-
 @app_views.route('/job_seeker/review', methods=['POST'], strict_slashes=False)
 def create_review():
     """This method creates a review"""
     job_seeker = request.current_user
-    must_attr = ['school', 'degree', 'fieldOfStudy', 'startDate', 'endDate']
+    must_attr = ['rating', 'description']
     for attr in must_attr:
         if attr not in request.get_json():
             return jsonify({'error': 'Missing attribute: ' + attr}), 400
     request.get_json()['job_seeker_id'] = job_seeker.id
+    request.get_json()['firstName'] = job_seeker.firstName
+    request.get_json()['lastName'] = job_seeker.lastName
     review = Review(**request.get_json())
     review.save()
     return jsonify(review.to_dict()), 201

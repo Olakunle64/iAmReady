@@ -10,7 +10,8 @@ class RecruiterReview(ParentModel, Base):
     __tablename__ = 'recruiter_reviews'
     description = Column("description", String(1024), nullable=False)
     rating = Column("rating", Integer, nullable=False)
-    recuiter_id = Column(String(60), ForeignKey('recruiters.id'), nullable=False)
+    companyName = Column("companyName", String(128), nullable=False)
+    recruiter_id = Column(String(60), ForeignKey('recruiters.id'), nullable=False)
 
 # added attr:
 # rating

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { Navigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
-const AddCertification = ({camelCase}) => {
+const AddCertification = () => {
     // const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [newCertification, setnewCertification] = useState({ title: '', issuingOrg: '', dateIssued: ''});
@@ -14,9 +14,6 @@ const AddCertification = ({camelCase}) => {
             return acc;
         }, {});
     });
-    // write a function that takes in dictionary and change all value that starts with alphabet to capital letter
-    // letter and the rest of the word must be in lowercase just like turning the first letter of a word to capital letter
-    // and the rest of the word to lowercase
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +26,7 @@ const AddCertification = ({camelCase}) => {
             "Cookie": JSON.stringify(cookies),
             "Authorization": JSON.stringify(cookies)
         },
-        body: JSON.stringify(camelCase(newCertification)),
+        body: JSON.stringify(newCertification),
         });
         if (!response.ok) {
             alert('Failed to add certification');

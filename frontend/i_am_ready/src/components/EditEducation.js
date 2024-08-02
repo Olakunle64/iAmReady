@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const EditEducation = ({camelCase, jobSeeker, showForm, setShowForm, educationId}) => {
+const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
     const [newEducation, setnewEducation] = useState({
         degree: "",
         school: "",
@@ -10,7 +10,7 @@ const EditEducation = ({camelCase, jobSeeker, showForm, setShowForm, educationId
         endDate: ""
     });
     // write a function that takes in a list of object and filter the list based on the id attribute and return the just one object with the id
-    const education = jobSeeker.education.filter((edu) => edu.id === educationId);
+    const education = jobSeeker.education.filter((edu) => edu.id === objId);
     
     // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
@@ -22,7 +22,7 @@ const EditEducation = ({camelCase, jobSeeker, showForm, setShowForm, educationId
     });
     const deleteEducation = async (e) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/v1/job_seeker/education?education_id=${educationId}`, {
+            const response = await fetch(`http://localhost:5000/api/v1/job_seeker/education?education_id=${objId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -44,14 +44,14 @@ const EditEducation = ({camelCase, jobSeeker, showForm, setShowForm, educationId
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch(`http://localhost:5000/api/v1/job_seeker/education?education_id=${educationId}`, {
+        const response = await fetch(`http://localhost:5000/api/v1/job_seeker/education?education_id=${objId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             "Cookie": JSON.stringify(cookies),
             "Authorization": JSON.stringify(cookies)
         },
-        body: JSON.stringify(camelCase(newEducation)),
+        body: JSON.stringify(newEducation),
         });
         if (response.status !== 200) {
             alert('Network response was not ok');
@@ -134,7 +134,7 @@ const EditEducation = ({camelCase, jobSeeker, showForm, setShowForm, educationId
                 <input
                     type='date'
                     name='startDate'
-                    value={newEducation.startDate || education[0].startDate}
+                    value={newEducation.startDate}
                     onChange={handleEducationInputChange}
                     // placeholder='Start Date'
                     required
@@ -143,7 +143,7 @@ const EditEducation = ({camelCase, jobSeeker, showForm, setShowForm, educationId
                 <input
                     type='date'
                     name='endDate'
-                    value={newEducation.endDate || education[0].endDate}
+                    value={newEducation.endDate}
                     onChange={handleEducationInputChange}
                     // placeholder='End Date'
                     required

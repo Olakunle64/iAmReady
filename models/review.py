@@ -10,6 +10,8 @@ class Review(ParentModel, Base):
     __tablename__ = 'reviews'
     description = Column("review", String(1024), nullable=False)
     rating = Column("rating", Integer, nullable=False)
+    firstName = Column("firstName", String(128), nullable=False)
+    lastName = Column("lastName", String(128), nullable=False)
     job_seeker_id = Column(String(60), ForeignKey('job_seekers.id'), nullable=False)
 
 # added attr:

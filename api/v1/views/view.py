@@ -10,17 +10,19 @@ from models.view import View
 @app_views.route('/job_seeker/view', methods=['POST'], strict_slashes=False)
 def create_view():
     """This method creates a view"""
-    job_seeker = request.current_user
-    must_attr = ['recruiter_id']
+    recruiter = request.current_user
+    must_attr = ['job_seeker_id']
     for attr in must_attr:
         if attr not in request.get_json():
             return jsonify({'error': 'Missing attribute: ' + attr}), 400
     
-    # check if the recruiter exists
-    recruiter = storage.get(Recruiter, request.get_json()['recruiter_id'])
-    if recruiter is None:
+    # check if the job seeker exists
+    job_seeker = storage.get(JobSeeker, request.get_json().get("job_seeker_id"))
+    if job_seeker is None:
         abort(404)
-    request.get_json()['job_seeker_id'] = job_seeker.id
+    request.get_json()['recruiter_id'] = recruiter.id
+    request.get_json()['companyName'] = recruiter.companyName
+    request.get_json()['companyDesc'] = recruiter.companyDesc
     view = View(**request.get_json())
     view.save()
     return jsonify(view.to_dict()), 201

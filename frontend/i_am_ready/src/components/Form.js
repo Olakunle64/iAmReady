@@ -14,6 +14,7 @@ export default function Form(props) {
         skills: "",
         country: "",
         city: "",
+        jobName: ""
         // resume: null,
     });
 
@@ -138,10 +139,10 @@ return (
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email" value={recruiterData.email} onChange={handleRecruiterInputChange} />
 
-                <label htmlFor="company-name">Company Name</label>
+                <label htmlFor="companyName">Company Name</label>
                 <input type="text" id="company-name" name="companyName" value={recruiterData.companyName} onChange={handleRecruiterInputChange} />
 
-                <label htmlFor="company-description">Company Description</label>
+                <label htmlFor="companyDesc">Company Description</label>
                 <textarea id="company-description" name="companyDesc" value={recruiterData.companyDesc} onChange={handleRecruiterInputChange}></textarea>
 
                 <label htmlFor="password">Password</label>
@@ -163,7 +164,7 @@ return (
                 <h2>Are you looking for a job?</h2>
             </div>
             <div className="labels">
-                <label htmlFor="name">First Name</label>
+                <label htmlFor="firstName">First Name</label>
                 <input
                     type="text"
                     id="name"
@@ -173,7 +174,7 @@ return (
                     required
                 />
 
-                <label htmlFor="last-name">Last Name</label>
+                <label htmlFor="lastName">Last Name</label>
                 <input
                     type="text"
                     id="last-name"
@@ -202,7 +203,7 @@ return (
                     onChange={handleJobSeekerInputChange}
                     required
                 />
-                <label htmlFor="interest">Interest</label>
+                <label htmlFor="jobName">Interest</label>
                 <input
                     type="text"
                     id="interest"

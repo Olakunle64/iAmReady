@@ -72,8 +72,26 @@ class SessionDBAuth(Auth):
         if not session_id:
             return None
         if user_type == 'j':
+            # delete expired JobSeekerSession from the database
+            expired_sessions = []
+            for session in storage.all(JobSeekerSession).values():
+                if session.is_expired():
+                    expired_sessions.append(session)
+            for expired_session in expired_sessions:
+                storage.delete(expired_session)
+            storage.save()
+
             user = self._db.find_user_by(JobSeekerSession, session_id=session_id)
         else:
+            # delete expired RecruiterSession from the database
+            expired_sessions = []
+            for session in storage.all(RecruiterSession).values():
+                if session.is_expired():
+                    expired_sessions.append(session)
+            for expired_session in expired_sessions:
+                storage.delete(expired_session)
+            storage.save()
+
             user = self._db.find_user_by(RecruiterSession, session_id=session_id)
         if not user:
             return None
@@ -82,6 +100,8 @@ class SessionDBAuth(Auth):
         cr_at = user.created_at
         exp_date = cr_at + timedelta(seconds=self.session_duration)
         if exp_date < datetime.utcnow():
+            storage.delete(user)
+            storage.save()
             return None
         return user.user_id
 

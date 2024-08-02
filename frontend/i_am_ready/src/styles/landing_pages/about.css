@@ -1,0 +1,52 @@
+/* AboutPage.css */
+
+.about {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.about h2 {
+    color: #007BFF; /* Bootstrap primary color */
+    font-size: 1.8em;
+    margin-top: 30px;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+}
+
+.about p {
+    line-height: 1.6;
+    color: #555;
+    font-size: 1.1em;
+    margin: 15px 0;
+}
+
+.developer-picture {
+    display: block;
+    margin: 20px auto;
+    border-radius: 50%;
+    width: 150px; /* Adjust size as necessary */
+    height: 150px; /* Adjust size as necessary */
+    object-fit: cover;
+    border: 3px solid #007BFF; /* Border color */
+}
+
+.about a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.about a:hover {
+    text-decoration: underline;
+}

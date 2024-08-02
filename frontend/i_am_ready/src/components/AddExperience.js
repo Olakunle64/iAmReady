@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // import { Navigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
-const AddExperience = ({camelCase}) => {
+const AddExperience = () => {
     // const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [newExperience, setnewExperience] = useState({
@@ -29,7 +29,7 @@ const AddExperience = ({camelCase}) => {
             "Cookie": JSON.stringify(cookies),
             "Authorization": JSON.stringify(cookies)
         },
-        body: JSON.stringify(camelCase(newExperience)),
+        body: JSON.stringify(newExperience),
         });
         if (!response.ok) {
             alert('Failed to add experience');

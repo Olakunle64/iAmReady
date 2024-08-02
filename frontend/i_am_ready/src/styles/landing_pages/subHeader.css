@@ -1,24 +1,38 @@
 .subHeader {
     display: flex;
-    background-color: #eff6ff;
+    background-color: #eff6ff; /* Light blue background */
     flex-direction: column;
     align-items: center;
+    padding: 20px; /* Added padding for better spacing */
+    border-bottom: 2px solid #d1e7dd; /* Subtle bottom border for separation */
+    /* width: 100%; */
 }
 
 .subHeader h2 {
-    color: #000000;
-    font-size: 2em;
+    color: #333333; /* Darker text color for better contrast */
+    font-size: 1em;
     margin: 0.5em;
+    text-align: center; /* Centered text for consistency */
 }
 
-/* choose the first h2 in subHeader class */
 .subHeader h2:first-child {
-    font-size: 4em;
-    padding-top: 1%;
-    padding-bottom: 0%;
-    margin-bottom: 0.5%;
+    font-size: 1.8em; /* Increased font size for prominence */
+    padding-top: 1%; /* Top padding for spacing */
+    margin-bottom: 0.5em; /* Added margin for separation */
+    font-weight: bold; /* Bold font for emphasis */
 }
-/* choose the last h2 in subHeader class */
+
 .subHeader h2:last-child {
     padding-top: 0%;
+    color: #555555; /* Slightly lighter color for secondary heading */
+}
+
+@media (max-width: 768px) {
+    .subHeader {
+        padding: 15px; /* Adjusted padding for smaller screens */
+    }
+
+    .subHeader h2 {
+        font-size: 1.2em; /* Increased font size on smaller screens for better readability */
+    }
 }

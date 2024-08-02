@@ -6,19 +6,16 @@ from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 
 # import the authentication class
-# from api.v1.auth.auth import Auth
 from api.v1.auth.session_auth import SessionDBAuth
 
 
-# AUTH = Auth()
-
-
+# Initialize the app and set up the cross origin resources.
 app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
-# CORS(app, origins="*")
 
 
+# set up swagger API documentation
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 SWAGGER_URL = "/swagger"
 API_URL = "/static/swagger.json"
@@ -30,24 +27,14 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
         'app_name': 'Access API'
     }
 )
+
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
+# Instantiate the authentication class
 auth = SessionDBAuth()
-# @app.after_request
-# def after_request(response):
-#     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-#     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-#     response.headers.add('Access-Control-Allow-Credentials', 'true')
-#     return response
 
-# from flask import Response
 
-# @current_app.before_request
-# def basic_authentication():
-#     if request.method.lower() == 'options':
-#         return Response()
-
+# Define things to be executed before any request like checking the route that needs to be authenticated.
 @app.before_request
 def before_request():
     """Method that runs before each request to
@@ -62,17 +49,14 @@ def before_request():
             '/api/v1/status/', '/api/v1/stats/',
             '/api/v1/login/', '/api/v1/register/job_seeker',
             '/api/v1/reset_password/', '/api/v1/register/recruiter',
-            '/swagger/*', '/static/*'
+            '/swagger/*', '/static/*', '/api/v1/reviews'
         ]
     ):
         if (
-            # not auth.authorization_header(request) and
             not auth.session_cookie(request)
         ):
-            print("KOFFI")
             abort(401)  # Unauthorized
         if not auth.current_user(request):
-            # print("here")
             abort(403)  # Forbidden
     request.current_user = auth.current_user(request)
 

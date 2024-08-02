@@ -40,7 +40,7 @@ def update_experience():
     if experience is None:
         abort(404)
 
-    must_not_attr = ['id', 'created_at', 'updated_at']
+    must_not_attr = ['id', 'created_at', 'updated_at', "__class__"]
     for key, value in request.get_json().items():
         if key not in must_not_attr:
             setattr(experience, key, value)

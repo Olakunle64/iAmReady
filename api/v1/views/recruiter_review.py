@@ -7,7 +7,7 @@ from models.recruiter_review import RecruiterReview
 
 
 @app_views.route('/recruiter/review', methods=['POST'], strict_slashes=False)
-def create_review():
+def create_recruiter_review():
     """This method creates a review"""
     recruiter = request.current_user
     must_attr = ['rating', 'description']
@@ -15,13 +15,14 @@ def create_review():
         if attr not in request.get_json():
             return jsonify({'error': 'Missing attribute: ' + attr}), 400
     request.get_json()['recruiter_id'] = recruiter.id
+    request.get_json()['companyName'] = recruiter.companyName
     review = RecruiterReview(**request.get_json())
     review.save()
     return jsonify(review.to_dict()), 201
 
 
 @app_views.route('/recruiter/review', methods=['GET'], strict_slashes=False)
-def get_reviews():
+def get_recruiter_reviews():
     """This method returns all the reviews"""
     recruiter = request.current_user
 
@@ -31,7 +32,7 @@ def get_reviews():
 
 
 @app_views.route('/recruiter/review', methods=['PUT'], strict_slashes=False)
-def update_review():
+def update_recruiter_review():
     """This method updates an review"""
     args = request.args
     if 'review_id' not in args:
@@ -49,7 +50,7 @@ def update_review():
 
 
 @app_views.route('/recruiter/review', methods=['DELETE'], strict_slashes=False)
-def delete_review():
+def delete_recruiter_review():
     """This method deletes a review"""
     recruiter = request.current_user
 

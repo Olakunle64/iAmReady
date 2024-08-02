@@ -47,8 +47,6 @@ def login():
 def logout():
     from api.v1.app import auth
     """This method logs out a user"""
-    # if request.method == 'OPTIONS':
-    #     return make_response('', 200)  # Handle preflight OPTIONS request
     session_id = auth.session_cookie(request)
     if request.cookies.get("user_type"):
         user_type = request.cookies.get("user_type")
@@ -126,3 +124,20 @@ def update_password():
         return jsonify({"email": email, "message": "Password updated"}), 200
     except ValueError:
         return jsonify({"error": "Invalid reset token"}), 404
+
+
+@app_views.route("/is_authenticated", methods=["GET"], strict_slashes=False)
+def is_authenticated():
+    """This method checks if a user is authenticated"""
+    user = request.current_user
+    if user is None:
+        return jsonify({"message": False}), 401
+    return jsonify({"message": True}), 200
+
+@app_views.route("/user/me", methods=["GET"], strict_slashes=False)
+def current_user():
+    """This method get the current user"""
+    user = request.current_user
+    if user is None:
+        abort(401)
+    return jsonify(user.to_dict()), 200

@@ -26,7 +26,7 @@ from sqlalchemy.orm.exc import NoResultFound
 ValidClasses = [Recruiter, JobSeeker, Experience,
                 Education, Portfolio,
                 Certification, Review, View,
-                JobSeekerSession, RecruiterSession
+                JobSeekerSession, RecruiterSession, RecruiterReview
             ]
 
 classes = {
@@ -193,3 +193,7 @@ class DBStorage():
         except InvalidRequestError as e:
             # raise e
             return None
+    
+    def pagination(self, offset, limit, cls):
+        """return a list of objects that are paginated"""
+        return self.__session.query(cls).offset(offset).limit(limit).all()

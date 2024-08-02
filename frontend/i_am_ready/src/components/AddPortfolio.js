@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const AddPortfolio = ({camelCase}) => {
+const AddPortfolio = () => {
     // const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [newPortfolio, setnewPortfolio] = useState({
@@ -27,7 +27,7 @@ const AddPortfolio = ({camelCase}) => {
             "Cookie": JSON.stringify(cookies),
             "Authorization": JSON.stringify(cookies)
         },
-        body: JSON.stringify(camelCase(newPortfolio)),
+        body: JSON.stringify(newPortfolio),
         });
         if (!response.ok) {
             alert('Failed to add portfolio');

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ButtonSub from "../ButtonSub";
 import { useNavigate } from "react-router-dom";
+import { IoArrowBackCircle } from "react-icons/io5";
+// import "./LoginPage.css";
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -13,6 +15,17 @@ export default function LoginPage() {
         setUserType(e.target.value);
         setIsUserTypeSelected(true);
     };
+
+    function clearCookies() {
+        const cookies = document.cookie.split(";");
+      
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i];
+          const eqPos = cookie.indexOf("=");
+          const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+        }
+      }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,6 +41,7 @@ export default function LoginPage() {
         };
 
         try {
+            clearCookies();
             const response = await fetch("http://localhost:5000/api/v1/login", {
                 method: "POST",
                 credentials: "include",
@@ -36,19 +50,19 @@ export default function LoginPage() {
                 },
                 body: JSON.stringify(dataToSend),
             });
-            // console.log(typeof password)
+
             if (!response.ok) {
                 alert("Invalid email or password.");
-                return
+                return;
             }
-            // console.log(response)
 
-            // const cookies = response.headers.get("Set-Cookie");
             alert("Login successful!");
 
-            // localStorage.setItem("cookies", cookies);
-
-            user_type === "j" ? navigate("/job-seeker-profile") : navigate("/recruiter-profile");
+            if (user_type === "j") {
+                navigate('/job-seeker-profile', { replace: true });
+            } else {
+                navigate('/recruiter-profile', { replace: true });
+            }
 
         } catch (error) {
             console.error("Error logging in:", error);
@@ -58,22 +72,25 @@ export default function LoginPage() {
 
     return (
         <div className="login">
+            
             <form className="sub_login" onSubmit={handleSubmit}>
+            <IoArrowBackCircle onClick={() => navigate('/')} 
+                style={{ cursor: 'pointer', color: '#2563eB'}} size="2em" />
                 <h1>iAmReady</h1>
                 <h2>Bridging Talent with Opportunities</h2>
                 <input
+                    htmlFor="email"
                     type="email"
                     placeholder="Email address"
                     required
-                    name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
+                    htmlFor="password"
                     type="password"
                     placeholder="Password"
                     required
-                    name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -100,6 +117,10 @@ export default function LoginPage() {
                     </label>
                 </div>
                 <ButtonSub text={"Sign in"} color={"#2563eb"} />
+                <div className="links">
+                    <a href="/forgot-password">Forgot Password?</a>
+                    <a href="/signup">Sign Up</a>
+                </div>
             </form>
         </div>
     );

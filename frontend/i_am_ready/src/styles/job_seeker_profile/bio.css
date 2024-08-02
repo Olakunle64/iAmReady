@@ -1,64 +1,95 @@
 .profile {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    margin-top: 3%;
-    margin-bottom: 3%;
+    margin: 3% 2%;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding for inner spacing */
 }
 
 .bio {
-    margin-left: 2%;
-    margin-right: 2%;
-    /* border: 1px solid #2563eb; */
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
-    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.15);
-    flex-wrap: wrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #ffffff; /* White background for bio */
+    padding: 15px; /* Inner padding */
+    margin-bottom: 20px; /* Space below bio */
 }
+
+@media screen and (max-width: 768px) {
+    .bio {
+        flex-direction: column;
+    }
+    .message div {
+        margin-bottom: 2%;
+        margin-top: 2%;
+    }
+}
+
 .profile-picture {
-    width: 220px;
-    height: 90px;
+    width: 100px; /* Adjusted width */
+    height: 100px; /* Adjusted height */
     border-radius: 50%;
-    border: 1px solid aqua;
-    margin-right: 4%;
-    margin-left: 3%;
-    background-color: aqua;
+    border: 1px solid #2563eb; /* Thicker border */
+    margin-right: 20px; /* Increased margin */
+    background-color: #e0f7fa; /* Light aqua background */
     display: flex;
-    justify-content: center;
-    font-size: 3em;
-    height: fit-content;
-    /* width: fit-content; */
-    /* overflow: hidden; */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-size: 1.5em; /* Adjust font size */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for picture */
+    overflow: hidden; /* Hide overflow if text is too large */
+    text-align: center; /* Center text */
 }
+
+
+@media screen and (max-width: 768px) {
+    .profile-picture {
+        font-size: 1.8em; /* Smaller font size on mobile */
+        width: 80px; /* Slightly smaller width */
+        height: 80px; /* Slightly smaller height */
+    }
+}
+
 .info {
-    /* border: 1px solid #2563eb; */
-    font-size: 1.5em;
+    font-size: 1.1em; /* Slightly larger text */
     width: 70%;
-    /* margin-bottom: -3%; */
 }
+
 .info p {
-    margin-bottom: -0.5%;
+    margin: 5px 0; /* Spacing adjustments */
+    color: #555; /* Darker text for better readability */
 }
+
 .info h1 {
-    /* margin-top: -1%; */
-    margin-bottom: -0.5%;
+    margin: 5px 0; /* Spacing adjustments */
+    color: #2563eb; /* Highlight name in blue */
 }
+
 .message {
     display: flex;
     flex-direction: row;
-    margin-top: 1%;
+    margin-top: 10px; /* Increased margin */
     flex-wrap: wrap;
-    font-size: 1.1em;
+    font-size: 1em;
 }
+
 .message div {
-    margin-right: 4%;
+    margin-right: 20px; /* Increased margin */
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    transition: transform 0.2s; /* Animation on hover */
 }
+
+.message div:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
 .message div h3 {
-    margin-left: 2%;
+    margin-left: 5px; /* Spacing adjustments */
+    color: #333; /* Darker text for better readability */
 }

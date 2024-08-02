@@ -19,6 +19,10 @@ import './styles/job_seeker_profile/skills.css'
 import './styles/searchPage/search.css'
 import './styles/searchPage/user_card.css'
 import './styles/job_seeker_profile/add_education.css'
+import './styles/recruiter_profile/recruiter_search.css'
+import './styles/job_seeker_profile/review_button.css'
+import './styles/job_seeker_profile/view.css'
+import './styles/landing_pages/about.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
