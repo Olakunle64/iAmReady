@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-// import { Navigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
+
 
 const AddCertification = () => {
-    // const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [newCertification, setnewCertification] = useState({ title: '', issuingOrg: '', dateIssued: ''});
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
             const [key, value] = cookie.trim().split("=");
@@ -41,8 +38,6 @@ const AddCertification = () => {
     };
 
     const handleButtonClick = (e) => {
-    // const buttonRect = e.target.getBoundingClientRect();
-    // setButtonRect(buttonRect);
     setShowForm(true);
     };
     const handleEducationInputChange = (e) => {

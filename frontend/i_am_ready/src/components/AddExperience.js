@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-// import { useEffect } from 'react';
-// import { Navigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
 
 const AddExperience = () => {
-    // const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [newExperience, setnewExperience] = useState({
         company: '', location: '', description: '', startDate: '', endDate: ''
     });
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
           const [key, value] = cookie.trim().split("=");
@@ -21,7 +16,6 @@ const AddExperience = () => {
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        // console.log(newCertification);
         const response = await fetch("http://localhost:5000/api/v1/job_seeker/experience", {
         method: 'POST',
         headers: {
@@ -43,8 +37,6 @@ const AddExperience = () => {
     }
     };
     const handleButtonClick = (e) => {
-    // const buttonRect = e.target.getBoundingClientRect();
-    // setButtonRect(buttonRect);
     setShowForm(true);
     };
     const handleEducationInputChange = (e) => {

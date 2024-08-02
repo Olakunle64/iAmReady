@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 export default function ReviewButton({url}) {
     const [showForm, setShowForm] = useState(false);
     const [newReview, setnewReview] = useState({ description: '', rating: ''});
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
             const [key, value] = cookie.trim().split("=");
@@ -38,8 +37,6 @@ export default function ReviewButton({url}) {
     };
 
     const handleButtonClick = (e) => {
-    // const buttonRect = e.target.getBoundingClientRect();
-    // setButtonRect(buttonRect);
     setShowForm(true);
     };
     const handleEducationInputChange = (e) => {

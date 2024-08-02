@@ -23,15 +23,12 @@ export default function JobSeekerProfile() {
     useEffect(() => {
         async function getJobSeekerDetails() {
             try {
-                // const cookies = localStorage.getItem("cookies");
                 const response = await fetch(url, {
-                    // mode: 'no-cors',
                     method: "GET",
                     credentials: "include",
                     cookies: JSON.stringify(cookies),
                     headers: {
                         "Content-Type": "application/json",
-                        // "Access-Control-Allow-Origin": "*",
                         "Cookie": JSON.stringify(cookies),
                         "Authorization": JSON.stringify(cookies)
                     },

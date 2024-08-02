@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 
 
 const AddPortfolio = () => {
-    // const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [newPortfolio, setnewPortfolio] = useState({
         title: '', link: '', description: ''
     });
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
           const [key, value] = cookie.trim().split("=");
@@ -19,7 +17,6 @@ const AddPortfolio = () => {
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        // console.log(newCertification);
         const response = await fetch("http://localhost:5000/api/v1/job_seeker/portfolio", {
         method: 'POST',
         headers: {
@@ -41,8 +38,6 @@ const AddPortfolio = () => {
     }
     };
     const handleButtonClick = (e) => {
-    // const buttonRect = e.target.getBoundingClientRect();
-    // setButtonRect(buttonRect);
     setShowForm(true);
     };
     const handleEducationInputChange = (e) => {

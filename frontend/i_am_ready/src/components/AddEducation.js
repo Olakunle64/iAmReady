@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 
 
 const AddEducation = () => {
-    // const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [newEducation, setnewEducation] = useState({ degree: '', school: '', fieldOfStudy: '', startDate: '', endDate: ''});
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
           const [key, value] = cookie.trim().split("=");
@@ -40,8 +38,6 @@ const AddEducation = () => {
     };
 
     const handleButtonClick = (e) => {
-    // const buttonRect = e.target.getBoundingClientRect();
-    // setButtonRect(buttonRect);
     setShowForm(true);
     };
     const handleEducationInputChange = (e) => {

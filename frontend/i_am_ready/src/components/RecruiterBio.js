@@ -30,23 +30,18 @@ export default function RecruiterBio() {
     useEffect(() => {
         async function getRecruiterDetails() {
             try {
-                // const cookies = localStorage.getItem("cookies");
                 const response = await fetch("http://127.0.0.1:5000/api/v1/recruiter", {
-                    // mode: 'no-cors',
                     method: "GET",
                     credentials: "include",
                     cookies: JSON.stringify(cookies),
                     headers: {
                         "Content-Type": "application/json",
-                        // "Access-Control-Allow-Origin": "*",
                         "Cookie": JSON.stringify(cookies),
                         "Authorization": JSON.stringify(cookies)
                     },
-                    // body: JSON.stringify({name: "olakunle"})
                 });
     
                 if (!response.ok) {
-                    // throw new Error("Unable to fectch jobseeker details");
                     navigate('/login');
                 }
     
@@ -64,7 +59,6 @@ export default function RecruiterBio() {
     return (
         <div className="bio">
             <div className="profile-picture">
-                {/* <h1>JD</h1> */}
                 <FcManager size="5em"/>
             </div>
             {Recruiter && (
@@ -100,8 +94,6 @@ export default function RecruiterBio() {
                     </div>
                 </>
             )}
-            
-            
         </div>
     )
 }

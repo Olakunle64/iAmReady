@@ -12,7 +12,8 @@ export default function EditProfile({ icon, jobSeeker }) {
         city: jobSeeker.job_seeker.city,
         skills: jobSeeker.job_seeker.skills.join(','),
         bio: jobSeeker.job_seeker.bio || "",
-        jobName: jobSeeker.job_seeker.jobName || ""
+        jobName: jobSeeker.job_seeker.jobName || "",
+        resume: jobSeeker.job_seeker.resume || ""
     });
     
     const [cookies] = useState(() => {
@@ -57,7 +58,8 @@ export default function EditProfile({ icon, jobSeeker }) {
                 city: jobSeeker.job_seeker.city,
                 skills: jobSeeker.job_seeker.skills.join(','),
                 bio: jobSeeker.job_seeker.bio || "",
-                jobName: jobSeeker.job_seeker.jobName || ""
+                jobName: jobSeeker.job_seeker.jobName || "",
+                resume: jobSeeker.job_seeker.resume || ""
             });
             setShowForm(false);
             window.location.reload();
@@ -166,6 +168,13 @@ export default function EditProfile({ icon, jobSeeker }) {
                             type='text'
                             name='jobName'
                             value={updateJobSeeker.jobName}
+                            onChange={handleJobSeekerInputChange}
+                        />
+                        <label>Resume Link</label>
+                        <input
+                            type='text'
+                            name='resume'
+                            value={updateJobSeeker.resume}
                             onChange={handleJobSeekerInputChange}
                         />
                         <button type="submit" disabled={loading}>

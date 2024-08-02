@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaGithub } from "react-icons/fa";
 
 const AboutPage = () => {
     return (
@@ -24,6 +25,11 @@ const AboutPage = () => {
                 and job seekers.
             </p>
             <img src="/developer-picture.jpg" alt="Salau Isiaka Olakunle" className="developer-picture" />
+            <div style={{ textAlign: 'center', margin: '20px 0' }}>
+                <a href="https://github.com/Olakunle64/" target="_blank" rel="noopener noreferrer">
+                    <FaGithub size="2em" color='black'/>
+                </a>
+            </div>
             
             <h2>How It Works</h2>
             <p>

@@ -103,7 +103,6 @@ export default function EditProfileR({icon, Recruiter}) {
                     name='phoneNumber'
                     value={updateRecruiter.phoneNumber || Recruiter.phoneNumber}
                     onChange={handleRecruiterInputChange}
-                    // required
                 />
                 <label><em>LinkedIn</em></label>
                 <input
@@ -111,7 +110,6 @@ export default function EditProfileR({icon, Recruiter}) {
                     name='linkedIn'
                     value={updateRecruiter.linkedIn || Recruiter.linkedIn}
                     onChange={handleRecruiterInputChange}
-                    // required
                 />
                 <label><em>Country</em></label>
                 <input
@@ -135,7 +133,6 @@ export default function EditProfileR({icon, Recruiter}) {
                     name='websiteUrl'
                     value={updateRecruiter.websiteUrl || Recruiter.websiteUrl}
                     onChange={handleRecruiterInputChange}
-                    // required
                 />
 
                 <button type="submit">Save</button>

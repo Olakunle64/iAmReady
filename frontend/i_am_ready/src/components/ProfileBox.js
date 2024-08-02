@@ -25,12 +25,6 @@ export default function ProfileBox({header, subheader, children, icon, cls, opti
                 {optional && <p className="parag">{optional}</p>}
                 <ul>
                     {
-                        // children is a list of object so loop through it and display <li title="Double click to edit" onDoubleClick={handleButtonDoubleClick} key={each id of the object in the array} id={each id of the object in the array} tabIndex="0">the object value</li>
-                        // children.map((child) => (
-                        //     <li title="Double click to edit" onDoubleClick={handleButtonDoubleClick} key={child.id} id={child.id} tabIndex="0">
-                        //         {child.value}
-                        //     </li>
-                        // ))
                         Object.keys(children).map((key, index) => (
                             <li title="Double click to edit" onDoubleClick={handleButtonDoubleClick} key={index} id={key} tabIndex="0">{children[key]}</li>
                         ))

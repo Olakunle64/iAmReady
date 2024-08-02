@@ -4,8 +4,6 @@ import { useState } from "react";
 export default function Portfolio({ description, link, title, jobSeeker, portfolioId}) {
     const [showForm, setShowForm] = useState(false);
     const [objId, setobjId] = useState(null);
-    // console.log("portfolioId", portfolioId)
-    // console.log("element", element)
     function handleButtonDoubleClick(e) {
         setobjId(e.target.id);
         setShowForm(true);

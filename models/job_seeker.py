@@ -23,9 +23,7 @@ class JobSeeker(User, Base):
     experiences = relationship("Experience", backref="job_seeker", cascade="all, delete")
     portfolios = relationship("Portfolio", backref="job_seeker", cascade="all, delete")
     certifications = relationship("Certification", backref="job_seeker", cascade="all, delete")
-    # payment = relationship("Payment", backref="job_seeker", uselist=False)
     reviews = relationship("Review", backref="job_seeker", cascade="all, delete")
-    # jsInfo = relationship("JobSeekerInfo", backref="job_seeker", uselist=False)
     views = relationship("View", backref="job_seeker", cascade="all, delete")
     sessions = relationship("JobSeekerSession", backref="job_seeker", cascade="all, delete")
 

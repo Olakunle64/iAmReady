@@ -16,6 +16,7 @@ import EditProfile from "./EditProfile";
 import View from "./View";
 import ReviewButton from "./ReviewButton";
 import { FaEdit } from "react-icons/fa";
+import { FaFilePdf } from "react-icons/fa";
 import { useState } from "react";
 
 export default function ProfileSection({ jobSeeker }) {
@@ -102,6 +103,10 @@ export default function ProfileSection({ jobSeeker }) {
                                     <div className="linkedin">
                                         <FaLinkedin size="1.5em" />
                                         <a href={jobSeeker.job_seeker.linkedIn}>LinkedIn</a>
+                                    </div>
+                                    <div className="resume">
+                                        <FaFilePdf size="1.5em" />
+                                        <a href={jobSeeker.job_seeker.resume}>Resume</a>
                                     </div>
                                     {jobSeeker && jobSeeker.user === "JobSeeker" && (
                                         <div>

@@ -14,7 +14,6 @@ const EditExperience = ({jobSeeker, showForm, setShowForm, objId}) => {
     // write a function that takes in a list of object and filter the list based on the id attribute and return the just one object with the id
     
     
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
             const [key, value] = cookie.trim().split("=");
@@ -73,9 +72,6 @@ const EditExperience = ({jobSeeker, showForm, setShowForm, objId}) => {
     }
     };
 
-    // const handleButtonClick = (e) => {
-    // setShowForm(true);
-    // };
     const handleExperienceInputChange = (e) => {
         setnewExperience({
             ...newExperience,
@@ -111,7 +107,6 @@ const EditExperience = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='company'
                     value={newExperience.company || experience[0].company}
                     onChange={handleExperienceInputChange}
-                    // placeholder='Degree'
                     required
                 />
                 <label><em>Location</em></label>
@@ -120,7 +115,6 @@ const EditExperience = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='location'
                     value={newExperience.location || experience[0].location}
                     onChange={handleExperienceInputChange}
-                    // placeholder='Field of Study'
                     required
                 />
                 <label><em>Description</em></label>
@@ -129,7 +123,6 @@ const EditExperience = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='description'
                     value={newExperience.description || experience[0].description}
                     onChange={handleExperienceInputChange}
-                    // placeholder='School'
                     required
                 />
                 <label><em>Start Date</em></label>
@@ -138,7 +131,6 @@ const EditExperience = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='startDate'
                     value={newExperience.startDate}
                     onChange={handleExperienceInputChange}
-                    // placeholder='Start Date'
                     required
                 />
                 <label><em>End Date</em></label>
@@ -147,7 +139,6 @@ const EditExperience = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='endDate'
                     value={newExperience.endDate}
                     onChange={handleExperienceInputChange}
-                    // placeholder='End Date'
                     required
                 />
                 <button type="submit">Save</button>

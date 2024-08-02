@@ -12,7 +12,6 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
     // write a function that takes in a list of object and filter the list based on the id attribute and return the just one object with the id
     const education = jobSeeker.education.filter((edu) => edu.id === objId);
     
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
             const [key, value] = cookie.trim().split("=");
@@ -71,9 +70,6 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
     }
     };
 
-    // const handleButtonClick = (e) => {
-    // setShowForm(true);
-    // };
     const handleEducationInputChange = (e) => {
         setnewEducation({
             ...newEducation,
@@ -83,7 +79,6 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
 
     return (
     <div>
-        {/* <button className='btn_add' onClick={handleButtonClick}>Add</button> */}
         {showForm && (
         <div
         style={{
@@ -109,7 +104,6 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='degree'
                     value={newEducation.degree || education[0].degree}
                     onChange={handleEducationInputChange}
-                    // placeholder='Degree'
                     required
                 />
                 <label><em>Field of Study</em></label>
@@ -118,7 +112,6 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='fieldOfStudy'
                     value={newEducation.fieldOfStudy || education[0].fieldOfStudy}
                     onChange={handleEducationInputChange}
-                    // placeholder='Field of Study'
                     required
                 />
                 <label><em>School</em></label>
@@ -127,7 +120,6 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='school'
                     value={newEducation.school || education[0].school}
                     onChange={handleEducationInputChange}
-                    // placeholder='School'
                     required
                 />
                 <label><em>Start Date</em></label>
@@ -136,7 +128,6 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='startDate'
                     value={newEducation.startDate}
                     onChange={handleEducationInputChange}
-                    // placeholder='Start Date'
                     required
                 />
                 <label><em>End Date</em></label>

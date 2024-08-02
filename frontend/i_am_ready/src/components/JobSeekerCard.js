@@ -35,7 +35,7 @@ const JobSeekerCard = ({ name, title, location, skills, id, bio }) => {
                 return;
             }
     
-            alert("View Created!");
+            // alert("View Created!");
     
             navigate(`/job-seeker-profile/${id}`);
     
@@ -65,8 +65,6 @@ const JobSeekerCard = ({ name, title, location, skills, id, bio }) => {
 };
 
 const SearchResults = ({ users, keywords }) => {
-    // Split the keywords into an array
-    // const keywordArray = keywords.toLowerCase().trim().split(/\s+/); // Split by whitespace
 
     return (
         <>
@@ -83,7 +81,7 @@ const SearchResults = ({ users, keywords }) => {
                         />
                     );
                 }
-)}
+    )}
         </>
     );
 };

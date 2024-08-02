@@ -13,9 +13,7 @@ const EditPortfolio = ({jobSeeker, showForm, setShowForm, objId}) => {
         link: ""
     });
     // write a function that takes in a list of object and filter the list based on the id attribute and return the just one object with the id
-    
-    
-    // const [buttonRect, setButtonRect] = useState(null);
+
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
             const [key, value] = cookie.trim().split("=");
@@ -72,9 +70,7 @@ const EditPortfolio = ({jobSeeker, showForm, setShowForm, objId}) => {
     }
     };
 
-    // const handleButtonClick = (e) => {
-    // setShowForm(true);
-    // };
+
     const handlePortfolioInputChange = (e) => {
         setnewPortfolio({
             ...newPortfolio,
@@ -84,7 +80,6 @@ const EditPortfolio = ({jobSeeker, showForm, setShowForm, objId}) => {
 
     return (
     <div>
-        {/* <button className='btn_add' onClick={handleButtonClick}>Add</button> */}
         {showForm && jobSeeker && jobSeeker.user === "JobSeeker" && (
         <div
         style={{
@@ -110,7 +105,6 @@ const EditPortfolio = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='title'
                     value={newPortfolio.title || portfolio[0].title}
                     onChange={handlePortfolioInputChange}
-                    // placeholder='Degree'
                     required
                 />
                 <label><em>Description</em></label>
@@ -119,7 +113,6 @@ const EditPortfolio = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='description'
                     value={newPortfolio.description || portfolio[0].description}
                     onChange={handlePortfolioInputChange}
-                    // placeholder='Field of Study'
                     required
                 />
                 <label><em>Link</em></label>
@@ -128,7 +121,6 @@ const EditPortfolio = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='link'
                     value={newPortfolio.link || portfolio[0].link}
                     onChange={handlePortfolioInputChange}
-                    // placeholder='School'
                     required
                 />
                 <button type="submit">Save</button>

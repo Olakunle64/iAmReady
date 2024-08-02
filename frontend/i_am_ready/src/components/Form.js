@@ -14,8 +14,8 @@ export default function Form(props) {
         skills: "",
         country: "",
         city: "",
-        jobName: ""
-        // resume: null,
+        jobName: "",
+        resume: "",
     });
 
     const [recruiterData, setRecruiterData] = useState({
@@ -61,7 +61,7 @@ export default function Form(props) {
             body: JSON.stringify(dataToSend),
             });
             if (response.status !== 201) {
-            alert("Email already exists");
+                alert("Email already exists");
             } else {
                 setjobSeekerData({
                     firstName: "",
@@ -72,7 +72,7 @@ export default function Form(props) {
                     country: "",
                     city: "",
                     jobName: "",
-                    // resume: null,
+                    resume: "",
                 });
                 alert("You have successfully signed up");
                 navigate("/login");
@@ -118,12 +118,6 @@ export default function Form(props) {
             await fetchRecruiterData();
         };
 
-    // const handleFileChange = (e) => {
-    // setjobSeekerData({
-    //     ...jobSeekerData,
-    //     resume: e.target.files[0],
-    // });
-    // };
 
 return (
     <div className="signupform">
@@ -244,8 +238,13 @@ return (
                     required
                 />
 
-                <label htmlFor="resume">Resume</label>
-                <input type="file" id="resume" name="resume" />
+                <label htmlFor="resume">Resume Link</label>
+                <input
+                    type="text" id="resume" name="resume"
+                    value={jobSeekerData.resume}
+                    onChange={handleJobSeekerInputChange}
+                    required
+                />
                 <ButtonSub text={"Sign Up as Job Seeker"} color={"#3b82f6"} />
             </div>
         </form>

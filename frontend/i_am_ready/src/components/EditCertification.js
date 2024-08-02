@@ -10,7 +10,6 @@ const EditCertification = ({jobSeeker, showForm, setShowForm, objId}) => {
     // write a function that takes in a list of object and filter the list based on the id attribute and return the just one object with the id
     const certification = jobSeeker.certification.filter((cert) => cert.id === objId);
     
-    // const [buttonRect, setButtonRect] = useState(null);
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
             const [key, value] = cookie.trim().split("=");
@@ -67,9 +66,6 @@ const EditCertification = ({jobSeeker, showForm, setShowForm, objId}) => {
     }
     };
 
-    // const handleButtonClick = (e) => {
-    // setShowForm(true);
-    // };
     const handleCertificationInputChange = (e) => {
         setnewCertification({
             ...newCertification,
@@ -79,7 +75,6 @@ const EditCertification = ({jobSeeker, showForm, setShowForm, objId}) => {
 
     return (
     <div>
-        {/* <button className='btn_add' onClick={handleButtonClick}>Add</button> */}
         {showForm && (
         <div
         style={{
@@ -105,7 +100,6 @@ const EditCertification = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='title'
                     value={newCertification.title || certification[0].title}
                     onChange={handleCertificationInputChange}
-                    // placeholder='Degree'
                     required
                 />
                 <label><em>Issuing Organization</em></label>
@@ -114,7 +108,6 @@ const EditCertification = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='issuingOrg'
                     value={newCertification.issuingOrg || certification[0].issuingOrg}
                     onChange={handleCertificationInputChange}
-                    // placeholder='Field of Study'
                     required
                 />
                 <label><em>Date Issued</em></label>
@@ -123,7 +116,6 @@ const EditCertification = ({jobSeeker, showForm, setShowForm, objId}) => {
                     name='dateIssued'
                     value={newCertification.dateIssued}
                     onChange={handleCertificationInputChange}
-                    // placeholder='School'
                     required
                 />
                 <button type="submit">Save</button>

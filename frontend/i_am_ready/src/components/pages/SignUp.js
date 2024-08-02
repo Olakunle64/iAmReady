@@ -22,7 +22,6 @@ export default function SignUp() {
                     <button onClick={() => toggleUserType(1)}>Recruiter</button>
                 </div>
                 <div className="two-forms">
-                    {/* {userType === 0 ? <Form user_type={0} /> : <Form user_type={1} />} */}
                     <Form user_type={userType} />
                 </div>
                 <div className="notify">
