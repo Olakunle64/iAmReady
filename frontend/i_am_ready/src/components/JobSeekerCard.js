@@ -18,7 +18,7 @@ const JobSeekerCard = ({ name, title, location, skills, id, bio }) => {
     async function handleViewProfile(e) {
         const id = e.target.id;
         try {
-            const response = await fetch("http://localhost:5000/api/v1/job_seeker/view", {
+            const response = await fetch("https://iamready.onrender.com/api/v1/job_seeker/view", {
                 method: "POST",
                 credentials: "include",
                 headers: {

@@ -21,7 +21,7 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
     });
     const deleteEducation = async (e) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/v1/job_seeker/education?education_id=${objId}`, {
+            const response = await fetch(`https://iamready.onrender.com/api/v1/job_seeker/education?education_id=${objId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

@@ -16,9 +16,9 @@ export default function JobSeekerProfile() {
       });
     let url = "";
     if (!id) {
-        url = "http://127.0.0.1:5000/api/v1/jobSeeker"
+        url = "https://iamreadyy.onrender.com/api/v1/jobSeeker"
     } else {
-        url = `http://127.0.0.1:5000/api/v1/jobSeeker?job_seeker_id=${id}`
+        url = `https://iamreadyy.onrender.com/api/v1/jobSeeker?job_seeker_id=${id}`
     }
     useEffect(() => {
         async function getJobSeekerDetails() {

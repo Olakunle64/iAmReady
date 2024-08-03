@@ -42,7 +42,7 @@ export default function LoginPage() {
 
         try {
             clearCookies();
-            const response = await fetch("http://localhost:5000/api/v1/login", {
+            const response = await fetch("https://iamready.onrender.com/api/v1/login", {
                 method: "POST",
                 credentials: "include",
                 headers: {

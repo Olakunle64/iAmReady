@@ -24,7 +24,7 @@ export default function Logout() {
     async function handleLogout() {
         try {
             // console.log(cookies);
-            const response = await fetch("http://127.0.0.1:5000/api/v1/logout", {
+            const response = await fetch("https://iamready.onrender.com/api/v1/logout", {
                 method: "POST",
                 credentials: "include",
                 cookies: JSON.stringify(cookies),
