@@ -41,7 +41,7 @@ export default function LoginPage() {
         };
 
         try {
-            clearCookies();
+            // clearCookies();
             const response = await fetch("https://iamready.onrender.com/api/v1/login", {
                 method: "POST",
                 credentials: "include",
@@ -50,6 +50,10 @@ export default function LoginPage() {
                 },
                 body: JSON.stringify(dataToSend),
             });
+            
+            // Log the Set-Cookie header
+            const cookies = response.headers.get('Set-Cookie');
+            console.log("Cookies from response:", cookies);
 
             if (!response.ok) {
                 alert("Invalid email or password.");

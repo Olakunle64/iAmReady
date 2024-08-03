@@ -84,6 +84,7 @@ export default function JobSeekerProfile() {
 
     useEffect(() => {
         async function getJobSeekerDetails() {
+            console.log("cookies", cookies);
             setLoading(true); // Start loading
             try {
                 const response = await fetch(url, {
