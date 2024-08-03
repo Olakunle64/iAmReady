@@ -1,0 +1,5 @@
+USER = os.getenv("iAmReady_PG_USER")
+PASWD = os.getenv("iAmReady_PG_PWD")
+HOST = os.getenv("iAmReady_PG_HOST")
+DB = os.getenv("iAmReady_PG_DB")
+PORT = os.getenv("iAmReady_PG_PORT", "5432")

@@ -23,6 +23,7 @@ import './styles/recruiter_profile/recruiter_search.css'
 import './styles/job_seeker_profile/review_button.css'
 import './styles/job_seeker_profile/view.css'
 import './styles/landing_pages/about.css'
+import './styles/login_pages/loader.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
