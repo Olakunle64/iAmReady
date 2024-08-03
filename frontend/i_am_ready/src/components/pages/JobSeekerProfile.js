@@ -9,11 +9,11 @@ export default function JobSeekerProfile() {
     const [jobSeeker, setjobSeeker] = useState([])
     const [cookies] = useState(() => {
         return document.cookie.split(";").reduce((acc, cookie) => {
-          const [key, value] = cookie.trim().split("=");
-          acc[key] = value;
-          return acc;
+            const [key, value] = cookie.trim().split("=");
+            acc[key] = value;
+            return acc;
         }, {});
-      });
+    });
     let url = "";
     if (!id) {
         url = "https://iamreadyy.onrender.com/api/v1/jobSeeker"
