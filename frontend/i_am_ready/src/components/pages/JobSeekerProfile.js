@@ -16,7 +16,7 @@ export default function JobSeekerProfile() {
     });
     let url = "";
     if (!id) {
-        url = "https://iamreadyy.onrender.com/api/v1/jobSeeker"
+        url = "https://iamready.onrender.com/api/v1/jobSeeker"
     } else {
         url = `https://iamreadyy.onrender.com/api/v1/jobSeeker?job_seeker_id=${id}`
     }
