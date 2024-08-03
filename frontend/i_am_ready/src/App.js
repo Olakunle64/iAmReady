@@ -16,7 +16,7 @@ function App() {
     useEffect(() => {
         async function getReview() {
             try {
-                const response = await fetch("http://127.0.0.1:5000/api/v1/reviews", {
+                const response = await fetch("https://iamready.onrender.com/api/v1/reviews", {
                     method: "GET",
                     credentials: "include",
                     headers: {
