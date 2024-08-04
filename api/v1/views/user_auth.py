@@ -40,7 +40,7 @@ def login():
     response = make_response(jsonify({"message": "Logged in"}))
     response.set_cookie('session_id', session_id, httponly=True, secure=True, samesite=None)
     response.set_cookie('user_type', user_type, httponly=True, secure=True, samesite=None)
-    response.headers.add('Set-Cookie','cross-site-cookie=bar; SameSite=None; Secure')
+    # response.headers.add('Set-Cookie','cross-site-cookie=bar; SameSite=None; Secure')
     return response
 
 @app_views.route('/logout', methods=['POST', 'OPTIONS'], strict_slashes=False)
