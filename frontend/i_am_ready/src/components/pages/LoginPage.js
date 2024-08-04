@@ -187,15 +187,17 @@ export default function LoginPage() {
             alert("Login successful!");
             setLoading(true); // Show loader while waiting for cookies
 
-            // Wait for cookies to be set
-            waitForCookies(() => {
-                // Navigate based on user type
-                if (user_type === "j") {
-                    navigate('/job-seeker-profile', { replace: true });
-                } else {
-                    navigate('/recruiter-profile', { replace: true });
-                }
-            });
+            // Add a slight delay before checking for cookies
+            setTimeout(() => {
+                waitForCookies(() => {
+                    // Navigate based on user type
+                    if (user_type === "j") {
+                        navigate('/job-seeker-profile', { replace: true });
+                    } else {
+                        navigate('/recruiter-profile', { replace: true });
+                    }
+                });
+            }, 3000); // 500ms delay
 
         } catch (error) {
             console.error("Error logging in:", error);
