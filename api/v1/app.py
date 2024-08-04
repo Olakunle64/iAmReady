@@ -13,7 +13,7 @@ from api.v1.auth.session_auth import SessionDBAuth
 app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
-app.server.config["SESSION_COOKIE_SAMESITE"] = "None"
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
 
 
 # set up swagger API documentation
