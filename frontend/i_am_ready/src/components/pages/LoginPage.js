@@ -139,10 +139,21 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [user_type, setUserType] = useState("");
     const [isUserTypeSelected, setIsUserTypeSelected] = useState(false);
+    const [loading, setLoading] = useState(false); // Loader state
 
     const handleRadioChange = (e) => {
         setUserType(e.target.value);
         setIsUserTypeSelected(true);
+    };
+
+    const waitForCookies = (callback) => {
+        const interval = setInterval(() => {
+            if (document.cookie) {
+                clearInterval(interval);
+                setLoading(false); // Hide loader when cookies are set
+                callback();
+            }
+        }, 100); // Check every 100ms
     };
 
     const handleSubmit = async (e) => {
@@ -173,20 +184,18 @@ export default function LoginPage() {
                 return;
             }
 
-            // Assuming the response data is required to be ready before navigating
-            const responseData = await response.json(); // Ensure the response data is fetched
-            if (responseData) {
-                alert("Login successful!");
+            alert("Login successful!");
+            setLoading(true); // Show loader while waiting for cookies
 
+            // Wait for cookies to be set
+            waitForCookies(() => {
                 // Navigate based on user type
                 if (user_type === "j") {
                     navigate('/job-seeker-profile', { replace: true });
                 } else {
                     navigate('/recruiter-profile', { replace: true });
                 }
-            } else {
-                alert("No response data received. Unable to proceed.");
-            }
+            });
 
         } catch (error) {
             console.error("Error logging in:", error);
@@ -196,6 +205,7 @@ export default function LoginPage() {
 
     return (
         <div className="login">
+            {loading && <div className="loader">Loading...</div>} {/* Loader */}
             <form className="sub_login" onSubmit={handleSubmit}>
                 <IoArrowBackCircle onClick={() => navigate('/')} 
                     style={{ cursor: 'pointer', color: '#2563eB'}} size="2em" />
