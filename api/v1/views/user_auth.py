@@ -38,8 +38,8 @@ def login():
     
     # add the session_id to cookie
     response = make_response(jsonify({"message": "Logged in"}))
-    response.set_cookie('session_id', session_id)
-    response.set_cookie('user_type', user_type)
+    response.set_cookie('session_id', session_id, httponly=True, secure=True, samesite='Lax')
+    response.set_cookie('user_type', user_type, httponly=True, secure=True, samesite='Lax')
     return response
 
 @app_views.route('/logout', methods=['POST', 'OPTIONS'], strict_slashes=False)
