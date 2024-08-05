@@ -12,7 +12,7 @@ from api.v1.auth.session_auth import SessionDBAuth
 # Initialize the app and set up the cross origin resources.
 app = Flask(__name__)
 app.register_blueprint(app_views)
-CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}}, allow_headers=['Content-Type', 'session_id', 'user_type'])
+CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
 
 app.config["SESSION_COOKIE_SAMESITE"] = "None"
 app.config['SESSION_COOKIE_SECURE'] = True

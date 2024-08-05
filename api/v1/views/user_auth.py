@@ -10,7 +10,6 @@ from flask_cors import cross_origin
 
 
 @app_views.route('/login', methods=['POST'], strict_slashes=False)
-@cross_origin(supports_credentials=True, allow_headers=['Content-Type', 'session_id', 'user_type'])
 def login():
     """This method logs in a user"""
     from api.v1.app import auth
