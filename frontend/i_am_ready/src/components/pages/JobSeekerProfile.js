@@ -17,7 +17,7 @@ export default function JobSeekerProfile() {
     if (!id) {
         url = "https://iamready.onrender.com/api/v1/jobSeeker"
     } else {
-        url = `https://iamreadyy.onrender.com/jobSeeker?job_seeker_id=${id}`
+        url = `https://iamready.onrender.com/jobSeeker?job_seeker_id=${id}`
     }
     useEffect(() => {
         async function getJobSeekerDetails() {
