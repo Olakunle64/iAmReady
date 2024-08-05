@@ -13,11 +13,10 @@ const EditEducation = ({jobSeeker, showForm, setShowForm, objId}) => {
     const education = jobSeeker.education.filter((edu) => edu.id === objId);
     
     const [cookies] = useState(() => {
-        return document.cookie.split(";").reduce((acc, cookie) => {
-            const [key, value] = cookie.trim().split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
+        return {
+            session_id: localStorage.getItem("session_id") || "",
+            user_type: localStorage.getItem("user_type") || "",
+        };
     });
     const deleteEducation = async (e) => {
         try {

@@ -8,11 +8,10 @@ export default function JobSeekerProfile() {
     const navigate = useNavigate();
     const [jobSeeker, setjobSeeker] = useState([])
     const [cookies] = useState(() => {
-        return document.cookie.split(";").reduce((acc, cookie) => {
-            const [key, value] = cookie.trim().split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
+        return {
+            session_id: localStorage.getItem("session_id") || "",
+            user_type: localStorage.getItem("user_type") || "",
+        };
     });
     let url = "";
     if (!id) {

@@ -13,13 +13,12 @@ export default function RecruiterBio() {
     const navigate = useNavigate();
     const [Recruiter, setRecruiter] = useState([]);
     const [cookies] = useState(() => {
-        return document.cookie.split(";").reduce((acc, cookie) => {
-          const [key, value] = cookie.trim().split("=");
-          acc[key] = value;
-          return acc;
-        }, {});
-      });
-      function camelCaseStr(str) {
+        return {
+            session_id: localStorage.getItem("session_id") || "",
+            user_type: localStorage.getItem("user_type") || "",
+        };
+    });
+    function camelCaseStr(str) {
         if (str) {
             let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
             return newStr;

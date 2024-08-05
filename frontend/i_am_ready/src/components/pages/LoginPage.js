@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ButtonSub from "../ButtonSub";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBackCircle } from "react-icons/io5";
-// import "./LoginPage.css";
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -17,15 +16,9 @@ export default function LoginPage() {
     };
 
     function clearCookies() {
-        const cookies = document.cookie.split(";");
-      
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i];
-          const eqPos = cookie.indexOf("=");
-          const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-        }
-      }
+        localStorage.removeItem("session_id");
+        localStorage.removeItem("user_type");
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,11 +43,21 @@ export default function LoginPage() {
                 },
                 body: JSON.stringify(dataToSend),
             });
-            
 
             if (!response.ok) {
                 alert("Invalid email or password.");
                 return;
+            }
+
+            // Assuming session_id and user_type are in the response headers
+            const sessionId = response.headers.get("session_id");
+            const userType = response.headers.get("user_type");
+
+            if (sessionId) {
+                localStorage.setItem("session_id", sessionId);
+            }
+            if (userType) {
+                localStorage.setItem("user_type", userType);
             }
 
             alert("Login successful!");
@@ -73,10 +76,9 @@ export default function LoginPage() {
 
     return (
         <div className="login">
-            
             <form className="sub_login" onSubmit={handleSubmit}>
-            <IoArrowBackCircle onClick={() => navigate('/')} 
-                style={{ cursor: 'pointer', color: '#2563eB'}} size="2em" />
+                <IoArrowBackCircle onClick={() => navigate('/')} 
+                    style={{ cursor: 'pointer', color: '#2563eB'}} size="2em" />
                 <h1>iAmReady</h1>
                 <h2>Bridging Talent with Opportunities</h2>
                 <input
@@ -127,6 +129,10 @@ export default function LoginPage() {
     );
 }
 
+
+
+
+
 // import React, { useState } from "react";
 // import ButtonSub from "../ButtonSub";
 // import { useNavigate } from "react-router-dom";
@@ -139,22 +145,22 @@ export default function LoginPage() {
 //     const [password, setPassword] = useState("");
 //     const [user_type, setUserType] = useState("");
 //     const [isUserTypeSelected, setIsUserTypeSelected] = useState(false);
-//     const [loading, setLoading] = useState(false); // Loader state
 
 //     const handleRadioChange = (e) => {
 //         setUserType(e.target.value);
 //         setIsUserTypeSelected(true);
 //     };
 
-//     const waitForCookies = (callback) => {
-//         const interval = setInterval(() => {
-//             if (document.cookie) {
-//                 clearInterval(interval);
-//                 setLoading(false); // Hide loader when cookies are set
-//                 callback();
-//             }
-//         }, 100); // Check every 100ms
-//     };
+//     function clearCookies() {
+//         const cookies = document.cookie.split(";");
+      
+//         for (let i = 0; i < cookies.length; i++) {
+//           const cookie = cookies[i];
+//           const eqPos = cookie.indexOf("=");
+//           const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+//           document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+//         }
+//       }
 
 //     const handleSubmit = async (e) => {
 //         e.preventDefault();
@@ -170,6 +176,7 @@ export default function LoginPage() {
 //         };
 
 //         try {
+//             clearCookies();
 //             const response = await fetch("https://iamready.onrender.com/api/v1/login", {
 //                 method: "POST",
 //                 credentials: "include",
@@ -178,6 +185,7 @@ export default function LoginPage() {
 //                 },
 //                 body: JSON.stringify(dataToSend),
 //             });
+            
 
 //             if (!response.ok) {
 //                 alert("Invalid email or password.");
@@ -185,19 +193,12 @@ export default function LoginPage() {
 //             }
 
 //             alert("Login successful!");
-//             setLoading(true); // Show loader while waiting for cookies
 
-//             // Add a slight delay before checking for cookies
-//             setTimeout(() => {
-//                 waitForCookies(() => {
-//                     // Navigate based on user type
-//                     if (user_type === "j") {
-//                         navigate('/job-seeker-profile', { replace: true });
-//                     } else {
-//                         navigate('/recruiter-profile', { replace: true });
-//                     }
-//                 });
-//             }, 3000); // 500ms delay
+//             if (user_type === "j") {
+//                 navigate('/job-seeker-profile', { replace: true });
+//             } else {
+//                 navigate('/recruiter-profile', { replace: true });
+//             }
 
 //         } catch (error) {
 //             console.error("Error logging in:", error);
@@ -207,10 +208,10 @@ export default function LoginPage() {
 
 //     return (
 //         <div className="login">
-//             {loading && <div className="loader">Loading...</div>} {/* Loader */}
+            
 //             <form className="sub_login" onSubmit={handleSubmit}>
-//                 <IoArrowBackCircle onClick={() => navigate('/')} 
-//                     style={{ cursor: 'pointer', color: '#2563eB'}} size="2em" />
+//             <IoArrowBackCircle onClick={() => navigate('/')} 
+//                 style={{ cursor: 'pointer', color: '#2563eB'}} size="2em" />
 //                 <h1>iAmReady</h1>
 //                 <h2>Bridging Talent with Opportunities</h2>
 //                 <input

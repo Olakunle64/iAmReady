@@ -15,11 +15,10 @@ const EditPortfolio = ({jobSeeker, showForm, setShowForm, objId}) => {
     // write a function that takes in a list of object and filter the list based on the id attribute and return the just one object with the id
 
     const [cookies] = useState(() => {
-        return document.cookie.split(";").reduce((acc, cookie) => {
-            const [key, value] = cookie.trim().split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
+        return {
+            session_id: localStorage.getItem("session_id") || "",
+            user_type: localStorage.getItem("user_type") || "",
+        };
     });
     const deletePortfolio = async (e) => {
         try {

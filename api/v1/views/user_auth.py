@@ -38,6 +38,11 @@ def login():
     
     # add the session_id to cookie
     response = make_response(jsonify({"message": "Logged in"}))
+
+    # this for my frontend 
+    response.headers['session_id'] = session_id
+    response.headers['user_type'] = user_type
+    
     response.set_cookie('session_id', session_id)
     response.set_cookie('user_type', user_type)
     # response.headers.add('Set-Cookie','cross-site-cookie=bar; SameSite=None; Secure')

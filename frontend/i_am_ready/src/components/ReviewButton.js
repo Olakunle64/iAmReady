@@ -4,11 +4,10 @@ export default function ReviewButton({url}) {
     const [showForm, setShowForm] = useState(false);
     const [newReview, setnewReview] = useState({ description: '', rating: ''});
     const [cookies] = useState(() => {
-        return document.cookie.split(";").reduce((acc, cookie) => {
-            const [key, value] = cookie.trim().split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
+        return {
+            session_id: localStorage.getItem("session_id") || "",
+            user_type: localStorage.getItem("user_type") || "",
+        };
     });
 
     const handleSubmit = async (e) => {

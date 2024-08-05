@@ -4,21 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
     const navigate = useNavigate();
-    const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-        const [key, value] = cookie.trim().split("=");
-        acc[key] = value;
-        return acc;
-    }, {});
+    const [cookies] = useState(() => {
+        return {
+            session_id: localStorage.getItem("session_id") || "",
+            user_type: localStorage.getItem("user_type") || "",
+        };
+    });
 
-        function clearCookies() {
-        const cookies = document.cookie.split(";");
-        
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i];
-            const eqPos = cookie.indexOf("=");
-            const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-        }
+    function clearCookies() {
+        localStorage.removeItem("session_id");
+        localStorage.removeItem("user_type");
     }
 
     async function handleLogout() {

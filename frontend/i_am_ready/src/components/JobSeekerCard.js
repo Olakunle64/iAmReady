@@ -9,11 +9,10 @@ const JobSeekerCard = ({ name, title, location, skills, id, bio }) => {
         return bio.length > maxLength ? bio.slice(0, maxLength) + "..." : bio;
     };
     const [cookies] = useState(() => {
-        return document.cookie.split(";").reduce((acc, cookie) => {
-            const [key, value] = cookie.trim().split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
+        return {
+            session_id: localStorage.getItem("session_id") || "",
+            user_type: localStorage.getItem("user_type") || "",
+        };
     });
     async function handleViewProfile(e) {
         const id = e.target.id;
