@@ -38,11 +38,15 @@ def login():
         abort(401)
     
     # add the session_id to cookie
-    response = make_response(jsonify({"message": "Logged in"}))
+    response = make_response(jsonify({
+        "message": "Logged in",
+        'session_id': session_id,
+        'user_type': user_type
+    }))
 
-    # this for my frontend 
-    response.headers['session_id'] = session_id
-    response.headers['user_type'] = user_type
+    # # this for my frontend 
+    # response.headers['session_id'] = session_id
+    # response.headers['user_type'] = user_type
 
     response.set_cookie('session_id', session_id)
     response.set_cookie('user_type', user_type)

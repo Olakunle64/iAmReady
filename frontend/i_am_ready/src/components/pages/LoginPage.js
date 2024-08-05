@@ -49,9 +49,10 @@ export default function LoginPage() {
                 return;
             }
 
-            // Assuming session_id and user_type are in the response headers
-            const sessionId = response.headers.get("session_id");
-            const userType = response.headers.get("user_type");
+            // Get session_id and user_type from the response body
+            const data = await response.json();
+            const sessionId = data.session_id;
+            const userType = data.user_type;
 
             if (sessionId) {
                 localStorage.setItem("session_id", sessionId);
