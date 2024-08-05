@@ -16,7 +16,7 @@ const AddCertification = () => {
     e.preventDefault();
     try {
         console.log(newCertification);
-        const response = await fetch("https://iamready.onrender.com/api/v1/job_seeker/certification", {
+        const response = await fetch("http://localhost:5000/api/v1/job_seeker/certification", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

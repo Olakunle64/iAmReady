@@ -7,7 +7,7 @@ export default function RecruiterProfile() {
         <>
             <RecruiterBio />
             <RecruiterSearch />
-            <ReviewButton url={"https://iamready.onrender.com/api/v1/recruiter/review"} />
+            <ReviewButton url={"http://localhost:5000/api/v1/recruiter/review"} />
         </>
     )
 }

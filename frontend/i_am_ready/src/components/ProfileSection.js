@@ -221,7 +221,7 @@ export default function ProfileSection({ jobSeeker }) {
                 </div>
             </div>
             {jobSeeker && jobSeeker.user === "JobSeeker" && (
-                <ReviewButton url={"http://localhost:5000/api/v1/job_seeker/review"} />
+                <ReviewButton url={"http://localhost:5000:5000/api/v1/job_seeker/review"} />
             )}
         </>
     );

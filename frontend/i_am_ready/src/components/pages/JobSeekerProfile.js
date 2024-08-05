@@ -2,6 +2,8 @@ import ProfileSection from "../ProfileSection";
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
+// import { API_BASE_URL } from "../Variable";
+
 
 export default function JobSeekerProfile() {
     const { id } = useParams();
@@ -16,9 +18,9 @@ export default function JobSeekerProfile() {
     });
     let url = "";
     if (!id) {
-        url = "https://iamready.onrender.com/api/v1/jobSeeker"
+        url = "http://localhost:5000/api/v1/jobSeeker"
     } else {
-        url = `https://iamreadyy.onrender.com/api/v1/jobSeeker?job_seeker_id=${id}`
+        url = `http://localhost:5000/api/v1/jobSeeker?job_seeker_id=${id}`
     }
     useEffect(() => {
         async function getJobSeekerDetails() {
@@ -77,9 +79,9 @@ export default function JobSeekerProfile() {
 
 //     let url = "";
 //     if (!id) {
-//         url = "https://iamready.onrender.com/api/v1/jobSeeker";
+//         url = "http://localhost:5000/api/v1/jobSeeker";
 //     } else {
-//         url = `https://iamready.onrender.com/api/v1/jobSeeker?job_seeker_id=${id}`;
+//         url = `http://localhost:5000/api/v1/jobSeeker?job_seeker_id=${id}`;
 //     }
 
 //     useEffect(() => {

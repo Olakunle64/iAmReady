@@ -30,7 +30,7 @@ export default function RecruiterBio() {
     useEffect(() => {
         async function getRecruiterDetails() {
             try {
-                const response = await fetch("https://iamready.onrender.com/api/v1/recruiter", {
+                const response = await fetch("http://localhost:5000/api/v1/recruiter", {
                     method: "GET",
                     credentials: "include",
                     cookies: JSON.stringify(cookies),
@@ -78,7 +78,7 @@ export default function RecruiterBio() {
                             </div>
                             <div className="linkedin">
                                 <FaLinkedin size="1.5em"/>
-                                <a href="google.com">Linkedin</a>
+                                <a href={Recruiter.linkedin}>Linkedin</a>
                             </div>
                             <div className="website">
                                 <TbWorld size="1.5em"/>

@@ -71,30 +71,30 @@ class DBStorage():
         """
         # retrieve all environment variables that are necessary to
         # connect to the iAmReady PostgreSQL server
-        # USER = os.getenv("iAmReady_PG_USER", "iamready_dev")
-        # PASWD = os.getenv("iAmReady_PG_PWD", "iamready_dev_pwd")
-        # HOST = os.getenv("iAmReady_PG_HOST", "localhost")
-        # DB = os.getenv("iAmReady_PG_DB", "iamready_dev")
-        # PORT = os.getenv("iAmReady_PG_PORT", "5432")
-
-        # self.__engine = create_engine(
-        #         'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(USER, PASWD, HOST, PORT, DB),
-        #         pool_pre_ping=True
-        #         )
-
-        USER = os.getenv("iAmReady_PG_USER")
-        PASWD = os.getenv("iAmReady_PG_PWD")
-        HOST = os.getenv("iAmReady_PG_HOST")
-        DB = os.getenv("iAmReady_PG_DB")
+        USER = os.getenv("iAmReady_PG_USER", "iamready_dev")
+        PASWD = os.getenv("iAmReady_PG_PWD", "iamready_dev_pwd")
+        HOST = os.getenv("iAmReady_PG_HOST", "localhost")
+        DB = os.getenv("iAmReady_PG_DB", "iamready_dev")
         PORT = os.getenv("iAmReady_PG_PORT", "5432")
 
-        # create an instance of create_engine that links to
-        # the iAmReady PostgreSQL server
-
         self.__engine = create_engine(
-                'postgresql+psycopg2://{}:{}@{}/{}'.format(USER, PASWD, HOST, DB),
+                'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(USER, PASWD, HOST, PORT, DB),
                 pool_pre_ping=True
                 )
+
+        # USER = os.getenv("iAmReady_PG_USER")
+        # PASWD = os.getenv("iAmReady_PG_PWD")
+        # HOST = os.getenv("iAmReady_PG_HOST")
+        # DB = os.getenv("iAmReady_PG_DB")
+        # PORT = os.getenv("iAmReady_PG_PORT", "5432")
+
+        # # create an instance of create_engine that links to
+        # # the iAmReady PostgreSQL server
+
+        # self.__engine = create_engine(
+        #         'postgresql+psycopg2://{}:{}@{}/{}'.format(USER, PASWD, HOST, DB),
+        #         pool_pre_ping=True
+        #         )
 
         # drop all tables if the TUTORPLAN_ENV is "test"
         if os.getenv("iAmReady_ENV") == "test":

@@ -21,7 +21,7 @@ export default function EditProfileR({icon, Recruiter}) {
         e.preventDefault();
         
         try {
-            const response = fetch("https://iamready.onrender.com/api/v1/recruiter", {
+            const response = fetch("http://localhost:5000/api/v1/recruiter", {
                 method: 'PUT',
                 headers: {
                 'Content-Type': 'application/json',

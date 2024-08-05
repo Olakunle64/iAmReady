@@ -19,7 +19,7 @@ const EditCertification = ({jobSeeker, showForm, setShowForm, objId}) => {
     });
     const deleteCertification = async (e) => {
         try {
-            const response = await fetch(`https://iamready.onrender.com/api/v1/job_seeker/certification?certification_id=${objId}`, {
+            const response = await fetch(`http://localhost:5000/api/v1/job_seeker/certification?certification_id=${objId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

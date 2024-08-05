@@ -21,7 +21,7 @@ const SearchPage = () => {
     useEffect(() => {
         async function getJobSeekers() {
             try {
-                const response = await fetch(`https://iamready.onrender.com/api/v1/job_seekers`, {
+                const response = await fetch(`http://localhost:5000/api/v1/job_seekers`, {
                     method: "GET",
                     credentials: "include",
                     headers: {

@@ -30,7 +30,7 @@ export default function EditProfile({ icon, jobSeeker }) {
         try {
             setLoading(true); // Set loading to true
 
-            const response = await fetch("https://iamready.onrender.com/api/v1/job_seeker", {
+            const response = await fetch("http://localhost:5000/api/v1/job_seeker", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
