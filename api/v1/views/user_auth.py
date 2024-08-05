@@ -10,6 +10,7 @@ from flask_cors import cross_origin
 
 
 @app_views.route('/login', methods=['POST'], strict_slashes=False)
+@cross_origin(supports_credentials=True, allow_headers=['Content-Type', 'session_id', 'user_type'])
 def login():
     """This method logs in a user"""
     from api.v1.app import auth
@@ -42,7 +43,7 @@ def login():
     # this for my frontend 
     response.headers['session_id'] = session_id
     response.headers['user_type'] = user_type
-    
+
     response.set_cookie('session_id', session_id)
     response.set_cookie('user_type', user_type)
     # response.headers.add('Set-Cookie','cross-site-cookie=bar; SameSite=None; Secure')
